@@ -1,0 +1,24 @@
+title = "Presidio Workshops"
+baseURL = "http://redhatgov.io/"
+theme = "presidio"
+languageCode = "en-us"
+metaDataFormat = "yaml"
+
+[params]
+    description = "#FutureBuilt"
+
+[taxonomies]
+    workshop = "workshops"
+
+[blackfriday]
+    smartypants = false
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+[[menu.main]]
+    name = "Workshops"
+    identifier = "workshops"
+    weight = 100
