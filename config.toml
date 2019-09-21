@@ -1,5 +1,5 @@
 title = "Presidio Workshops"
-baseURL = "http://redhatgov.io/"
+baseURL = "http://presidioworkshops.com/"
 theme = "presidio"
 languageCode = "en-us"
 metaDataFormat = "yaml"

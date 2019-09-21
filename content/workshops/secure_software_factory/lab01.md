@@ -32,7 +32,7 @@ Use your browser to navigate to the URI provided by your instructor and login wi
 For example:
 
 ```bash
-{{< urishortfqdn "https://" "master" ":8443" >}}
+{{< urishortfqdn "https://" >}}
 ```
 
 <img src="../images/ocp-login.png" width="600"><br/>
@@ -41,13 +41,13 @@ For example:
 Once logged in you should see your available projects - or a button to create a project if none exist already.
 
 ## Let's try the 'oc' command line (CLI) tool
-Open a terminal and login using the same openshift URI with the oc Login command.  Please add the option --insecure-skip-tls-verify=true.
+Open a terminal and login using the same Kubernetes URI with the oc Login command.  Please add the option --insecure-skip-tls-verify=true.
 
 For example:
 
 ```
-$ oc login {{< urishortfqdn "https://" "master" ":8443" >}} --insecure-skip-tls-verify=true
-Authentication required for {{< urishortfqdn "https://" "master" ":8443" >}} (openshift)
+$ oc login {{< urishortfqdn "https://" >}} --insecure-skip-tls-verify=true
+Authentication required for {{< urishortfqdn "https://" >}} (openshift)
 Username: user{{< span "userid" "YOUR#" >}}Password:
 Login successful.
 ```

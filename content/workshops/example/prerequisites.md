@@ -105,7 +105,7 @@ $ cd ~/projects/redhatgov.github.io
 
 ## Step 5
 
-From the `redhatgov.github.io` repo directory, run the Hugo server:
+From the `presidioworkshops` repo directory, run the Hugo server:
 
 ```
 $ hugo server

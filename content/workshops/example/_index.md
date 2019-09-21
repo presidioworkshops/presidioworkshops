@@ -11,7 +11,7 @@ menu:
 This is an example workshop to showcase what is possible when building
 workshops. You can find examples of how to organize your content, what
 shortcodes are available, and the widgets available as a part of the
-`redhatgov` theme.
+`presidio` theme.
 
 {{% alert success %}}
 **This workshop is also expected to be used as a starting point for any new
