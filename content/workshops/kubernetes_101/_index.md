@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 101
+title: Kubernetes Workshop
 menu:
   main:
     parent: workshops

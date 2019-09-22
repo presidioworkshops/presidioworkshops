@@ -1,12 +1,12 @@
 ---
-title: Ansible Tower Workshop
+title: Automation Workshop
 menu:
   main:
     parent: workshops
     pre: fa fa-magic
 ---
 
-:domain_name: redhatgov.io
+:domain_name: presidioworkshops.com
 :workshop_prefix: workshop
 :tower_url: https://{workshop_prefix}.*student_number*.{domain_name}
 :ssh_url: https://{workshop_prefix}.*student_number*.{domain_name}/wetty/ssh/ec2-user
@@ -15,11 +15,11 @@ menu:
 :iconsdir: http://people.redhat.com/~jduncan/images/icons
 :imagesdir: /workshops/ansible_tower/images
 
-= Red Hat Ansible Tower Workshop
+= Automation Workshop
 
 == Workshop Description
 
-Ansible Tower will enable you to create playbooks, while building in security. Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks!
+Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks! Ansible  will enable you to create playbooks, while building in security. 
 
 
 == Who should attend
@@ -34,14 +34,14 @@ Ansible Tower will enable you to create playbooks, while building in security. A
 
 - How to run ad hoc commands
 - How to write a playbook
-- How to install and configure Red Hat Ansible Tower
+- How to install and configure Ansible
 - How to use templates to save time
-- How to enhance security, using Ansible Tower
+- How to enhance security, using Ansible
 
 
 == Overview
 
-The Ansible Tower Workshop is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
+The Automation features will save time, empower junior staff, offload senior staff and automate your most tedious tasks!Workshop is meant for anyone who has any exposure to Ansible, whether you have used it or not. We are going to start with a short overview and then we’ll get into the lab as soon as possible. That is where we will spend most of our time.
 
 
 == Your Responsibilities
@@ -55,6 +55,6 @@ Hopefully you have your laptop with you. If not, please find a shoulder-surfing 
 
 == Exercises
 
-{{< labs ansible_tower >}}
+{{< labs automation >}}
 
 {{< importPartial "footer/footer.html" >}}
