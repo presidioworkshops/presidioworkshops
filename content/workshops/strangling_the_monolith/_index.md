@@ -1,11 +1,11 @@
 ---
-title: Microservices Workshop - Strangling the Monolith
+title: Monolith to Microservices Workshop
 menu:
   main:
     parent: workshops
 ---
 
-# Microservices Workshop - Strangling the Monolith
+# Monolith to Microservices Workshop
 
 ## Description
 
@@ -21,9 +21,9 @@ Large organizations have a tremendous amount of resources invested in existing m
 
 ## What you will learn
 
-Tour of Openshift
+Tour of Kubernetes
 Strangling your Monolith
-Microservice  Integration Patterns
+Microservice Integration Patterns
 
 ## Agenda
 
@@ -31,15 +31,10 @@ Microservice  Integration Patterns
 - Introductions / Agenda
 - Presentation
 - Introduction
-- Hands-on lab demonstrating the deployment of a legacy monolithic application onto a container, and then breaking it into microservices to deploy on OpenShift Container Platform.
+- Hands-on lab demonstrating the deployment of a legacy monolithic application onto a container, and then breaking it into microservices to deploy on Kubernetes.
 
 ## Labs
 
 {{< labs strangling_the_monolith >}}  
 
 
-{{% alert success %}}
-
-Special Thanks to James Faulkner!
-
-{{% /alert %}}
