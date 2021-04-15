@@ -2,13 +2,6 @@ language: python
 python:
   - "3.9"
 
-branches:
-  only:
-    - main
-
-before_install:
-  - 'echo hi'
-
 install:
   - sudo apt-get install tree
   - gem install asciidoctor
@@ -23,7 +16,7 @@ script:
   - ./bin/hugo --buildFuture --verbose
   - cd public
   - touch .nojekyll
-  - echo "presidioworkshops.com" > CNAME
+# - echo "presidioworkshops.com" > CNAME
   - tree workshops
   - tree events
   - cd ..
