@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.org/RedHatGov/redhatgov.github.io.svg?branch=docs)](https://travis-ci.org/RedHatGov/redhatgov.github.io)
 
 
-----
-
 [PresidioWorkshops.com](https://PresidioWorkshops.com) is an open source collection of workshop materials that
 cover various topics relating to Cloud, Kubernetes, and DevOps.
 
