@@ -1,19 +1,17 @@
-# PresidioWorkshops.com
+# Presidio Workshops
 
-[![Build Status](https://travis-ci.org/RedHatGov/redhatgov.github.io.svg?branch=docs)](https://travis-ci.org/RedHatGov/redhatgov.github.io)
+[![Build Status](https://travis-ci.org/github/presidioworkshops/presidioworkshops.github.io.svg?branch=docs)](https://travis-ci.org/github/presidioworkshops/presidioworkshops.github.io)
 
 
-[PresidioWorkshops.com](https://PresidioWorkshops.com) is an open source collection of workshop materials that
-cover various topics relating to Cloud, Kubernetes, and DevOps.
+[PresidioWorkshops.com](https://presidioworkshops.com) is an open source collection of workshop materials relating to Cloud, Kubernetes, and DevOps.
 
 ----
 
-## Developing
+If you want to build the site locally:
 
-If you want to build the site right away:
-
-- You have a working [Hugo environment](https://gohugo.io/).
-- You have Ruby and the `asciidoctor` gem installed (*gem install asciidoctor*).
+1. Setup a local [Hugo environment](https://gohugo.io/).
+1. Install Ruby and the `asciidoctor` gem (*gem install asciidoctor*).
+1. Clone and run `hugo`:
 
     `$ git clone git@github.com:presidioworkshops/presidioworkshops.github.io.git`
 
