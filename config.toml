@@ -22,3 +22,7 @@ metaDataFormat = "yaml"
     name = "Workshops"
     identifier = "workshops"
     weight = 100
+
+
+[security.exec]
+allow = ['^(dart-)?sass(-embedded)?$', '^go$', '^npx$', '^postcss$', '^asciidoctor$']
