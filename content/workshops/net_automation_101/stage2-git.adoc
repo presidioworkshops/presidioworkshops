@@ -1,0 +1,100 @@
+---
+title: Stage 2.1 - Git
+workshops: net_automation_101
+workshop_weight: 21
+layout: lab
+---
+
+:icons: font
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+
+= Stage2-git
+
+== Stage 2 Git Basics
+
+image::s2-0.png['Stages', 1000]
+
+== In Stage 2, we will discuss Git basics.  
+
+== We will run through some of the commands and concepts to understand the power of Git.
+
+== Understanding the Git workflow is a key part of infrastructure automation.  
+
+---
+
+== Here are the requirements for Stage 2
+
+image::s2-1.png['Requirements', 1000]
+
+---
+
+== Here is a diagram of Stage 2.  This shows all the technology we will be using in Stage 2.  
+
+== It also defines the use cases we will be working on in Stage 2.
+
+image::s2-2.png['Diagram', 1000]
+
+---
+
+== Here is a summary of Stage 2
+
+image::s2-3.png['Stage 2 Summary', 1000]
+
+---
+
+== **Use Git to pull down some code onto Server 1**
+
+1. Login to your Ubuntu Server 1 as a user
+2. Open a terminal window
+3. Run the following command:
+[source, bash]
+----
+git clone https://github.com/knorton3/network-automation.git
+----
+=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
+=== This will create a new folder named **network-automation**
+
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~$ git clone https://github.com/knorton3/network-automation.git
+Cloning into 'network-automation'...
+remote: Enumerating objects: 214, done.
+remote: Counting objects: 100% (157/157), done.
+remote: Compressing objects: 100% (151/151), done.
+remote: Total 214 (delta 58), reused 0 (delta 0), pack-reused 57
+Receiving objects: 100% (214/214), 391.58 MiB | 6.09 MiB/s, done.
+Resolving deltas: 100% (84/84), done.
+cloud_user@ed26757f4b2c:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  network-automation
+cloud_user@ed26757f4b2c:~$ git branch -m main master
+----
+
+---
+
+== **Use Git to pull down some code onto your workstation**
+
+1. Create a folder named NAW
+2. Open Visual Studio Code on your workstation
+3. Click File -> Open Folder and open the NAW folder
+4. Trust the author of the folder if prompted
+5. Open a terminal window, View -> Terminal
+
+Run the following command from the terminal:
+[source, bash]
+----
+git clone https://github.com/knorton3/network-automation.git
+git branch -m main master
+----
+
+image::s2-4.png['Visual Studio Code', 500]
+
+=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
+=== This will create a new folder named network-automation
+
+
+== End Result
+
+=== At this point, you will have pulled down all the code from the Git repository

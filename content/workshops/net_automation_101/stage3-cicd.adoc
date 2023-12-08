@@ -1,0 +1,484 @@
+---
+title: Stage 3.2 - CI/CD
+workshops: net_automation_101
+workshop_weight: 32
+layout: lab
+---
+
+:icons: font
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+
+= Stage3-cicd
+
+== Stage 3 CI/CD Basics
+
+image::s3-0.png['Stages', 1000]
+
+== In Stage 3, we will discuss Continous Integration and Continous Deployment basics (CI/CD).  
+
+== We will run through some of the concepts to understand the power of CI/CD.
+
+== CI/CD is the glue to automate the workflow for deploying network infrastructure.  
+
+---
+
+== Here are the requirements for Stage 3
+
+image::s3-1.png['Requirements', 1000]
+
+---
+
+== Here is a diagram of Stage 3.  This shows all the technology we will be using in Stage 3.  
+
+== It also defines the use cases we will be working on in Stage 3.
+
+image::s3-2.png['Diagram', 1000]
+
+---
+
+== Here is a summary of Stage 3
+
+image::s3-3.png['Stage 3 Summary', 1000]
+
+---
+
+== **Let's install the GitLab Runner**
+[IMPORTANT]
+**Log back into Server 1**
+
+=== Install the GitLab Runner
+[source, bash]
+----
+sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64
+----
+"curl: (23) Failed writing body (0 != 15784)" is not an error. Do not troubleshoot this.
+
+=== Give Permission to Execute
+[source, bash]
+----
+sudo chmod +x /usr/local/bin/gitlab-runner
+----
+=== Create a User for the Runner
+[source, bash]
+----
+sudo useradd --comment 'GitLab Runner' --create-home gitlab-runner --shell /bin/bash
+sudo usermod -a -G docker gitlab-runner
+----
+=== Update a gitlab-runner password and remember the password
+[source, bash]
+----
+sudo passwd gitlab-runner
+----
+=== Install and Run the Runner (if fails proceed to next step)
+[source, bash]
+----
+sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start
+----
+If above step fails
+[source, bash]
+----
+sudo mv /etc/systemd/system/gitlab-runner.service  /etc/systemd/system/gitlab-runner.service.bak
+----
+=== Run the above step again
+[source, bash]
+----
+sudo rm /etc/systemd/system/gitlab-runner.service.bak
+----
+
+---
+
+=== Logout of the Gitlab-CE Web Interface as a user
+=== As root on your GitLab server (Server-2) go to the following:
+=== Admin Area -> CI/CD -> Runners -> New Instance (Project) Runner 
+[source, bash]
+----
+http://server2/admin/runners/new <1>
+----
+
+<1> Replace Server 2 with your information
+
+=== Click Linux Runner and add a Tag of Netdevops and check “run untagged jobs” click create runner
+=== Copy the command from Step 1 to Server-1 and make it one line with sudo in front of it, for example.
+[source, bash]
+----
+sudo gitlab-runner register --url http://server2  --token glrt-k7HmELRbaHVxnnZa4DYf <1>
+----
+<1> Replace Server 2 with your information along with your token
+
+image::s3-15.png[caption="Figure 1: ", title='Gitlab Runner', 200]
+
+=== Run this command next:
+
+[source, bash]
+----
+sudo gitlab-runner list
+----
+
+
+[source, bash]
+----
+cloud_user@ed26757f4b1c:~$ sudo gitlab-runner register --url http://server2 --token glrt-k7HmELRbaHVxnnZa4DYf
+                                                   
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+[http://server2]: 
+Token specified trying to verify runner...         
+WARNING: If you want to register use the '-r' instead of '-t'. 
+Verifying runner... is alive                        runner=glrt-k7H
+Please enter the executor: docker, shell, ssh, virtualbox, docker-ssh+machine, kubernetes, docker-ssh, parallels, docker+machine:
+shell <1>
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded! 
+cloud_user@ed26757f4b1c:~$ sudo gitlab-runner list
+Listing configured runners                          ConfigFile=/etc/gitlab-runner/config.toml
+server2                                             Executor=shell Token=glrt-k7HmELRbaHVxnnZa4DYf URL=http://server2
+----
+<1> Type shell for an executor
+
+---
+
+== **Lets prepare the Runner**
+=== Login to the Gitlab Runner Server as gitlab-runner (Server-1) 
+=== Modify the following file - /home/gitlab-runner/.bash_logout
+[source, bash]
+----
+cd /home/gitlab-runner
+sudo vi .bash_logout
+----
+=== Comment out the following by adding # before each line.  Here is an example
+[source, bash]
+----
+# if [ "$SHLVL" = 1 ]; then
+#   [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
+# fi
+----
+Shift + zz to save and exit the file
+[source, bash]
+----
+sudo visudo
+----
+=== Now add the following to the bottom of the file and type CTRL + X and enter to save the file
+[source, bash]
+----
+gitlab-runner ALL=(ALL) NOPASSWD: ALL 
+----
+
+image::s3-16.png[caption="Figure 2: ", title='Gitlab Permission', 200]
+
+---
+
+== **Go back to the Gitlab-CE Server (Server2)**
+=== Notice the runner is created
+=== Click Go to runners page
+=== It should show online
+
+image::s3-17.png[caption="Figure 3: ", title='Gitlab Runner', 500]
+
+---
+
+== **Let's Create A CI/CD Pipeline**
+=== Log out of Admin and login to the Gitlab-CE Web Interface as a User
+=== Click on the Network Automation Repository 
+[source, bash]
+----
+http://server2/username/network-automation <1>
+----
+<1> Replace server FQDN and username with your information
+
+[IMPORTANT]
+Make sure you are in new navigation mode
+
+=== Go to Build -> Pipeline Editor
+=== Click Configure Pipeline
+=== Review the example and erase the example configuration
+=== Copy the following:
+[source, bash]
+----
+---
+
+stages:
+  - build
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+----
+
+=== Click the validate button before committing the changes below
+
+image::s3-18.png[caption="Figure 4: ", title='Gitlab Pipeline Editor', 500]
+
+---
+
+== **Let's Check Your Pipeline**
+=== Go to Build -> Pipelines
+
+image::s3-19.png[caption="Figure 4: ", title='Gitlab Pipeline', 500]
+
+---
+
+== **Let's Add More To Your Pipeline**
+
+=== Copy the following and click validate:
+[source, bash]
+----
+---
+
+stages:
+  - build
+  - stage
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - ansible-playbook build.yaml -v
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/manual_backup.yaml -v
+  dependencies:
+    - staging_switches
+----
+
+=== Then commit changes if it validates
+
+image::s3-20.png[caption="Figure 5: ", title='Updated The Pipeline', 500]
+
+---
+
+== **Checkout The Pipeline**
+
+=== Notice the new stages in the Pipeline, but the pipeline stops due to an error
+
+
+image::s3-21.png[caption="Figure 6: ", title='Failed Pipeline', 200]
+
+=== Click on the failed pipeline and click the staging switches to see the details
+---
+
+== *Update The Pipeline**
+=== Click on Build -> Pipeline Editor
+=== Copy the following to include the following to the staging_switches section: 
+pip install ansible-pylibssh 
+
+ansible-galaxy collection install arista.eos
+
+[source, bash]
+----
+---
+
+stages:
+  - build
+  - stage
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh 
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/manual_backup.yaml -v
+  dependencies:
+    - staging_switches
+----
+---
+== **Success**
+
+=== Now you have automated the following in a CI/CD pipeline:
+* **The creation of 5 switches and 3 Linux clients**
+* **The configuration of 5 switches with VXLAN and routing with complete IP reachability** 
+* **The backup of the 5 switch configurations to a folder on Server 1**
+
+---
+
+== **Let’s Create A Backup Repository - Optional**
+
+=== Lets automate the backup the of configs and upload the configurations to Gitlab
+== Create a new repository on the Gitlab-CE Server called Backup
+[IMPORTANT]
+Uncheck "initialize repository with a README"
+
+image::s3-22.png[caption="Figure 7: ", title='Backup Repository', 500]
+
+=== Jump on the Server running the Gitlab-Runner - Server 1
+=== Lets create an SSH key pair to automatically push the configuration through the CI/CD pipeline without prompting for a username and password
+=== Login as the gitlab-runner
+[source, bash]
+----
+cloud_user@ed26757f4b1c:~$ su gitlab-runner
+Password: 
+gitlab-runner@ed26757f4b1c:/home/cloud_user$ cd ~
+gitlab-runner@ed26757f4b1c:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/gitlab-runner/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/gitlab-runner/.ssh/id_rsa.pub 
+Your public key has been saved in /home/gitlab-runner/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:AO6s6kw4FID/JhCa3I+KwmGze0tZpc7Mx3XL3sa8EmE gitlab-runner@ed26757f4b1c.mylabserver.com
+The key's randomart image is:
++---[RSA 3072]----+
+|o   .            	      |
+|+  . .           	      |
+|o=. . ..                   |
+|+.o+  o.   E           |
+| o .=o  S....           |
+|o+.oX.. . o..          |
+|*.*= = o   o+         |
+|=*..  .   ...+            |
+|++o..      .oo.        |
++----[SHA256]-----+
+----
+=== Run this command
+[source, bash]
+----
+cat /home/gitlab-runner/.ssh/id_rsa.pub
+----
+
+=== Copy the contents of your public key to the clipboard 
+=== Go to the Gitlab server
+=== Edit your profile under your user settings to add the public key
+=== Select SSH Keys and add new key
+
+image::s3-23.png[caption="Figure 8: ", title='SSH Key', 300]
+
+=== Paste the key in the key text box and click add key
+
+image::s3-24.png[caption="Figure 9: ", title='Paste SSH Key', 500]
+
+
+=== On Server1 cd to the .ssh directory for the gitlab-runner user
+[source, bash]
+----
+cd ~/.ssh
+----
+=== Create and save a new file named “config” in the .ssh folder
+[source, bash]
+----
+vi config
+----
+==== Copy the following:
+[source, bash]
+----
+Host server2 <1>
+   Hostname server2 <1>
+   User git
+   Port 2222
+   Preferredauthentications publickey
+   IdentityFile ~/.ssh/id_rsa
+----
+Shift + zz to save and exit the file
+
+[IMPORTANT]
+Port 2222 for external connectivity translates to 22 for internal in Docker.
+
+<1> Change the host and hostname values to reflect your Gitlab-CE Server.  Use the FQDN.
+
+=== Restart sshd
+[source, bash]
+----
+sudo systemctl restart sshd
+----
+=== Run the following command to test connectivity
+[source, bash]
+----
+cloud_user@ed26757f4b1c:~$ ssh -T git@ccoe-netdev-02.presidio-demo.com
+The authenticity of host '[ccoe-netdev-02.presidio-demo.com]:2222 ([10.129.225.179]:2222)' can't be established.
+ECDSA key fingerprint is SHA256:JhIlzg5flNje7/tMtzv6e8S/axpapbp38sh61unVBQs.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '[ccoe-netdev-02.presidio-demo.com]:2222,[10.129.225.179]:2222' (ECDSA) to the list of known hosts.
+Welcome to GitLab, @knorton!
+----
+---
+
+=== Jump back on the Server 1 running the Gitlab-Runner
+=== Login to your new backup repository 
+=== Let's backup the config and upload the configurations to Gitlab
+
+[source, bash]
+----
+cloud_user@ed26757f4b1c:~$ su gitlab-runner
+Password: 
+gitlab-runner@ed26757f4b1c:/home/cloud_user$ cd ~
+gitlab-runner@ed26757f4b1c:/home$ cd network-automation/backup/
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git init
+Initialized empty Git repository in /home/gitlab-runner/network-automation/backup/.git/
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git remote add origin git@server2:knorton/backup.git <1>
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git add .
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.email "knorton@presidio.com"
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.name "knorton"
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ pu
+[master (root-commit) 0c4e95b] Initial commit
+ 5 files changed, 324 insertions(+)
+….
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git push --set-upstream origin master
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 2.11 KiB | 215.00 KiB/s, done.
+Total 8 (delta 4), reused 0 (delta 0)
+To server2:knorton/backup.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+----
+<1> Grab the git remote add origin command from your backup git repository on the GitLab Server
+
+---
+
+== Go back to the Network Automation repository
+== Let’s modify the backup stage in CI/CD Pipeline to reflect the highlighted area in the diagram and click commit changes
+
+
+image::s3-25.png[caption="Figure 10: ", title='Update PipeLine To Reflect Git Backup', 500]
+
+---
+
+=== Go back to the Backup repository
+=== Check out the switch configurations
+
+image::s3-26.png[caption="Figure 11: ", title='Switch Configuration In Git Backup', 400]
+
+== End Result
+
+=== At this point, we are now taking all the manual steps performed in Stage 2 and automating them into a CI/CD Pipeline

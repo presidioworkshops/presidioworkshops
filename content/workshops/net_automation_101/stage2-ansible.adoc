@@ -1,0 +1,333 @@
+---
+title: Stage 2.3 - Ansible
+workshops: net_automation_101
+workshop_weight: 23
+layout: lab
+---
+
+:icons: font
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+
+= Stage 2 - Ansible
+
+== Stage 2 Ansible Basics
+
+image::s2-0.png['Stages', 1000]
+
+== In Stage 2, we will discuss Ansible basics.  
+
+== We will run through some of the commands and concepts to better understand Ansible.
+
+== Utilizing Ansible to configure network devices in minutes.
+
+== Allows us to easily deploy and test changes prior to releasing it to production.
+
+---
+
+== Here are the requirements for Stage 2
+
+image::s2-1.png['Requirements', 1000]
+
+---
+
+== Here is a diagram of Stage 2.  This shows all the technology we will be using in Stage 2.  
+
+== It also defines the use cases we will be working on in Stage 2.
+
+image::s2-2.png['Diagram', 1000]
+
+---
+
+== Here is a summary of Stage 2
+
+image::s2-3.png['Stage 2 Summary', 1000]
+
+---
+
+== **Let's try Ansible**
+
+=== Change Directory to the following
+[source, bash]
+----
+cd ~/network-automation/backup/
+----
+=== Run the build Ansible playbook which will create a folder of today's date
+[source, bash]
+----
+ansible-playbook playbooks/make_folder.yaml –v
+----
+=== After running the ls command notice the new folder based on the date
+[source, bash]
+----
+ls
+----
+
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/backup$ ls
+ansible.cfg  inventory  playbooks
+cloud_user@ed26757f4b2c:~/network-automation/backup$ ansible-playbook playbooks/make_folder.yaml -v
+Using /home/cloud_user/network-automation/backup/ansible.cfg as config file
+
+PLAY [CAPTURE DATE AND CREATE DIRECTORY] *****************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************
+ok: [localhost]
+
+TASK [Capture Date] *****************************************************************************************************************
+ok: [localhost -> localhost] => {"changed": false, "cmd": ["date", "+%Y-%m-%d"], "delta": "0:00:00.003057", "end": "2023-08-21 16:47:36.684209", "rc": 0, "start": "2023-08-21 16:47:36.681152", "stderr": "", "stderr_lines": [], "stdout": "2023-08-21", "stdout_lines": ["2023-08-21"]}
+
+TASK [Create Directory] *****************************************************************************************************************
+changed: [localhost] => {"changed": true, "gid": 1001, "group": "cloud_user", "mode": "0775", "owner": "cloud_user", "path": "/home/cloud_user/network-automation/backup/2023-08-21", "size": 4096, "state": "directory", "uid": 1001}
+
+PLAY RECAP *****************************************************************************************************************
+localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+
+
+cloud_user@ed26757f4b2c:~/network-automation/backup$ ls
+2023-08-21  ansible.cfg  inventory  playbooks
+
+----
+
+---
+
+== **So what are we trying to accomplish.....**
+=== We need to get configurations on the switches, make changes, validate the changes and then test the changes
+=== To start let's automate the following with Ansible:
+* Basic IP Connectivity
+* Basic BGP
+* VLANs
+* VXLAN
+* SNMP
+
+== **Let's Add A Configuration To The Switches**
+
+=== Run the build Ansible playbook and beware of the error.  This is to be expected.
+[source, bash]
+----
+cd ~/network-automation/build/
+ansible-playbook build.yaml –v
+----
+[IMPORTANT]
+This error highlights the use of collections or modules from different manufacturers
+
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/build$ ansible-playbook build.yaml -v
+Using /home/cloud_user/network-automation/build/ansible.cfg as config file
+ERROR! couldn't resolve module/action 'arista.eos.eos_snmp_server'. This often indicates a misspelling, missing collection, or incorrect module path.
+
+The error appears to be in '/home/cloud_user/network-automation/build/build.yaml': line 111, column 7, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+
+    - name: CONFIGURE SNMP
+      ^ here
+cloud_user@ed26757f4b2c:~/network-automation/build$ ansible-galaxy collection install arista.eos
+Process install dependency map
+Starting collection install process
+Installing 'arista.eos:6.1.2' to '/home/cloud_user/.ansible/collections/ansible_collections/arista/eos'
+Installing 'ansible.netcommon:5.2.0' to '/home/cloud_user/.ansible/collections/ansible_collections/ansible/netcommon'
+Installing 'ansible.utils:2.11.0' to '/home/cloud_user/.ansible/collections/ansible_collections/ansible/utils'
+cloud_user@ed26757f4b2c:~/network-automation/build$
+----
+
+=== Install the arista_eos module
+[source, bash]
+----
+ansible-galaxy collection install arista.eos
+----
+
+=== Run the playbook again
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/build$ ansible-playbook build.yaml -v
+Using /home/cloud_user/network-automation/build/ansible.cfg as config file
+
+PLAY [BUILD SPINE ARISTA SWITCHES] ***********************************************************************************************************************
+
+TASK [CONFIGURE BGP] *************************************************************************************************************************************
+changed: [clab-Arista-2s-3l-spine1] => {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python"}, "changed": true, "commands": ["router bgp 100", "neighbor 192.168.1.2 remote-as 201", "neighbor 192.168.2.2 remote-as 202", "neighbor 192.168.3.2 remote-as 203", "maximum-paths 2 ecmp 2", "redistribute connected", "ip routing"], "session": "ansible_169255202249", "updates": ["router bgp 100", "neighbor 192.168.1.2 remote-as 201", "neighbor 192.168.2.2 remote-as 202", "neighbor 192.168.3.2 remote-as 203", "maximum-paths 2 ecmp 2", "redistribute connected", "ip routing"]}
+....
+TASK [CONFIGURE SNMP] **********************************************************************************************************************************************************************
+changed: [clab-Arista-2s-3l-leaf3] => {"after": {"communities": [{"acl_v4": "list3", "name": "netdevops", "ro": true, "view": "view1"}], "contact": "admin", "hosts": [{"host": "host02", "user": "user1", "version": "2c"}], "traps": {"bgp": {"enabled": true}, "capacity": {"arista_hardware_utilization_alert": true}}}, "before": {}, "changed": true, "commands": ["snmp-server host host02 version 2c user1", "snmp-server community netdevops view view1 list3", "snmp-server enable traps bgp", "snmp-server enable traps capacity arista-hardware-utilization-alert", "snmp-server contact admin"]}
+changed: [clab-Arista-2s-3l-leaf1] => {"after": {"communities": [{"acl_v4": "list3", "name": "netdevops", "ro": true, "view": "view1"}], "contact": "admin", "hosts": [{"host": "host02", "user": "user1", "version": "2c"}], "traps": {"bgp": {"enabled": true}, "capacity": {"arista_hardware_utilization_alert": true}}}, "before": {}, "changed": true, "commands": ["snmp-server host host02 version 2c user1", "snmp-server community netdevops view view1 list3", "snmp-server enable traps bgp", "snmp-server enable traps capacity arista-hardware-utilization-alert", "snmp-server contact admin"]}
+changed: [clab-Arista-2s-3l-leaf2] => {"after": {"communities": [{"acl_v4": "list3", "name": "netdevops", "ro": true, "view": "view1"}], "contact": "admin", "hosts": [{"host": "host02", "user": "user1", "version": "2c"}], "traps": {"bgp": {"enabled": true}, "capacity": {"arista_hardware_utilization_alert": true}}}, "before": {}, "changed": true, "commands": ["snmp-server host host02 version 2c user1", "snmp-server community netdevops view view1 list3", "snmp-server enable traps bgp", "snmp-server enable traps capacity arista-hardware-utilization-alert", "snmp-server contact admin"]}
+
+PLAY RECAP *********************************************************************************************************************************************************************************
+clab-Arista-2s-3l-leaf1    : ok=9    changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-leaf2    : ok=9    changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-leaf3    : ok=9    changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-spine1   : ok=4    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-spine2   : ok=4    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+----
+
+
+=== Login to a Leaf switch and check out the routing table and the running configuration
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/build$ ssh admin@clab-Arista-2s-3l-leaf1
+Password: 
+leaf1>ena
+leaf1#sho ip route
+VRF: default
+Codes: C - connected, S - static, K - kernel, 
+       O - OSPF, IA - OSPF inter area, E1 - OSPF external type 1,
+       E2 - OSPF external type 2, N1 - OSPF NSSA external type 1,
+       N2 - OSPF NSSA external type2, B - BGP, B I - iBGP, B E - eBGP,
+       R - RIP, I L1 - IS-IS level 1, I L2 - IS-IS level 2,
+       O3 - OSPFv3, A B - BGP Aggregate, A O - OSPF Summary,
+       NG - Nexthop Group Static Route, V - VXLAN Control Service,
+       DH - DHCP client installed default route, M - Martian,
+       DP - Dynamic Policy Route, L - VRF Leaked,
+       RC - Route Cache Route
+Gateway of last resort:
+ S        0.0.0.0/0 [1/0] via 172.20.20.1, Management0
+ C        10.255.255.11/32 is directly connected, Loopback1
+ B E      10.255.255.12/32 [200/0] via 192.168.1.1, Ethernet1
+                                   via 192.168.10.1, Ethernet2
+ B E      10.255.255.13/32 [200/0] via 192.168.1.1, Ethernet1
+                                   via 192.168.10.1, Ethernet2
+ C        172.20.20.0/24 is directly connected, Management0
+ C        192.168.1.0/24 is directly connected, Ethernet1
+ B E      192.168.2.0/24 [200/0] via 192.168.1.1, Ethernet1
+ B E      192.168.3.0/24 [200/0] via 192.168.1.1, Ethernet1
+ C        192.168.10.0/24 is directly connected, Ethernet2
+----
+
+=== Change Directory to the following:
+[source, bash]
+----
+cd ~/network-automation/backup/
+----
+=== Run the build Ansible playbook
+[source, bash]
+----
+ansible-playbook playbooks/manual_backup.yaml –v
+----
+
+=== Check out the configurations in the dated directory
+
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/backup$ ls
+2023-08-21  ansible.cfg  inventory  playbooks
+cloud_user@ed26757f4b2c:~/network-automation/backup$ ansible-playbook playbooks/manual_backup.yaml
+
+PLAY [CAPTURE DATE AND CREATE DIRECTORY] *****************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************
+ok: [localhost]
+
+TASK [Capture Date] ***************************************************************************************************************************
+ok: [localhost -> localhost]
+TASK [Create Directory] ***************************************************************************************************************************
+ok: [localhost]
+PLAY [BACKUP ARISTA SWITCHES] ***************************************************************************************************************************
+TASK [ARISTA SWITCH CONFIG] ***************************************************************************************************************************
+ok: [clab-Arista-2s-3l-spine1]
+ok: [clab-Arista-2s-3l-leaf3]
+ok: [clab-Arista-2s-3l-spine2]
+ok: [clab-Arista-2s-3l-leaf1]
+ok: [clab-Arista-2s-3l-leaf2]
+TASK [SAVE ARISTA SWITCH CONFIG] *************************************************************************************************************************
+ok: [clab-Arista-2s-3l-spine2]
+ok: [clab-Arista-2s-3l-spine1]
+ok: [clab-Arista-2s-3l-leaf2]
+ok: [clab-Arista-2s-3l-leaf1]
+ok: [clab-Arista-2s-3l-leaf3]
+PLAY RECAP ***************************************************************************************************************************
+clab-Arista-2s-3l-leaf1    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-leaf2    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-leaf3    : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-spine1   : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-spine2   : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+cloud_user@ed26757f4b2c:~/network-automation/backup$cd 2023-08-21 <1>
+cloud_user@ed26757f4b2c :~/network-automation/backup/2023-08-21$ ls
+show_run_clab-Arista-2s-3l-leaf1.txt  show_run_clab-Arista-2s-3l-leaf3.txt   show_run_clab-Arista-2s-3l-spine2.txt
+show_run_clab-Arista-2s-3l-leaf2.txt  show_run_clab-Arista-2s-3l-spine1.txt
+----
+<1> Replace with the correct date
+
+---
+
+== **Let’s Document The Devices with Ansible**
+
+=== Change Directory to the following
+[source, bash]
+----
+cd ~/network-automation/document/
+----
+=== Run the build Ansible playbook
+[source, bash]
+----
+ansible-playbook document.yaml -v
+----
+
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/document$ ls
+ansible.cfg  clab-Arista-2s-3l  css  document.yaml  get_facts.yaml  hosts  template.docx  template.html.j2
+cloud_user@ed26757f4b2c:~/network-automation/document$ ansible-playbook document.yaml -v
+Using /home/cloud_user/network-automation/document/ansible.cfg as config file
+
+PLAY [DOCUMENT ARISTA DEVICES] ***********************************************************************************************************************
+
+TASK [Collect all facts from device] *********************************************************************************************************************
+ok: [clab-Arista-2s-3l-leaf2] => {"ansible_facts": {"ansible_net_all_ipv4_addresses": ["172.20.20.4", "0.0.0.0", "10.255.255.12", "192.168.20.2", "192.168.2.2"], "ansible_net_all_ipv6_addresses": ["2001:172:20:20::4"], "ansible_net_api": "cliconf", "ansible_net_config": "! Command: show running-config\n! device: leaf2 (cEOSLab, EOS-4.25.10M-29053933.42510M (engineering build))\n!\nno aaa root\n!\nusername admin privilege 15 role network-admin secret sha512 $6$wYNajXUa4eGpxHdt$wfjC8jkvayT/VdNSu2Ee7xvs.9dpyv5fK2bhURg0cLxL1rAm3N9Ig/.QdS/GJEwPtUaWycl8.qQyC8g9FEcBU1\n!\ntransceiver qsfp default-mode 4x10G\n!\nservice routing protocols model multi-agent\n!\nhostname leaf2\n!\nsnmp-server contact admin\nsnmp-server community netdevops view view1 ro list3\nsnmp-server host host02 version 2c user1\nsnmp-server
+TASK [Display result] ************************************************************************************************************************
+ok: [clab-Arista-2s-3l-spine1] => {
+    "msg": "Model is spine1 and it is running 4.25.10M-29053933.42510M (engineering build)"
+}
+ok: [clab-Arista-2s-3l-spine2] => {
+    "msg": "Model is spine2 and it is running 4.25.10M-29053933.42510M (engineering build)"
+}
+ok: [clab-Arista-2s-3l-leaf1] => {
+    "msg": "Model is leaf1 and it is running 4.25.10M-29053933.42510M (engineering build)"
+}
+ok: [clab-Arista-2s-3l-leaf3] => {
+    "msg": "Model is leaf3 and it is running 4.25.10M-29053933.42510M (engineering build)"
+}
+ok: [clab-Arista-2s-3l-leaf2] => {
+    "msg": "Model is leaf2 and it is running 4.25.10M-29053933.42510M (engineering build)"
+}
+TASK [Generate document] ************************************************************************************************************************
+changed: [clab-Arista-2s-3l-spine2] => {"changed": true, "checksum": "78e810de2d80f595044cfb8aefe4013f6573b080", "dest": "./devices.html", "gid": 1001, "group": "cloud_user", "md5sum": "67486001513e554b5c4de0964bcd3213", "mode": "0664", "owner": "cloud_user", "size": 17439, "src": "/home/cloud_user/.ansible/tmp/ansible-local-89719bvfm81o5/ansible-tmp-1692727733.4033265-59491256145205/source", "state": "file", "uid": 1001}
+PLAY RECAP ************************************************************************************************************************
+clab-Arista-2s-3l-leaf1    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-leaf2    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-leaf3    : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-spine1   : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+clab-Arista-2s-3l-spine2   : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+----
+
+---
+== **Open a Web Browser and go to the FQDN of Server1**
+
+image::s2-5.png[caption="Figure 1: ", title='Network AUtomation Web Page', 500]
+
+---
+
+=== If you opted to configure SAMBA
+=== Open the text files on the Samba Share. 
+=== This is where all the config files have been stored.
+
+=== \\a.b.c.d\share\backup\2023-10-06
+
+[IMPORTANT]
+Replace a.b.c.d with your IP address and the correct folder
+
+---
+
+== End Result
+
+=== At this point, you automated the backup, configuration and documentation of 5 Arista switches.

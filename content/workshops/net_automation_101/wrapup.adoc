@@ -1,0 +1,22 @@
+---
+title: Wrap Up
+workshops: net_automation_101
+workshop_weight: 99
+layout: lab
+---
+
+:figure-caption!:
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+= Wrap Up
+
+That wraps up what we have planned for today.  We hope you've learned something
+valuable about Network Automation that you can apply in your daily role.
+
+What do you think? How can we help you understand Network Automation better?
+
+Please provide feedback so we can make it better and enhance the workshop.
+
+Thank you for your time and participation!

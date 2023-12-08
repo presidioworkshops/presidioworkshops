@@ -1,0 +1,411 @@
+---
+title: Stage 4.2 - PreDeployment Testing
+workshops: net_automation_101
+workshop_weight: 42
+layout: lab
+---
+
+:icons: font
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+
+= Stage4-testing
+
+== Stage 4 PreDeployment Testing
+
+image::s4-0.png['Stages', 1000]
+
+== In Stage 4, we will discuss the process of testing a change.  
+
+== We will run through some of the concepts to understand how to use Batfish and a Linux container to perform testing.
+
+== Performing automated test is one of the advantages to help reduce risk during a change to the network.  
+
+---
+
+== Here are the requirements for Stage 4
+
+image::s4-1.png['Requirements', 1000]
+
+---
+
+== Here is a diagram of Stage 4.  This shows all the technology we will be using in Stage 4.  
+
+== It also defines the use cases we will be working on in Stage 4.
+
+image::s4-2.png['Diagram', 1000]
+
+---
+
+== Here is a summary of Stage 4
+
+image::s4-3.png['Stage 4 Summary', 1000]
+
+---
+
+== **Let's Do Some Testing**
+[IMPORTANT]
+Login to the Gitlab-CE Server (Server 2) as a user
+
+=== Let’s start with creating a new issue and Merge Request in Gitlab network Automation Repository
+
+=== Click on the Network Automation Project
+=== Click Issues, then new issue
+
+
+=== Provide a title **Testing** for the issue and add the following description:
+[source, bash]
+----
+- [ ] Adding traditional and model testing with Batfish
+----
+
+
+image::s4-19.png[caption="Figure 1: ", title='Testing New Issue', 500]
+
+
+=== Click preview and notice the checklist
+=== Click create issue
+=== Assign yourself to the issue on the far right
+
+[IMPORTANT]
+Write down the new branch name, 2-testing
+
+=== Click create a merge request and new branch
+
+---
+
+=== Click assign to me
+=== Click create a merge request
+
+[IMPORTANT]
+A Merge request doesn’t make any changes, but don’t close the merge request
+
+image::s4-20.png[caption="Figure 2: ", title='Merge Request', 500]
+
+=== Click Code -> Branches
+=== Notice the new merge request, new issue, and new branch
+
+---
+
+== **Let's Go Bring Down The Latest Version Of The Repository**
+
+=== Go to a remote location where you have a copy of the remote repository from your Gitlab server
+=== Perform the following to get latest copy of the remote repository
+=== Below was done from the VS Code terminal
+
+---
+
+
+=== Notice that I am starting out on the 1-network-change branch, lets switch to the master branch
+=== It’s a good idea to check if your local repository is out of date from the remote repository
+
+[source, bash]
+----
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git branch
+* 1-network-change
+  master
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git checkout master
+Switched to branch 'master'
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git remote -v show origin
+Username for 'http://ed26757f4b2c.mylabserver.com': knorton
+Password for 'http://knorton@ed26757f4b2c.mylabserver.com': 
+* remote origin
+  Fetch URL: http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+  Push  URL: http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+  HEAD branch: master
+  Remote branches:
+    master                               tracked
+    refs/remotes/origin/1-network-change stale (use 'git remote prune' to remove)
+  Local ref configured for 'git push':
+    master pushes to master (local out of date) <1>
+----
+<1> This local repository is out of date and needs to be updated
+
+== **Lets update the local repository**
+=== Run the following command from VS Code
+
+[source, bash]
+----
+git pull origin master
+----
+
+=== Notice the only branch is master and 1-network-change
+=== We can pull down the remote network change branch using the following command:
+[source, bash]
+---- 
+git fetch 
+----
+=== But you need to create a new branch in the local repository using the following command:
+[IMPORTANT]
+Your branch name maybe different
+[source, bash]
+----
+git branch 2-testing
+----
+=== Then let’s switch to that branch with the following command:
+[source, bash]
+----
+git checkout 2-testing
+----
+
+[source, bash]
+----
+kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+  1-network-change
+* master
+  remotes/origin/1-network-change
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git fetch
+From http://ed26757f4b2c.mylabserver.com/knorton/network-automation
+ * [new branch]      2-testing  -> origin/2-testing
+kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+  1-network-change
+* master
+  remotes/origin/1-network-change
+  remotes/origin/2-testing
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch
+  1-network-change
+* master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch 2-testing
+kennorton@C02G71AFMD6P-knorton network-automation % git checkout 2-testing
+Switched to branch '2-testing'
+----
+---
+
+== **Let's Create Some Tests**
+=== Let's build an Ansible Playbook to create the testing
+=== Let's use Visual studio code to create the tests folder
+=== Let’s review the files in the tests directory
+
+image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
+
+---
+
+=== Let’s review the snapshots.yaml file:
+
+[source, bash]
+----
+---
+- name: CAPTURE DATE AND CREATE DIRECTORY
+  hosts: localhost
+  tasks:
+    - name: Capture Date
+      command: date +"%Y-%m-%d"
+      register: time
+      changed_when: false
+      delegate_to: localhost
+    - name: Create Directory
+      file:
+        path: /home/gitlab-runner/network-automation/configs
+        state: directory 
+  run_once: yes
+- name: BACKUP ARISTA SWITCHES
+  hosts: eos
+  gather_facts: false
+  connection: network_cli
+  tasks:
+    - name: ARISTA SWITCH CONFIG
+      eos_command:
+        commands: show run
+      register: output
+    - name: COPY SWITCH CONFIGS
+      copy:
+        content: "{{ output.stdout[0] }}"
+        dest: "/home/gitlab-runner/network-automation/configs/show_run_{{ inventory_hostname }}.txt"
+----
+
+---
+
+=== Let’s review the Batfish.py file:
+
+[source, bash]
+----
+# Modules
+from pybatfish.client.commands import bf_init_snapshot, bf_session
+from pybatfish.question.question import load_questions
+from pybatfish.question import bfq
+import os
+# Variables
+bf_address = "127.0.0.1"
+snapshot_path = "/home/gitlab-runner/network-automation/"
+output_dir = "/home/gitlab-runner/network-automation/"
+# Body
+if __name__ == "__main__":
+    # Setting host to connect
+    bf_session.host = bf_address
+    # Loading confgs and questions
+    bf_init_snapshot(snapshot_path, overwrite=True)
+    load_questions()
+    # Running questions
+    r = bfq.nodeProperties().answer().frame()
+    assert r.empty is False
+    print(r)
+    r1 = bfq.nodeProperties(properties="SNMP_Trap_servers").answer().frame()
+    assert r1.empty is False
+    print(r1)
+
+    print("ANALYSIS // lpmRoutes()")
+    r2 = bfq.lpmRoutes(ip='192.168.14.1').answer().frame()
+    assert r2.empty is False
+    print(r2)
+    # Saving output
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+    r.to_csv(f"{output_dir}/results.csv")
+----
+
+---
+
+=== In the previous section we automated a change to add vlan 14 and subnet 192.168.14.0/24 to the leaf3 switch
+=== As part of the Containerlab deployment, we created 3 Linux clients
+=== We can use one or all of the clients to perform traditional tests like Ping and Traceroute
+=== Let’s add a new test stage to the CI/CD file -> .gitlab-ci.yml
+
+[source, bash]
+----
+stages:
+- build
+- stage
+- change
+- test
+- backup
+----
+---
+
+=== Since the Linux clients are docker containers
+=== We can use the Docker Exec command to update the networking stack on third client
+=== Lets add an IP address of 192.168.14.8 to eth1 of the Linux client
+=== Lets add the default route to point to the new vlan interface of 192.168.14.1
+=== Delete the existing default route
+=== Add a ping and traceroute to test the change
+
+[source, bash]
+----
+test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.14.1
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1
+----
+
+Now lets reference the batfish.py file in the CI/CD file in a new stage
+
+[source, bash]
+----
+test_model_switches:
+  stage: test
+  before_script:
+    - cd tests
+    - docker rmi -f $(docker images -q --filter=reference="batfish/allinone:latest") || true
+  script:
+    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true
+    - ansible-playbook snapshots.yaml -v 
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install pybatfish
+    - python3 batfish.py
+----
+
+=== Now lets go push the changes to the remote repository 
+=== Remember to save the files first!
+
+[source, bash]
+----
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml 
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ cd tests/
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git branch
+  1-network-change
+* 2-testing
+  master
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git add .
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git commit -m "added test changes"
+[2-testing 19301d9] added test changes
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git push origin 2-testing
+Username for 'http://ed26757f4b2c.mylabserver.com': knorton
+Password for 'http://knorton@ed26757f4b2c.mylabserver.com': 
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 431 bytes | 431.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0)
+remote: 
+remote: View merge request for 2-testing:
+remote:   http://ed26757f4b2c.mylabserver.com/knorton/network-automation/-/merge_requests/6
+remote: 
+To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+   60f97a8..19301d9  2-testing -> 2-testing
+----
+
+---
+
+=== Login to the GitLab-CI as a user
+=== Notice the Merge Request update – click Merge Requests and select the recent merge request
+=== Under Activity you can review the changes
+=== Click the 4d86023d link to review the changes (the link ID will be unique)
+=== Click Resolve conflicts if needed
+=== Click Mark as ready
+=== Click Merge
+
+image::s4-22.png[caption="Figure 4: ", title='Merge Request', 400]
+
+=== Under the build section
+=== Click on the pipeline
+
+image::s4-23.png[caption="Figure 5: ", title='CI/CD Pipeline', 200]
+---
+
+=== When the pipeline completes the issue will automatically close
+=== Go back into the issue and check the checkboxes if it was successful
+
+image::s4-24.png[caption="Figure 6: ", title='Close The Issue', 150]
+
+---
+
+== **Let's Try Something**
+=== Change the traditional test to ping an interface that doesn’t exist
+=== Change the lpm route in the the batfish.py file to a network that doesn’t exist
+
+
+[source, bash]
+----
+    print("ANALYSIS // lpmRoutes()")
+    r2 = bfq.lpmRoutes(ip='192.168.15.1').answer().frame() <1>
+    assert r2.empty is False
+    print(r2)
+----
+
+=== Change the .gitlab-ci.yml file
+
+[source, bash]
+----
+test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.15.1 <1>
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1
+
+----
+
+<1> E.g. 192.168.15.1
+
+=== Save the file and and push the change to master branch and watch the pipeline fail
+
+---
+== End Result
+
+=== At this point, we have incorporated automated and traditional testing with the new change using the Git Workflow of creating an issue and a Merge Request.

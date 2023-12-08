@@ -1,0 +1,436 @@
+---
+title: Stage 1.1 - Server Builds
+workshops: net_automation_101
+workshop_weight: 11
+layout: lab
+---
+
+:icons: font
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+
+= stage1
+
+== **Stage 1**
+
+image::s1-0.png['Stages', 1000]
+
+== In Stage 1, we will brainstorm ideas on how we can introduce network automation into your environment.  We will discuss use cases and tasks that are manually done today that could be automated.
+
+== The second part of Stage 1 is to install and initially build the two servers.
+
+---
+
+== **Here is a summary of Stage 1**
+
+image::s1-1.png['Stage 1 Summary', 500]
+
+---
+
+== **Server 1 and Server 2 Diagram**
+
+image::ind-3.png['Servers', 1000]
+
+---
+
+== **Let’s install Visual Studio Code on you Laptop**
+
+== Interactive Development Environment (IDE)
+
+image::s1-2.png[caption="Figure 1: ", title='Visual Studio Code', 600]
+
+== Download the latest and install it
+
+
+`https://code.visualstudio.com/`
+
+---
+
+== **Server 1 Requirements**
+
+* Ubuntu version 20.04 LTS with the latest updates
+* CPU = 4 vCPU or greater
+* Memory = 8 Gig or greater
+* Disk size = 100 Gig or greater
+* Name = netdev-01
+* Domain = yourdomain.com
+* Register the server in DNS or update the host file
+* Login as a user
+
+---
+
+== **Apache - Installation on Server 1**
+
+[source,bash]
+----
+sudo apt update
+sudo apt upgrade -y
+sudo apt install apache2 -y
+sudo systemctl status apache2
+----
+
+== Check the web page
+[source, bash]
+----
+http://IP Address or server name of Server <1>
+----
+
+<1> Use your IP address or Servername
+
+image::s1-3.png[caption="Figure 2: ", title='Apache Home Page', 300]
+
+---
+
+== **Apache - Configuration**
+
+=== Create the netdevops directory
+
+[source, bash]
+----
+sudo mkdir /var/www/netdevops
+sudo chown -R $USER:$USER /var/www/netdevops
+sudo chmod -R 777 /var/www/netdevops
+----
+
+=== Create and edit the netdevops.conf file
+
+[source, bash]
+----
+sudo vi /etc/apache2/sites-available/netdevops.conf
+----
+
+=== Add the following to the netdevops.conf file
+
+[source, bash]
+----
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName presidio-demo.com <1>
+    ServerAlias ccoe-netdev-01.presidio-demo.com <2>
+    DocumentRoot /var/www/netdevops
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+----
+
+<1> Use your information for the ServerName
+<2> Use your information for the ServerAlias
+
+=== Update Apache
+[source, bash]
+----
+sudo a2ensite netdevops.conf
+sudo a2dissite 000-default.conf
+sudo apache2ctl configtest
+sudo systemctl restart apache2
+----
+
+---
+
+== **Git - Installation on Server 1**
+
+=== Check git version
+
+[source, bash]
+----
+git version
+----
+
+=== Perform a quick update on your instance:
+
+[source, bash]
+----
+sudo apt-get update -y
+----
+
+=== Install git in your Server
+[source, bash]
+----
+sudo apt-get install git -y
+----
+
+---
+
+== **Virtual Environment and Python - Installation on Server 1**
+
+=== Check if Python3 is already installed
+[source, bash]
+----
+python3 --version
+----
+
+=== Upgrade Python if it is installed
+[source, bash]
+----
+sudo apt --only-upgrade install python3
+----
+
+=== If Python is not installed
+[source, bash]
+----
+sudo apt update && sudo apt upgrade –y
+sudo apt install python3
+----
+
+=== Install PIP
+[source, bash]
+----
+sudo apt install python3-pip –y
+----
+
+=== Virtual environment installation
+[source, bash]
+----
+sudo apt install python3-venv
+----
+
+---
+
+== **Ansible - Installation on Server 1**
+
+
+=== Installation of Ansible
+[source, bash]
+----
+sudo apt -y install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get install ansible -y
+----
+
+=== Installation of Ansible-pylibssh
+[source, bash]
+----
+pip install ansible-pylibssh
+----
+
+---
+
+== **Docker - Installation on Server 1**
+
+=== Download Docker
+[source, bash]
+----
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg -y
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+----
+[source, bash]
+----
+echo \
+"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+----
+[source, bash]
+----
+sudo apt-get update
+----
+
+=== Install Docker Engine
+[source, bash]
+----
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+----
+=== Check docker service
+[source, bash]
+----
+systemctl status docker
+----
+
+=== Type q to quit
+
+=== Add User to Group
+[source, bash]
+----
+sudo usermod -a -G docker $USER
+----
+
+=== Logout and log back in 
+
+=== Check Docker
+[source, bash]
+----
+docker ps
+----
+
+=== Install Docker Compose
+[source, bash]
+----
+sudo apt-get install docker-compose -y
+----
+
+=== Check Docker Compose
+[source, bash]
+----
+docker-compose version
+----
+
+---
+
+== **ContainerLabs – Installation on Server 1**
+
+=== Download and install the latest release (may require sudo)
+[source, bash]
+----
+bash -c "$(curl -sL https://get.containerlab.dev)"
+----
+
+---
+
+== **Optional Samba Installation**
+
+== Install Samba
+[source, bash]
+----
+sudo apt install samba
+----
+=== Edit the Samba config file to create the file share
+[source, bash]
+----
+sudo nano /etc/samba/smb.conf
+----
+=== Scroll to the bottom of the file and add the following:
+[source, bash]
+----
+[share]
+comment = Shared Folder
+path = /home/$USER/network-automation
+writeable = yes
+browseable = yes
+public = no
+----
+Ctrl + O to save
+Ctrl + X to exit
+
+=== Restart Samba Service
+[source, bash]
+----
+sudo service smbd restart
+----
+=== Set up your username to access the share
+[source, bash]
+----
+sudo smbpasswd -a username <1> 
+----
+<1> Replace username with your username
+
+=== Ensure the file share works: \\a.b.c.d\share 
+
+[IMPORTANT]
+Replace a.b.c.d with the IP address of Server 1
+
+---
+
+== **Server 2 Requirements**
+
+* Ubuntu version 20.04 LTS with the latest updates
+* CPU = 4 vCPU or greater
+* Memory = 8 Gig or greater
+* Disk size = 100 Gig or greater
+* Name = netdev-02
+* Domain = yourdomain.com
+* Register the server in DNS or update the host file
+* Login as a user
+
+---
+
+== **Docker - Installation on Server 2**
+
+=== Download Docker
+[source, bash]
+----
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg -y
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+----
+[source, bash]
+----
+echo \
+"deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+"$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+----
+[source, bash]
+----
+sudo apt-get update
+----
+
+=== Install Docker Engine
+[source, bash]
+----
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+----
+=== Check docker service
+[source, bash]
+----
+systemctl status docker
+----
+
+=== Type q to quit
+
+=== Add User to Group
+[source, bash]
+----
+sudo usermod -a -G docker $USER
+----
+
+=== Logout and log back in 
+
+=== Check Docker
+[source, bash]
+----
+docker ps
+----
+
+=== Install Docker Compose
+[source, bash]
+----
+sudo apt-get install docker-compose -y
+----
+
+=== Check Docker Compose
+[source, bash]
+----
+docker-compose version
+----
+
+---
+
+== **Setup a Host file entry on both Server (If required)**
+
+Not required for acloudguru servers or any servers that will have a FQDN
+
+=== The following command below will be unique to you and are only required if you did not enter these into your local DNS Server
+
+=== Edit /etc/hosts
+
+[source, bash]
+----
+127.0.0.1 localhost
+10.1.1.11 lab-server-1.domain.com <1>
+10.1.1.10 lab-server-2.domain.com <2>
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+----
+
+
+<1> Modify to reflect your IP addresses and hostnames for Server 1
+<2> Modify to reflect your IP addresses and hostnames for Server 2
+
+[IMPORTANT]
+**Be sure you can log in to your instances.  If you can't log in start shouting, loudly, and waving your hands!**
+
+
+== **End Result**
+
+=== At this point, everyone should have logged into both servers.  If you haven't, let us know so we can get you fixed up.
+
