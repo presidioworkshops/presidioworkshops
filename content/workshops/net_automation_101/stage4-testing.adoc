@@ -13,15 +13,15 @@ layout: lab
 
 = Stage4-testing
 
-== Stage 4 PreDeployment Testing
-
+== **Stage 4 PreDeployment Testing**
+== Estimate time to complete: 45 minutes
 image::s4-0.png['Stages', 1000]
 
 == In Stage 4, we will discuss the process of testing a change.  
 
-== We will run through some of the concepts to understand how to use Batfish and a Linux container to perform testing.
+== We will run through some of the concepts to understand how to use Batfish and a Linux container to perform tradional testing.
 
-== Performing automated test is one of the advantages to help reduce risk during a change to the network.  
+== Performing automated testing is one of the advantages to help reduce risk during a change to the network.  
 
 ---
 
@@ -49,6 +49,8 @@ image::s4-3.png['Stage 4 Summary', 1000]
 [IMPORTANT]
 Login to the Gitlab-CE Server (Server 2) as a user
 
+=== We just created a change, but what if the change breaks the network
+=== We need to test the change deploying to production
 === Let’s start with creating a new issue and Merge Request in Gitlab network Automation Repository
 
 === Click on the Network Automation Project
@@ -93,7 +95,7 @@ image::s4-20.png[caption="Figure 2: ", title='Merge Request', 500]
 
 === Go to a remote location where you have a copy of the remote repository from your Gitlab server
 === Perform the following to get latest copy of the remote repository
-=== Below was done from the VS Code terminal
+=== Let's continue to use VS Code to make our changes
 
 ---
 
@@ -132,12 +134,12 @@ git pull origin master
 ----
 
 === Notice the only branch is master and 1-network-change
-=== We can pull down the remote network change branch using the following command:
+=== We can pull down the remote testing branch using the following command:
 [source, bash]
 ---- 
 git fetch 
 ----
-=== But you need to create a new branch in the local repository using the following command:
+=== But you still need to create a new local testing branch in the local repository using the following command:
 [IMPORTANT]
 Your branch name maybe different
 [source, bash]
@@ -150,6 +152,8 @@ git branch 2-testing
 git checkout 2-testing
 ----
 
+
+=== Here is a progression of the commands above
 [source, bash]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
@@ -177,7 +181,7 @@ Switched to branch '2-testing'
 
 == **Let's Create Some Tests**
 === Let's build an Ansible Playbook to create the testing
-=== Let's use Visual studio code to create the tests folder
+=== Let's use Visual studio code to review the tests folder
 === Let’s review the files in the tests directory
 
 image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
@@ -185,7 +189,7 @@ image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
 ---
 
 === Let’s review the snapshots.yaml file:
-
+=== This playbook will create a backup of the switch configurations for Batfish to use as a model.
 [source, bash]
 ----
 ---
@@ -199,7 +203,7 @@ image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
       delegate_to: localhost
     - name: Create Directory
       file:
-        path: /home/gitlab-runner/network-automation/configs
+        path: /home/gitlab-runner/network-automation/configs <1>
         state: directory 
   run_once: yes
 - name: BACKUP ARISTA SWITCHES
@@ -214,12 +218,16 @@ image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
     - name: COPY SWITCH CONFIGS
       copy:
         content: "{{ output.stdout[0] }}"
-        dest: "/home/gitlab-runner/network-automation/configs/show_run_{{ inventory_hostname }}.txt"
+        dest: "/home/gitlab-runner/network-automation/configs/show_run_{{ inventory_hostname }}.txt" <1>
 ----
-
+<1> This is the location of where the configurations will be stored for Batfish to model.
 ---
 
 === Let’s review the Batfish.py file:
+=== This is a python script to leverage the pybatfish model. 
+=== Batfish uses a series of questions to test the network.  
+=== The answers to the questions are based on the modeling done by Batfish against the configurations.
+=== One of the benefits of Batfish is that it does not need the switches to be up and running to test functionality.
 
 [source, bash]
 ----
@@ -237,30 +245,33 @@ if __name__ == "__main__":
     # Setting host to connect
     bf_session.host = bf_address
     # Loading confgs and questions
-    bf_init_snapshot(snapshot_path, overwrite=True)
+    bf_init_snapshot(snapshot_path, overwrite=True) <1>
     load_questions()
-    # Running questions
-    r = bfq.nodeProperties().answer().frame()
-    assert r.empty is False
+    # Running questions 
+    r = bfq.nodeProperties().answer().frame() <2>
+    assert r.empty is False <3>
     print(r)
-    r1 = bfq.nodeProperties(properties="SNMP_Trap_servers").answer().frame()
-    assert r1.empty is False
+    r1 = bfq.nodeProperties(properties="SNMP_Trap_servers").answer().frame() <2>
+    assert r1.empty is False <3>
     print(r1)
 
     print("ANALYSIS // lpmRoutes()")
-    r2 = bfq.lpmRoutes(ip='192.168.14.1').answer().frame()
-    assert r2.empty is False
+    r2 = bfq.lpmRoutes(ip='192.168.14.1').answer().frame() <2>
+    assert r2.empty is False <3>
     print(r2)
     # Saving output
     if not os.path.exists(output_dir):
         os.mkdir(output_dir)
-    r.to_csv(f"{output_dir}/results.csv")
+    r.to_csv(f"{output_dir}/results.csv")<4>
 ----
-
+<1> Here is where we are loading the configurations
+<2> Here are the questions for Batfish
+<3> We are leveraging the python assert function to check if the answer is not empty 
+<4> This is full output of the Batfish model
 ---
 
 === In the previous section we automated a change to add vlan 14 and subnet 192.168.14.0/24 to the leaf3 switch
-=== As part of the Containerlab deployment, we created 3 Linux clients
+=== As part of the Containerlab deployment, we created 3 Linux container clients
 === We can use one or all of the clients to perform traditional tests like Ping and Traceroute
 === Let’s add a new test stage to the CI/CD file -> .gitlab-ci.yml
 
@@ -276,12 +287,12 @@ stages:
 ---
 
 === Since the Linux clients are docker containers
-=== We can use the Docker Exec command to update the networking stack on third client
+=== We can use the Docker Exec command to update the networking stack on third Linux client
 === Lets add an IP address of 192.168.14.8 to eth1 of the Linux client
 === Lets add the default route to point to the new vlan interface of 192.168.14.1
 === Delete the existing default route
 === Add a ping and traceroute to test the change
-
+=== Add this job between network_change and the backup_switches
 [source, bash]
 ----
 test_traditional_switches:
@@ -296,40 +307,42 @@ test_traditional_switches:
     - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1
 ----
 
-Now lets reference the batfish.py file in the CI/CD file in a new stage
+=== Now lets reference the batfish.py file in the .gitlab-ci.yml file in a new job
+=== Add this job between network_change and the backup_switches and after test_traditional_switches job
 
 [source, bash]
 ----
 test_model_switches:
-  stage: test
-  before_script:
-    - cd tests
-    - docker rmi -f $(docker images -q --filter=reference="batfish/allinone:latest") || true
-  script:
-    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true
-    - ansible-playbook snapshots.yaml -v 
-    - python3 -m venv venv
-    - source venv/bin/activate
-    - pip install pybatfish
-    - python3 batfish.py
+  stage: test
+  before_script:
+    - cd tests
+    - docker rmi -f $(docker images -q --filter=reference="batfish/allinone:latest") || true
+  script:
+    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true 
+    - ansible-playbook snapshots.yaml -v 
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install pybatfish
+    - python3 batfish.py
 ----
 
 === Now lets go push the changes to the remote repository 
-=== Remember to save the files first!
+[IMPORTANT]
+Remember to save the files first!
 
+=== Run the following commands below to push the code and kick off the pipeline
 [source, bash]
 ----
-kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml 
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml <1>
 kennorton@C02G71AFMD6P-knorton:~/network-automation$ cd tests/
-kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git branch
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git branch <2>
   1-network-change
 * 2-testing
   master
-kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git add .
-kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git commit -m "added test changes"
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git commit -m "added test changes" <3>
 [2-testing 19301d9] added test changes
  1 file changed, 9 insertions(+), 5 deletions(-)
-kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git push origin 2-testing
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git push origin 2-testing <4>
 Username for 'http://ed26757f4b2c.mylabserver.com': knorton
 Password for 'http://knorton@ed26757f4b2c.mylabserver.com': 
 Enumerating objects: 7, done.
@@ -345,7 +358,10 @@ remote:
 To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
    60f97a8..19301d9  2-testing -> 2-testing
 ----
-
+<1> Adding the modified .gitlab-ci.yml file to the local repository
+<2> Checking to make sure we are working on the correct git branch
+<3> Commiting the latest changes to the local repository
+<4> Push the changes to the 2-testing remote repository on the Gitlab-CE server
 ---
 
 === Login to the GitLab-CI as a user
@@ -358,6 +374,88 @@ To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
 
 image::s4-22.png[caption="Figure 4: ", title='Merge Request', 400]
 
+
+=== In case you are getting an error with your .gitlab-ci.yml file
+=== Here is a copy of the complete file at this point
+=== Working with YAML files can be challenging
+
+[source, bash]
+----
+---
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == 'master'
+
+stages:
+  - build
+  - stage
+  - change
+  - test
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+network_change:
+  stage: change
+  before_script:
+    - cd change
+  script:
+    - ansible-playbook change.yaml -v
+  dependencies:
+    - staging_switches
+
+test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.14.1
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1
+
+test_model_switches:
+  stage: test
+  before_script:
+    - cd tests
+    - docker rmi -f $(docker images -q --filter=reference="batfish/allinone:latest") || true
+  script:
+    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true 
+    - ansible-playbook snapshots.yaml -v 
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install pybatfish
+    - python3 batfish.py
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/git_backup.yaml -v
+  dependencies:
+    - staging_switches
+----
 === Under the build section
 === Click on the pipeline
 
@@ -372,7 +470,8 @@ image::s4-24.png[caption="Figure 6: ", title='Close The Issue', 150]
 ---
 
 == **Let's Try Something**
-=== Change the traditional test to ping an interface that doesn’t exist
+
+
 === Change the lpm route in the the batfish.py file to a network that doesn’t exist
 
 
@@ -383,8 +482,8 @@ image::s4-24.png[caption="Figure 6: ", title='Close The Issue', 150]
     assert r2.empty is False
     print(r2)
 ----
-
-=== Change the .gitlab-ci.yml file
+=== In the .gitlab-ci.yml file
+=== Change the traditional test to ping an interface that doesn’t exist
 
 [source, bash]
 ----
@@ -403,9 +502,21 @@ test_traditional_switches:
 
 <1> E.g. 192.168.15.1
 
-=== Save the file and and push the change to master branch and watch the pipeline fail
+=== Save the file and and push the change and merge it into the master branch and watch the pipeline fail
+
+image::s4-24a.png[caption="Figure 7: ", title='Traditional Test Failed', 400]
+
+
+image::s4-24b.png[caption="Figure 8: ", title='Batfish Model Test Failed', 400]
+
+=== This shows how the pipeline will fail if the test don't pass.
+=== If the test dont't pass then nothing is eventually deployed to production.
+=== Remember to change the configuration back to 192.168.14.1
+
 
 ---
 == End Result
+
+
 
 === At this point, we have incorporated automated and traditional testing with the new change using the Git Workflow of creating an issue and a Merge Request.
