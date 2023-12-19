@@ -13,8 +13,8 @@ layout: lab
 
 = Stage4-change
 
-== Stage 4 Automating A Change
-
+== **Stage 4 Automating A Change**
+== Estimated time to complete: 30 minutes
 image::s4-0.png['Stages', 1000]
 
 == In Stage 4, we will discuss the process of automating a change.  
@@ -49,7 +49,7 @@ image::s4-3.png['Stage 4 Summary', 1000]
 [IMPORTANT]
 Login to the Gitlab-CE Server (Server 2) as a user
 
-=== One of the first things to do to follow the gitlab flow.  
+=== One of the first things to do to follow the Gitlab flow.  
 === Create an issue in Gitlab to document the change. 
 === By creating an issue we can link it to the change
 === Click on the Network Automation Project
@@ -81,14 +81,17 @@ Write down the new branch name, 1-network-change
 
 ---
 
+
+image::s4-6.png[caption="Figure 3: ", title='Merge Request', 500]
+
+
 === Click assign to me
 === Click create a merge request
 
 [IMPORTANT]
 A Merge request doesn’t make any changes, but don’t close the merge request
 
-image::s4-6.png[caption="Figure 3: ", title='Merge Request', 500]
-
+---
 === Click Code -> Branches
 === Notice the new merge request, new issue, and new branch
 
@@ -99,10 +102,10 @@ image::s4-7.png[caption="Figure 4: ", title='Code Branches', 200]
 
 === Go to a remote location where you have a copy of the remote repository from your Gitlab server
 === Perform the following to get latest copy of the remote repository
-=== Below was done from the VS Code terminal
+=== Lets use VS Code to make the change
 [source, bash]
 ----
-kennorton@C02G71AFMD6P-knorton network-automation % git remote -v show origin
+kennorton@C02G71AFMD6P-knorton network-automation % git remote -v show origin <1>
 * remote origin
   Fetch URL: http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation.git
   Push  URL: http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation.git
@@ -111,8 +114,8 @@ kennorton@C02G71AFMD6P-knorton network-automation % git remote -v show origin
     1-network-change new (next fetch will store in remotes/origin)
     master           tracked
   Local ref configured for 'git push':
-    master pushes to master (local out of date)
-kennorton@C02G71AFMD6P-knorton network-automation % git pull origin master
+    master pushes to master (local out of date) <2>
+kennorton@C02G71AFMD6P-knorton network-automation % git pull origin master <3>
 remote: Enumerating objects: 21, done.
 remote: Counting objects: 100% (21/21), done.
 remote: Compressing objects: 100% (9/9), done.
@@ -128,15 +131,24 @@ Fast-forward
  create mode 100644 .gitlab-ci.yml
 ----
 
+<1> Check the remote repository
+<2> Notice the local repository is out of date
+<3> Pull down the changes from the remote repository
+
 ---
 
+=== Perform the following command to see the status of the branches
+[source, bash]
+----
+git branch
+----
 
-=== Notice the only branch is master, we can pull down the remote network change branch using the following command: 
+=== Notice the only branch is master. We can pull down the remote network change branch using the following command, but we need to create a local branch: 
 [source, bash]
 ----
 git fetch 
 ----
-=== But you need to create a new branch in the local repository using the following command:
+=== You need to create a new local branch in the local repository using the following command:
 [source, bash]
 ----
 git branch 1-network-change
@@ -146,6 +158,8 @@ git branch 1-network-change
 ----
 git checkout 1-network-change
 ----
+
+=== The following output shows the progression of the commands above
 [source, bash]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
@@ -172,7 +186,7 @@ Switched to branch '1-network-change'
 
 == **Let's Create A Change**
 === Let's build an Ansible Playbook to create the change
-=== Let's use Visual studio code to create the change
+=== Let's continue to use Visual studio code to create the change
 === Let’s review the files in the change directory
 
 image::s4-8.png[caption="Figure 5: ", title='Network Change File Structure', 200]
@@ -203,7 +217,7 @@ all:
 === These are the variables defined to add a new vlan interface to leaf3
 === By creating this yaml file you can simplify the addition of vlan interfaces in the future
 [IMPORTANT]
-**This can be the one file completed by a user in the future to support self service.  Easy to read without having to understand the commands required to configure the switches**
+**This can be the one file completed by a help desk user in the future.  Easy to read without having to understand the commands required to configure the switches**
 
 [source, bash]
 ----
@@ -285,12 +299,48 @@ image::s4-10.png[caption="Figure 7: ", title='Ansible Playbook For The Change Fo
 ---
 
 == **Now we need to add the change to CI/CD pipeline**
-=== Keep all the current configuration in the gitlab-ci.yml file, we just need to add to it
+=== Using VS Code keep all the current configuration in the gitlab-ci.yml file, we just need to add to it
 === Add the following workflow and stage to the gitlab-ci.yml file using Visual Studio Code
 
 [source, bash]
 ----
 ---
+workflow: <1>
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == 'master'
+
+stages:
+  - build
+  - stage
+  - change <2>
+  - backup
+
+network_change: <3>
+  stage: change
+  before_script:
+    - cd change
+  script:
+    - ansible-playbook change.yaml -v
+  dependencies:
+    - staging_switches
+----
+
+<1> Copy and paste the workflow section to the top of the .gitlab.ci file
+<2> Add the - change stage to the stages section between stage and backup
+<3> Copy and paste the network change stage in between the staging_switches stage and the backup_switches stage.
+
+image::s4-11.png[caption="Figure 8: ", title='Changes For The CI/CD Pipeline', 500]
+
+
+=== Complete .gitlab-ci.yml file
+
+Copy and paste this if you run into problems with your pipeline
+[source, bash]
+----
+---
+
 workflow:
   rules:
     - if: $CI_COMMIT_TAG
@@ -303,22 +353,47 @@ stages:
   - change
   - backup
 
-network_change:
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+network_change: 
   stage: change
   before_script:
     - cd change
   script:
-    - ansible-playbook change.yaml –v
+    - ansible-playbook change.yaml -v
+  dependencies:
+    - staging_switches
+
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/git_backup.yaml -v
   dependencies:
     - staging_switches
 ----
-
-image::s4-11.png[caption="Figure 8: ", title='Changes For The CI/CD Pipeline', 500]
-
 ---
 
 === Now lets go push the changes to the remote repository
-=== These are changes made in the VS Code terminal editor
+=== These are new changes made in the VS Code editor
 [source, bash]
 ----
 git status
@@ -358,7 +433,8 @@ To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
 ---
 
 == **Go to the Gitlab-CE Server**
-=== Go to Merge Request Network Change
+=== Go to Merge Requests
+=== Click on the Draft Network Change Merge Request
 === Notice the Merge Request update
 === Under Activity you can review the changes
 
@@ -367,11 +443,22 @@ image::s4-12.png[caption="Figure 9: ", title='Network Change Merge Request', 500
 [IMPORTANT]
 Click the **ab406831** link to review the changes.  The link ID will be different
 
+=== **Notice how the git push didn't automatically kickoff the CI/CD pipeline.**
+=== **By adding the following workflow to the gitlab-ci.yml file it pauses the pipeline so it can be reviewed before it is merged into the master branch**
+[source, bash]
+----
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == 'master'
+---- 
 === Take a look at the changes
 === You can make comments on the change and add a to do if needed
 
 image::s4-13.png[caption="Figure 10: ", title='Network Change Merge Request Changes', 200]
 
+ 
 === Go back to Merge Request after reviewing the changes and click Mark as ready
 
 image::s4-14.png[caption="Figure 11: ", title='Network Change Merge Request Mark Ready', 500]
@@ -399,5 +486,7 @@ image::s4-18.png[caption="Figure 18: ", title='Network Change Resolve The Issues
 ---
 
 == End Result
+
+
 
 === At this point, we have created a new change using the Git Workflow of creating an issue and a Merge Request.

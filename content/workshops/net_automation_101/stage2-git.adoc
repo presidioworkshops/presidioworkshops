@@ -13,8 +13,8 @@ layout: lab
 
 = Stage2-git
 
-== Stage 2 Git Basics
-
+== **Stage 2 Git Basics**
+== Estimated time to complete: 10 minutes
 image::s2-0.png['Stages', 1000]
 
 == In Stage 2, we will discuss Git basics.  
@@ -47,14 +47,15 @@ image::s2-3.png['Stage 2 Summary', 1000]
 
 == **Use Git to pull down some code onto Server 1**
 
-1. Login to your Ubuntu Server 1 as a user
-2. Open a terminal window
-3. Run the following command:
+=== Login to your Ubuntu Server 1 as a user
+=== Open a terminal window
+=== Run the following command:
 [source, bash]
 ----
 git clone https://github.com/knorton3/network-automation.git
+cd network-automation/infra
+git branch -m main master
 ----
-=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
 === This will create a new folder named **network-automation**
 
 [source, bash]
@@ -69,26 +70,43 @@ Receiving objects: 100% (214/214), 391.58 MiB | 6.09 MiB/s, done.
 Resolving deltas: 100% (84/84), done.
 cloud_user@ed26757f4b2c:~$ ls
 Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  network-automation
-cloud_user@ed26757f4b2c:~$ git branch -m main master
+cloud_user@ed26757f4b2c:~$ cd network-automation/infra
+cloud_user@ed26757f4b2c:~/network-automation/infra$ git branch -m main master
 ----
+=== Run the following commands to avoid logging into the repository with each pull and push request
+[source, bash]
+----
+git config --global credential.helper cache
+git config --global lfs.cachecredentials true
+----
+
+
+
+=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
 
 ---
 
 == **Use Git to pull down some code onto your workstation**
 
-1. Create a folder named NAW
-2. Open Visual Studio Code on your workstation
-3. Click File -> Open Folder and open the NAW folder
-4. Trust the author of the folder if prompted
-5. Open a terminal window, View -> Terminal
+=== Create a folder named NAW
+=== Open Visual Studio Code on your workstation
+=== Click File -> Open Folder and open the NAW folder
+=== Trust the author of the folder if prompted
+=== Open a terminal window, View -> Terminal
 
-Run the following command from the terminal:
+=== Run the following command from the terminal:
 [source, bash]
 ----
 git clone https://github.com/knorton3/network-automation.git
+cd network-automation/infra
 git branch -m main master
 ----
-
+=== Run the following commands to avoid logging into the repository with each pull and push request
+[source, bash]
+----
+git config --global credential.helper cache
+git config --global lfs.cachecredentials true
+----
 image::s2-4.png['Visual Studio Code', 500]
 
 === This will take some time.  It is pulling down the Arista Lab Container Image along with other files
@@ -96,5 +114,7 @@ image::s2-4.png['Visual Studio Code', 500]
 
 
 == End Result
+
+
 
 === At this point, you will have pulled down all the code from the Git repository

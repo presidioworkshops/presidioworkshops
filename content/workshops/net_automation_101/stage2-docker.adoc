@@ -13,8 +13,8 @@ layout: lab
 
 = Stage 2 - Docker and ContainerLab
 
-== Stage 2 Docker and ContainerLab Basics
-
+== **Stage 2 Docker and ContainerLab Basics**
+== Estimated time to complete: 15 minutes
 image::s2-0.png['Stages', 1000]
 
 == In Stage 2, we will discuss Docker and ContainerLab basics.  
@@ -53,7 +53,8 @@ image::s2-3.png['Stage 2 Summary', 1000]
 === These devices will all be created in Docker
 === Let’s check out docker from a terminal command prompt
 
-1. Run the following command:
+=== Run the following commands:
+=== Both of these commands perform the same tasks
 [source, bash]
 ----
 docker ps
@@ -64,28 +65,33 @@ docker container ls
 
 [source, bash]
 ----
-cloud_user@ed26757f4b1c:~$ docker ps
+cloud_user@ed26757f4b1c:~/network-automation/infra$ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-cloud_user@ed26757f4b1c:~$
+cloud_user@ed26757f4b1c:~/network-automation/infra$
 ----
 
-=== We need to import the Arista switch container image into your docker repository – be patient 
+=== We need to import the Arista switch container image into your docker repository – be patient
+=== Run the following command: 
 [source, bash]
 ----
-docker import network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
+docker import ~/network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
 ----
 
 === This will take some time.  It is pulling down the Arista Lab Container Image into Docker 
-
+=== Run the following command after it completes: 
+[source, bash]
+----
+docker image ls
+----
 
 [source, bash]
 ----
-cloud_user@ed26757f4b2c:~$ docker import network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
+cloud_user@ed26757f4b2c:~/network-automation/infra$ docker import network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
 sha256:1d338447c13d9594f6c3c99c13f24be285555595f590b57c44a54b71e2e664a7
 cloud_user@ed26757f4b2c:~$ docker image ls
 REPOSITORY   TAG        IMAGE ID       CREATED              SIZE
 ceos         4.25.10M   1d338447c13d   About a minute ago   1.62GB
-cloud_user@ed26757f4b2c:~$
+cloud_user@ed26757f4b2c:~/network-automation/infra$
 ----
 
 ---
@@ -93,11 +99,11 @@ cloud_user@ed26757f4b2c:~$
 == **Create a 5 node spin leaf Arista environment**
 
 === We will use ContainerLab to create a 5 node spin leaf Arista environment with three Linux Clients
-1. Run the following command to spin up the network and Linux clients
+=== Run the following command to spin up the network and Linux clients
 
 [source, bash]
 ----
-sudo containerlab deploy -t network-automation/infra/ceos_2spine_3leaf.yaml
+sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml
 ----
 [IMPORTANT] 
 Note: Depending on the Server Specs – Performance may vary
@@ -105,64 +111,68 @@ Note: Depending on the Server Specs – Performance may vary
 
 [source, bash]
 ----
-cloud_user@ed26757f4b2c:~$ sudo containerlab deploy -t network-automation/infra/ceos_2spine_3leaf.yaml 
-INFO[0000] Containerlab v0.44.0 started                 
+cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml 
+[sudo] password for cloud_user: 
+INFO[0000] Containerlab v0.48.6 started                 
 INFO[0000] Parsing & checking topology file: ceos_2spine_3leaf.yaml 
-INFO[0000] Creating docker network: Name="clab", IPv4Subnet="172.20.20.0/24", IPv6Subnet="2001:172:20:20::/64", MTU="1500" 
+INFO[0000] Creating docker network: Name="clab", IPv4Subnet="172.20.20.0/24", IPv6Subnet="2001:172:20:20::/64", MTU='ל' 
 INFO[0000] Could not read docker config: open /root/.docker/config.json: no such file or directory 
 INFO[0000] Pulling ghcr.io/hellt/network-multitool:latest Docker image 
 INFO[0005] Done pulling ghcr.io/hellt/network-multitool:latest 
-INFO[0006] Creating lab directory: /home/cloud_user/clab-Arista-2s-3l 
-WARN[0006] SSH_AUTH_SOCK not set, skipping pubkey fetching 
-INFO[0006] Creating container: "client1"                
-INFO[0006] Creating container: "leaf1"                  
+INFO[0006] Creating lab directory: /home/cloud_user/network-automation/infra/clab-Arista-2s-3l 
+INFO[0006] Creating container: "client3"                
+INFO[0006] Creating container: "spine2"                 
+INFO[0009] Creating container: "client1"                
 INFO[0009] Creating container: "client2"                
-INFO[0009] Creating link: client1:eth1 <--> leaf1:eth3  
-INFO[0009] Creating container: "client3"                
-INFO[0010] Creating container: "leaf3"                  
 INFO[0010] Creating container: "leaf2"                  
-INFO[0011] Creating link: client3:eth1 <--> leaf3:eth3  
-INFO[0011] Creating container: "spine1"                 
+INFO[0010] Creating container: "leaf1"                  
+INFO[0011] Creating link: leaf2:eth2 <--> spine2:eth2   
 INFO[0011] Creating link: client2:eth1 <--> leaf2:eth3  
-INFO[0011] Creating container: "spine2"                 
+INFO[0011] Creating container: "leaf3"                  
+INFO[0011] Creating link: leaf1:eth2 <--> spine2:eth1   
+INFO[0011] Creating link: client1:eth1 <--> leaf1:eth3  
+INFO[0012] Creating container: "spine1"                 
+INFO[0012] Creating link: leaf3:eth2 <--> spine2:eth3   
+INFO[0012] Creating link: client3:eth1 <--> leaf3:eth3  
 INFO[0012] Creating link: leaf1:eth1 <--> spine1:eth1   
 INFO[0012] Creating link: leaf2:eth1 <--> spine1:eth2   
-INFO[0012] Creating link: leaf1:eth2 <--> spine2:eth1   
-INFO[0012] Creating link: leaf3:eth1 <--> spine1:eth3   
-INFO[0012] Creating link: leaf2:eth2 <--> spine2:eth2   
-INFO[0012] Creating link: leaf3:eth2 <--> spine2:eth3   
-INFO[0012] Running postdeploy actions for Arista cEOS 'leaf1' node 
-INFO[0012] Running postdeploy actions for Arista cEOS 'leaf2' node 
-INFO[0012] Running postdeploy actions for Arista cEOS 'leaf3' node 
-INFO[0012] Running postdeploy actions for Arista cEOS 'spine1' node 
-INFO[0012] Running postdeploy actions for Arista cEOS 'spine2' node 
-INFO[0339] Adding containerlab host entries to /etc/hosts file 
-+---+---------------------------+--------------+---------------------------------+-------+---------+----------------+----------------------+
-| # |           Name            | Container ID |              Image              | Kind  |  State  |  IPv4 Address  |     IPv6 Address     |
-+---+---------------------------+--------------+---------------------------------+-------+---------+----------------+----------------------+
-| 1 | clab-Arista-2s-3l-client1 | c08ffc699168 | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.2/24 | 2001:172:20:20::2/64 |
-| 2 | clab-Arista-2s-3l-client2 | 08daf8774132 | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.4/24 | 2001:172:20:20::4/64 |
-| 3 | clab-Arista-2s-3l-client3 | ee18515b4445 | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.5/24 | 2001:172:20:20::5/64 |
-| 4 | clab-Arista-2s-3l-leaf1   | d6ae17c36972 | ceos:4.25.10M                   | ceos  | running | 172.20.20.3/24 | 2001:172:20:20::3/64 |
-| 5 | clab-Arista-2s-3l-leaf2   | 85c3286ef2a1 | ceos:4.25.10M                   | ceos  | running | 172.20.20.7/24 | 2001:172:20:20::7/64 |
-| 6 | clab-Arista-2s-3l-leaf3   | 30b75b57edf1 | ceos:4.25.10M                   | ceos  | running | 172.20.20.6/24 | 2001:172:20:20::6/64 |
-| 7 | clab-Arista-2s-3l-spine1  | ec2037eec52c | ceos:4.25.10M                   | ceos  | running | 172.20.20.8/24 | 2001:172:20:20::8/64 |
-| 8 | clab-Arista-2s-3l-spine2  | dfc4ec8ec698 | ceos:4.25.10M                   | ceos  | running | 172.20.20.9/24 | 2001:172:20:20::9/64 |
-+---+---------------------------+--------------+---------------------------------+-------+---------+----------------+----------------------+
-cloud_user@ed26757f4b2c:~$ 
+INFO[0013] Creating link: leaf3:eth1 <--> spine1:eth3   
+INFO[0013] Running postdeploy actions for Arista cEOS 'leaf1' node 
+INFO[0013] Running postdeploy actions for Arista cEOS 'spine2' node 
+INFO[0013] Running postdeploy actions for Arista cEOS 'leaf2' node 
+INFO[0013] Running postdeploy actions for Arista cEOS 'leaf3' node 
+INFO[0013] Running postdeploy actions for Arista cEOS 'spine1' node 
+INFO[0288] Adding containerlab host entries to /etc/hosts file 
+INFO[0288] Adding ssh config for containerlab nodes     
++---+---------------------------+--------------+---------------------------------+-------+---------+-----------------+-----------------------+
+| # |           Name            | Container ID |              Image              | Kind  |  State  |  IPv4 Address   |     IPv6 Address      |
++---+---------------------------+--------------+---------------------------------+-------+---------+-----------------+-----------------------+
+| 1 | clab-Arista-2s-3l-client1 | bed4b729f4ae | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.31/24 | 2001:172:20:20::31/64 |
+| 2 | clab-Arista-2s-3l-client2 | f524c21bf58b | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.32/24 | 2001:172:20:20::32/64 |
+| 3 | clab-Arista-2s-3l-client3 | 44ac3410b3b1 | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.33/24 | 2001:172:20:20::33/64 |
+| 4 | clab-Arista-2s-3l-leaf1   | 103c3bf271eb | ceos:4.25.10M                   | ceos  | running | 172.20.20.21/24 | 2001:172:20:20::21/64 |
+| 5 | clab-Arista-2s-3l-leaf2   | d80dd032c45f | ceos:4.25.10M                   | ceos  | running | 172.20.20.22/24 | 2001:172:20:20::22/64 |
+| 6 | clab-Arista-2s-3l-leaf3   | d4b34bf63926 | ceos:4.25.10M                   | ceos  | running | 172.20.20.23/24 | 2001:172:20:20::23/64 |
+| 7 | clab-Arista-2s-3l-spine1  | 5784ac1282df | ceos:4.25.10M                   | ceos  | running | 172.20.20.11/24 | 2001:172:20:20::11/64 |
+| 8 | clab-Arista-2s-3l-spine2  | 0efa144679ad | ceos:4.25.10M                   | ceos  | running | 172.20.20.12/24 | 2001:172:20:20::12/64 |
++---+---------------------------+--------------+---------------------------------+-------+---------+-----------------+-----------------------+
 ----
 
 ---
 
 == **Login to the Spine switch**
 
-=== All username are admin and passwords are admin
-[IMPORTANT]
-Notice all the configurations are default
 
+[IMPORTANT]
+All username are admin and passwords are admin. 
+Notice all the configurations are default
 [source, bash]
 ----
-cloud_user@ed26757f4b2c:~/network-automation$ ssh admin@clab-Arista-2s-3l-spine1
+ssh admin@clab-Arista-2s-3l-spine1
+----
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/infra$ ssh admin@clab-Arista-2s-3l-spine1
 The authenticity of host 'clab-arista-2s-3l-spine1 (2001:172:20:20::2)' can't be established.
 ECDSA key fingerprint is SHA256:J9FdkpeHpi5dq94nRSVAOJyvtyCnvhapwmLMjBh7vqU.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
@@ -193,7 +203,11 @@ spanning-tree mode mstp
 
 [source, bash]
 ----
-cloud_user@ed26757f4b2c:~$ sudo containerlab -h
+sudo containerlab -h
+----
+[source, bash]
+----
+cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab -h
 deploy container based lab environments with a user-defined interconnections
 
 Usage:
@@ -228,5 +242,7 @@ cloud_user@ed26757f4b2c:~$
 ----
 
 == End Result
+
+
 
 === At this point, you have deployed 5 Arista switches with 3 Linux clients in containers with default configurations.

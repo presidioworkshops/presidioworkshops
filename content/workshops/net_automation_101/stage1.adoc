@@ -14,7 +14,7 @@ layout: lab
 = stage1
 
 == **Stage 1**
-
+== Estimated time to complete: 20 mintues
 image::s1-0.png['Stages', 1000]
 
 == In Stage 1, we will brainstorm ideas on how we can introduce network automation into your environment.  We will discuss use cases and tasks that are manually done today that could be automated.
@@ -66,8 +66,17 @@ image::s1-2.png[caption="Figure 1: ", title='Visual Studio Code', 600]
 [source,bash]
 ----
 sudo apt update
+----
+[source,bash]
+----
 sudo apt upgrade -y
+----
+[source,bash]
+----
 sudo apt install apache2 -y
+----
+[source,bash]
+----
 sudo systemctl status apache2
 ----
 
@@ -102,6 +111,7 @@ sudo vi /etc/apache2/sites-available/netdevops.conf
 ----
 
 === Add the following to the netdevops.conf file
+=== Type i in vi to insert the information below
 
 [source, bash]
 ----
@@ -118,6 +128,7 @@ sudo vi /etc/apache2/sites-available/netdevops.conf
 <1> Use your information for the ServerName
 <2> Use your information for the ServerAlias
 
+=== Type esc the shift+zz to save the file and exit in vi
 === Update Apache
 [source, bash]
 ----
@@ -145,7 +156,13 @@ git version
 sudo apt-get update -y
 ----
 
-=== Install git in your Server
+=== Install git-lfs on your Server for large file transfers
+[source, bash]
+----
+sudo apt-get install git-lfs -y
+----
+
+=== Install git on your Server if it is not installed
 [source, bash]
 ----
 sudo apt-get install git -y
@@ -160,6 +177,7 @@ sudo apt-get install git -y
 ----
 python3 --version
 ----
+=== Python 3.8 and higher will work
 
 === Upgrade Python if it is installed
 [source, bash]
@@ -177,13 +195,13 @@ sudo apt install python3
 === Install PIP
 [source, bash]
 ----
-sudo apt install python3-pip –y
+sudo apt install python3-pip -y
 ----
 
 === Virtual environment installation
 [source, bash]
 ----
-sudo apt install python3-venv
+sudo apt install python3-venv -y
 ----
 
 ---
@@ -196,6 +214,9 @@ sudo apt install python3-venv
 ----
 sudo apt -y install software-properties-common
 sudo apt-add-repository ppa:ansible/ansible
+----
+[source, bash]
+----
 sudo apt-get install ansible -y
 ----
 
@@ -241,7 +262,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 systemctl status docker
 ----
 
-=== Type q to quit
+=== Type q to quit if needed
 
 === Add User to Group
 [source, bash]
@@ -255,6 +276,13 @@ sudo usermod -a -G docker $USER
 [source, bash]
 ----
 docker ps
+----
+
+=== If successful, you should see the following:
+[source, bash]
+----
+cloud_user@ed26757f4b1c:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ----
 
 === Install Docker Compose
@@ -286,7 +314,7 @@ bash -c "$(curl -sL https://get.containerlab.dev)"
 == Install Samba
 [source, bash]
 ----
-sudo apt install samba
+sudo apt install samba -y
 ----
 === Edit the Samba config file to create the file share
 [source, bash]
@@ -314,9 +342,9 @@ sudo service smbd restart
 === Set up your username to access the share
 [source, bash]
 ----
-sudo smbpasswd -a username <1> 
+sudo smbpasswd -a $USER 
 ----
-<1> Replace username with your username
+
 
 === Ensure the file share works: \\a.b.c.d\share 
 
@@ -344,6 +372,9 @@ Replace a.b.c.d with the IP address of Server 1
 [source, bash]
 ----
 sudo apt-get update
+----
+[source, bash]
+----
 sudo apt-get install ca-certificates curl gnupg -y
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
@@ -372,7 +403,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 systemctl status docker
 ----
 
-=== Type q to quit
+=== Type q to quit if needed
 
 === Add User to Group
 [source, bash]
@@ -386,6 +417,13 @@ sudo usermod -a -G docker $USER
 [source, bash]
 ----
 docker ps
+----
+
+=== If successful, you should see the following:
+[source, bash]
+----
+cloud_user@ed26757f4b1c:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ----
 
 === Install Docker Compose
