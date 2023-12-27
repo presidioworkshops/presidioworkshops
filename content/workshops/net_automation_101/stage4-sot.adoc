@@ -678,15 +678,19 @@ document_switches:
     - cd document
   script:
     - ansible-playbook document.yaml -v
+    - docker container rm -f netdevops-nginx || true
+    - docker rmi $(docker images -q --filter=reference="netdevops-nginx:1.0") || true
+    - docker build -t netdevops-nginx:1.0 .
+    - docker run -d -p 80:80 --name netdevops-nginx netdevops-nginx:1.0
   dependencies:
-   - test_model_switches
+    - test_model_switches
 
 push_to_production:
   stage: production
   script:
     - echo Pushing to production........
   dependencies:
-   - document_switches
+    - document_switches
 ----
 ---
 == **Now lets go push the changes to the remote repository**
@@ -855,15 +859,19 @@ document_switches:
     - cd document
   script:
     - ansible-playbook document.yaml -v
+    - docker container rm -f netdevops-nginx || true
+    - docker rmi $(docker images -q --filter=reference="netdevops-nginx:1.0") || true
+    - docker build -t netdevops-nginx:1.0 .
+    - docker run -d -p 80:80 --name netdevops-nginx netdevops-nginx:1.0
   dependencies:
-   - test_model_switches
+    - test_model_switches
 
 push_to_production:
   stage: production
   script:
     - echo Pushing to production........
   dependencies:
-   - document_switches
+    - document_switches
 ----
 === Under the build section
 === Click on the pipeline
@@ -876,7 +884,7 @@ image::s4-44.png[caption="Figure 20: ", title='CI/CD Pipeline', 200]
 image::s4-45.png[caption="Figure 21: ", title='Close The Issue', 400]
 
 
-== **CONGRATUATIONS**
+== **CONGRATUATIONS!! 🎉**
 
 ---
 
@@ -884,4 +892,4 @@ image::s4-45.png[caption="Figure 21: ", title='Close The Issue', 400]
 
 === At this point, You completed the following:
 
-image::s4-46.png[caption="Figure 22: ", title='Network Automation', 500]
+image::ind-5.png[caption="Figure 22: ", title='Network Automation', 500]
