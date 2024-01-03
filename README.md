@@ -24,4 +24,3 @@ If you want to build the site locally:
 If you have content that you'd like to contribute, check out our
 [contribution guidelines for this project](CONTRIBUTING.md).
 
-test
