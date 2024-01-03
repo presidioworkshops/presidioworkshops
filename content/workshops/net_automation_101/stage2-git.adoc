@@ -52,7 +52,7 @@ image::s2-3.png['Stage 2 Summary', 1000]
 === Run the following command:
 [source, bash]
 ----
-git clone https://github.com/knorton3/network-automation.git
+git clone https://gitlab.com/knorton3/network-automation.git
 cd network-automation/infra
 git branch -m main master
 ----
@@ -60,7 +60,7 @@ git branch -m main master
 
 [source, bash]
 ----
-cloud_user@ed26757f4b2c:~$ git clone https://github.com/knorton3/network-automation.git
+cloud_user@ed26757f4b2c:~$ git clone https://gitlab.com/knorton3/network-automation.git
 Cloning into 'network-automation'...
 remote: Enumerating objects: 214, done.
 remote: Counting objects: 100% (157/157), done.
@@ -97,7 +97,7 @@ git config --global lfs.cachecredentials true
 === Run the following command from the terminal:
 [source, bash]
 ----
-git clone https://github.com/knorton3/network-automation.git
+git clone https://gitlab.com/knorton3/network-automation.git
 cd network-automation/infra
 git branch -m main master
 ----

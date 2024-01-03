@@ -51,7 +51,7 @@ image::s3-3.png['Stage 3 Summary', 1000]
 === From the home directory pull down the latest git repository
 [source, bash]
 ----
-git clone https://github.com/knorton3/network-automation.git
+git clone https://gitlab.com/knorton3/network-automation.git
 
 ----
 === This will take some time.  It is pulling down the Arista Lab Container Image along with other files
