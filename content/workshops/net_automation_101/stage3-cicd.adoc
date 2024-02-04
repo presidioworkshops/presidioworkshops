@@ -157,6 +157,8 @@ sudo visudo
 gitlab-runner ALL=(ALL) NOPASSWD: ALL
 ----
 
+image::s3-16.png[caption="Figure 3: ", title='Gitlab Permission', 200]
+
 [IMPORTANT]
 **If you get an error trying to save the file,e.g.,**
 
@@ -170,8 +172,6 @@ sudo: parsing error in /etc/sudoers near line 31
 **DO NOT SAVE THE FILE**
 
 
-
-image::s3-16.png[caption="Figure 3: ", title='Gitlab Permission', 200]
 
 ---
 

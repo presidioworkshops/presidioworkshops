@@ -135,8 +135,12 @@ sudo apt install python3-venv -y
 [source, bash]
 ----
 sudo apt -y install software-properties-common
+----
+[source, bash]
+----
 sudo apt-add-repository ppa:ansible/ansible
 ----
+Hit Enter to continue
 [source, bash]
 ----
 sudo apt-get install ansible -y

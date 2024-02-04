@@ -55,7 +55,7 @@ Login to Server 2
 This is an all in one lab instance of Nautobot.  **This is not for Production.**
 [source, bash]
 ----
-docker run -itd --restart=always --name nautobot -p 8000:8000 --env NAPALM_USERNAME="admin" --env NAPALM_PASSWORD="admin" networktocode/nautobot-lab:latest
+docker run -itd --restart=always --name nautobot -p 8000:8000 --env NAPALM_USERNAME="admin" --env NAPALM_PASSWORD="admin" networktocode/nautobot-lab:1.6.2
 ----
 === This will spin up nautobot server in minutes
 === Create a superuser account after the container comes up
@@ -170,6 +170,11 @@ NB_HOST=ed26757f4b2c.mylabserver.com
 <2> Replace your Nautobot server name in the command above
 
 === Then cd into the ~/network-automation/infra/nautobot/ directory to run the playbook
+[source, bash]
+----
+cd ~/network-automation/infra/nautobot/
+----
+
 === This will add data to your Nautobot server 
 
 === Run the following playbook
