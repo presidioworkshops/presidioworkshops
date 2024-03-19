@@ -45,7 +45,7 @@ image::s3-3.png['Stage 3 Summary', 1000]
 
 ---
 
-== **Let's install the GitLab Runner**
+== **Let's install the GitLab Runner on Server 1**
 [IMPORTANT]
 **Log back into Server 1**
 
@@ -104,7 +104,7 @@ http://server2/admin/runners/new <1>
 
 image::s3-14a.png[caption="Figure 1: ", title='Setup Gitlab Runner', 400]
 
-=== Copy the command from Step 1 to Server-1 and make it one line with sudo in front of it, for example.
+=== **Copy the command from Step 1 to Server-1 and make it one line with sudo in front of it, for example.**
 [source, bash]
 ----
 sudo gitlab-runner register --url http://server2  --token glrt-k7HmELRbaHVxnnZa4DYf <1>
@@ -114,7 +114,7 @@ sudo gitlab-runner register --url http://server2  --token glrt-k7HmELRbaHVxnnZa
 image::s3-15.png[caption="Figure 2: ", title='Gitlab Runner', 200]
 
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~$ sudo gitlab-runner register --url http://server2 --token glrt-k7HmELRbaHVxnnZa4DYf
                                                    
@@ -176,7 +176,7 @@ sudo: parsing error in /etc/sudoers near line 31
 ---
 
 
-== **Lets prepare the Runner**
+== **Lets prepare the Runner on Server 1**
 
 === Modify the following file - /home/gitlab-runner/.bash_logout
 [source, bash]
@@ -220,7 +220,7 @@ Make sure you are in new navigation mode
 === Click Configure Pipeline
 === Review the example and erase the example configuration
 === Copy the following:
-[source, bash]
+[source, yaml]
 ----
 ---
 
@@ -233,7 +233,7 @@ build_switches:
     - cd infra
   script:
     - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
-    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
 ----
 
 === Click the validate button before committing the changes below
@@ -267,7 +267,7 @@ build_switches:
     - cd infra
   script:
     - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
-    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
 
 staging_switches:
   stage: stage
@@ -325,7 +325,7 @@ build_switches:
     - cd infra
   script:
     - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
-    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
 
 staging_switches:
   stage: stage
@@ -362,23 +362,30 @@ backup_switches:
 == Create a new repository on the Gitlab-CE Server called Backup
 === Go back to projects and click New project
 === Click Create blank project
-=== Name the project Backup and make it internal
+=== Name the project Backup a
+=== CLick internal
+=== **Uncheck Initialize repository with a README**
 
-[IMPORTANT]
-Uncheck "initialize repository with a README"
+
 
 image::s3-22.png[caption="Figure 9: ", title='Backup Repository', 500]
 
-=== Jump on the Server running the Gitlab-Runner - Server 1
+[IMPORTANT]
+**Uncheck "initialize repository with a README"**
+
+== **Jump on the Server running the Gitlab-Runner - Server 1**
 === Lets create an SSH key pair to automatically push the configuration through the CI/CD pipeline without prompting for a username and password
 === Login as the gitlab-runner and follow the steps below to create an ssh key
 [source, bash]
 ----
 su gitlab-runner
+----
+[source, bash]
+----
 cd ~
 ssh-keygen
 ----
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~$ su gitlab-runner
 Password: 
@@ -466,7 +473,7 @@ ssh -T git@server2 <1>
 
 
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~$ ssh -T git@ccoe-netdev-02.presidio-demo.com
 The authenticity of host '[ccoe-netdev-02.presidio-demo.com]:2222 ([10.129.225.179]:2222)' can't be established.
@@ -495,9 +502,40 @@ git init
 ----
 
 === On the Gitlab-Ce server capture the git remote add origin command from your backup git repository on the GitLab Server
-=== Follow the git commands below
+[source, bash]
+----
+git remote add origin git@server2:knorton/backup.git <1>
+----
+<1> Grab the git remote add origin command from your backup git repository on the GitLab Server
 
 [source, bash]
+----
+git add .
+----
+
+[source, bash]
+----
+git config --global user.email "knorton@presidio.com" <1>
+git config --global user.name "Ken Norton" <2>
+----
+
+<1> Change the user email with your email address
+<2> Change the user name with your name
+
+[source, bash]
+----
+git commit -m "Initial commit of backup"
+----
+
+[source, bash]
+----
+git push --set-upstream origin master
+----
+
+
+=== Follow the git commands in the image below
+
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~$ su gitlab-runner
 Password: 
@@ -508,7 +546,7 @@ Initialized empty Git repository in /home/gitlab-runner/network-automation/backu
 gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git remote add origin git@server2:knorton/backup.git <1>
 gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git add .
 gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.email "knorton@presidio.com"
-gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.name "knorton"
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.name "Ken Norton"
 gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git commit -m "Initial commit of backup"
 [master (root-commit) cf49541] Initial commit of backup
  5 files changed, 324 insertions(+)

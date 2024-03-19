@@ -1,0 +1,71 @@
+---
+title: Prerequisites
+workshops: net_automation_101
+workshop_weight: 10
+layout: lab
+---
+
+:icons: font
+:source-highlighter: highlight.js
+:source-language: bash
+:imagesdir: /workshops/net_automation_101/images
+
+
+= Prerequisites
+
+== **Prerequisites**
+== Estimated time to complete: 20 mintues
+image::s1-0.png['Stages', 1000]
+
+== To prepare for the workshop, we need to install some software on your laptop or desktop.  
+
+== Although it is not required, having a basic knowledge of Linux will help you in the workshop.
+
+== Being familiar with common Linux commands and editors like Nano and Vim will help you navigate the workshop.
+
+---
+
+== **Let’s install Git on you Laptop**
+
+== Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency. 
+
+image::s0-1.png[caption="Figure 1: ", title='Git', 600]
+
+== Download the latest and install it
+
+
+
+`https://git-scm.com/`
+
+---
+== We will also need to install and configure git-lfs to support the uploading and downloading of large files in Git.
+
+`https://git-lfs.com/`
+
+== Install git-lfs.  
+
+image::s0-2.png[caption="Figure 2: ", title='Git-lfs', 300]
+
+== Open a terminal window and type the following command on your laptop. 
+
+[source, bash]
+----
+git lfs install
+----
+
+== **Let’s install Visual Studio Code on you Laptop**
+
+== Interactive Development Environment (IDE)
+
+image::s1-2.png[caption="Figure 1: ", title='Visual Studio Code', 600]
+
+== Download the latest and install it
+
+
+`https://code.visualstudio.com/`
+
+
+== **End Result**
+
+=== At this point you have a couple new applications on your laptop that you will use throughout the workshop. 
+

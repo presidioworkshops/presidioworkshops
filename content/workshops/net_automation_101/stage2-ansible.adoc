@@ -14,7 +14,7 @@ layout: lab
 = Stage 2 - Ansible
 
 == **Stage 2 Ansible Basics**
-== Estimated time to complete: 20 minutes
+== Estimated time to complete: 45 minutes
 image::s2-0.png['Stages', 1000]
 
 == In Stage 2, we will discuss Ansible basics.  
@@ -47,7 +47,7 @@ image::s2-3.png['Stage 2 Summary', 1000]
 
 ---
 
-== **Let's try Ansible**
+== **Let's try Ansible on Server 1**
 
 === Change Directory to the following
 [source, bash]
@@ -65,7 +65,7 @@ ansible-playbook playbooks/make_folder.yaml -v
 ls
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/backup$ ls
 ansible.cfg  inventory  playbooks
@@ -116,7 +116,7 @@ ansible-playbook build.yaml -v
 [IMPORTANT]
 This error highlights the use of collections or modules from different manufacturers
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/build$ ansible-playbook build.yaml -v
 Using /home/cloud_user/network-automation/build/ansible.cfg as config file
@@ -151,7 +151,7 @@ ansible-galaxy collection install arista.eos
 ----
 ansible-playbook build.yaml -v
 ----
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/network-automation/build$ ansible-playbook build.yaml -v
 Using /home/cloud_user/network-automation/build/ansible.cfg as config file
@@ -245,7 +245,7 @@ cloud_user@ed26757f4b1c:~/network-automation/build$
 ssh admin@clab-Arista-2s-3l-leaf1
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/build$ ssh admin@clab-Arista-2s-3l-leaf1
 Password: 
@@ -291,7 +291,7 @@ ansible-playbook playbooks/manual_backup.yaml -v
 
 === Check out the configurations in the dated directory
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/backup$ ls
 2023-08-21  ansible.cfg  inventory  playbooks
@@ -362,7 +362,7 @@ cd ~/network-automation/document/
 ansible-playbook document.yaml -v
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/network-automation/document$ ansible-playbook document.yaml -v
 Using /home/cloud_user/network-automation/document/ansible.cfg as config file
@@ -432,7 +432,7 @@ docker build -t netdevops-nginx:1.0 .
 docker image ls
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/network-automation/document$ docker build -t netdevops-nginx:1.0 .
 [+] Building 1.1s (8/8) FINISHED                                                                                        docker:default
@@ -471,28 +471,28 @@ docker run -d -p 80:80 --name netdevops-nginx netdevops-nginx:1.0
 ----
 docker ps
 ----
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/network-automation/document$ docker run -d -p 80:80 --name netdevops-nginx netdevops-nginx:1.0
 e303ddfbbdea6142cd70d95601196ce1e75254fc0efd3c689585bfe21e1af640
 cloud_user@ed26757f4b1c:~/network-automation/document$ docker ps
-CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS          PORTS                                                                                                      NAMES
-e303ddfbbdea   netdevops-nginx:1.0               "/docker-entrypoint.…"   8 seconds ago    Up 7 seconds    0.0.0.0:80->80/tcp, :::80->80/tcp                                                                          netdevops-nginx <1>
-b5518c6fff61   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8023->22/tcp, :::8023->22/tcp                                                                      clab-Arista-2s-3l-leaf3
-5df56c409c52   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8022->22/tcp, :::8022->22/tcp                                                                      clab-Arista-2s-3l-leaf2
-4529a1888049   ghcr.io/hellt/network-multitool   "/docker-entrypoint.…"   45 minutes ago   Up 45 minutes   80/tcp, 443/tcp                                                                                            clab-Arista-2s-3l-client3
-44faae49385c   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8021->22/tcp, :::8021->22/tcp                                                                      clab-Arista-2s-3l-leaf1
-798e8af2dcbc   ghcr.io/hellt/network-multitool   "/docker-entrypoint.…"   45 minutes ago   Up 45 minutes   80/tcp, 443/tcp                                                                                            clab-Arista-2s-3l-client1
-a52373f39cda   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8012->22/tcp, :::8012->22/tcp                                                                      clab-Arista-2s-3l-spine2
-f50a53f554d1   ghcr.io/hellt/network-multitool   "/docker-entrypoint.…"   45 minutes ago   Up 45 minutes   80/tcp, 443/tcp                                                                                            clab-Arista-2s-3l-client2
-694b11906820   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8011->22/tcp, :::8011->22/tcp                                                                      clab-Arista-2s-3l-spine1
+CONTAINER ID   IMAGE                             COMMAND                  CREATED          STATUS          PORTS                                     NAMES
+e303ddfbbdea   netdevops-nginx:1.0               "/docker-entrypoint.…"   8 seconds ago    Up 7 seconds    0.0.0.0:80->80/tcp, :::80->80/tcp         netdevops-nginx <1>
+b5518c6fff61   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8023->22/tcp, :::8023->22/tcp     clab-Arista-2s-3l-leaf3
+5df56c409c52   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8022->22/tcp, :::8022->22/tcp     clab-Arista-2s-3l-leaf2
+4529a1888049   ghcr.io/hellt/network-multitool   "/docker-entrypoint.…"   45 minutes ago   Up 45 minutes   80/tcp, 443/tcp                           clab-Arista-2s-3l-client3
+44faae49385c   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8021->22/tcp, :::8021->22/tcp     clab-Arista-2s-3l-leaf1
+798e8af2dcbc   ghcr.io/hellt/network-multitool   "/docker-entrypoint.…"   45 minutes ago   Up 45 minutes   80/tcp, 443/tcp                           clab-Arista-2s-3l-client1
+a52373f39cda   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8012->22/tcp, :::8012->22/tcp     clab-Arista-2s-3l-spine2
+f50a53f554d1   ghcr.io/hellt/network-multitool   "/docker-entrypoint.…"   45 minutes ago   Up 45 minutes   80/tcp, 443/tcp                           clab-Arista-2s-3l-client2
+694b11906820   ceos:4.25.10M                     "bash -c '/mnt/flash…"   45 minutes ago   Up 45 minutes   0.0.0.0:8011->22/tcp, :::8011->22/tcp     clab-Arista-2s-3l-spine1
 ----
 <1> New Nginx container
 
 == **Open a Web Browser and go to the FQDN of Server 1**
 ---
 
-image::s2-5.png[caption="Figure 1: ", title='Network Automation Web Page', 500]
+image::s2-5.png[caption="Figure 1: ", title='Network Automation Web Page', 400]
 
 ---
 
@@ -503,7 +503,7 @@ image::s2-5.png[caption="Figure 1: ", title='Network Automation Web Page', 500]
 docker exec -it netdevops-nginx /bin/bash
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/network-automation/document$ docker exec -it netdevops-nginx /bin/bash
 root@e303ddfbbdea:/usr/share/nginx/html# ls

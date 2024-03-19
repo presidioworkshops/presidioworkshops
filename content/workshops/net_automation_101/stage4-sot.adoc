@@ -65,7 +65,7 @@ docker run -itd --restart=always --name nautobot -p 8000:8000 --env NAPALM_USERN
 docker exec -it nautobot nautobot-server createsuperuser
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/nautobot$ docker exec -it nautobot nautobot-server createsuperuser
 Username: support
@@ -110,7 +110,7 @@ image::s4-26.png[caption="Figure 2: ", title='Welcome To Nautobot', 600]
 === Select your username and click save
 === Copy the new token down to safe location
 
-image::s4-27.png[caption="Figure 3: ", title='Nautobot Token', 400]
+image::s4-27.png[caption="Figure 3: ", title='Nautobot Token', 375]
 
 ---
 
@@ -124,7 +124,9 @@ image::s4-27.png[caption="Figure 3: ", title='Nautobot Token', 400]
 pip3 install pynautobot==1.5.0
 ansible-galaxy collection install networktocode.nautobot:4.5.0
 ----
-[source, bash]
+
+=== Here is the progression of the commands above
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:/home/cloud_user$ pip3 install pynautobot==1.5.0 <1>
 Collecting pynautobot==1.5.0
@@ -156,7 +158,7 @@ networktocode.nautobot:4.5.0 was installed successfully
 
 === Let’s add the token to the environmental variables of the server
 === In production the recommendation would be to encrypt the token with a Vault application from Ansible or Hashicorp, but this is just for lab purposes
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/nautobot/add_device$ export NB_TOKEN="fbf4caacbd265dfc88aa430be6c31650a84179a7" <1>
 cloud_user@ed26757f4b1c:~/nautobot/add_device$ export NB_HOST="ed26757f4b2c.mylabserver.com" <2>
@@ -184,7 +186,7 @@ ansible-playbook ~/network-automation/infra/nautobot/add_info.yaml -vv
 ----
 
 === Here is the output from the playbook
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~$ ansible-playbook ~/network-automation/infra/nautobot/add_info.yaml -vv
 ansible-playbook [core 2.12.10]
@@ -268,7 +270,7 @@ localhost                  : ok=11   changed=11   unreachable=0    failed=0    s
 === You just added 5 new devices using the Nautobot API
 === Check out the devices by clicking on a device
 
-image::s4-28.png[caption="Figure 4: ", title='Nautobot Devices', 300]
+image::s4-28.png[caption="Figure 4: ", title='Nautobot Devices', 325]
 
 ---
 === To support the new VLAN change
@@ -281,7 +283,7 @@ image::s4-29.png[caption="Figure 5: ", title='Nautobot Interface Assignment', 20
 === Click update and click IP Addresses and then click on the 192.168.14.1/24 IP Address and assign vlan14 to the same device under the Interface Assignment section
 === On the IP Address page you should see the checkboxes for assigned
 
-image::s4-30.png[caption="Figure 6: ", title='Nautobot IP Addresses', 100]
+image::s4-30.png[caption="Figure 6: ", title='Nautobot IP Addresses', 150]
 
 === Now we have associated the two new VLANs to the Leaf3 switch
 
@@ -326,7 +328,7 @@ image::s4-31.png[caption="Figure 7: ", title='Config Context', 300]
 === The change will remain the same, open the change_sot folder and review the get_ip.yaml.
 === Notice the variables we will query in Nautobot
 === Check out the Nautobot Query - This introduces the GraphQL
-[source, bash]
+[sidebar]
 ----
 ---
 - name: GET DEVICE INFORMATION FROM THE GRAPHQL API
@@ -384,7 +386,7 @@ query {
       }
     }
 ----
-image::s4-33.png[caption="Figure 9: ", title='GraphQL Query', 370]
+image::s4-33.png[caption="Figure 9: ", title='GraphQL Query', 450]
 
 === Let modify the query and hit the play button again to try the flexibility of GraphQL
 === Notice how we can modify query and receive new results
@@ -401,13 +403,13 @@ query {
       }
     }
 ----
-image::s4-34.png[caption="Figure 10: ", title='GraphQL Query', 370]
+image::s4-34.png[caption="Figure 10: ", title='GraphQL Query', 450]
 
 ---
 === The next part of the Ansible Playbook to check out is the debug variable and the jinja2 template to create the host_vars yaml file 
 === The devices variable will include the results of the GraphQL query
 
-image::s4-35.png[caption="Figure 11: ", title='GraphQL Query', 400]
+image::s4-35.png[caption="Figure 11: ", title='GraphQL Query', 550]
 ---
 
 === Let modify the query to capture the SNMP info and hit the play button again to try the flexibility of GraphQL
@@ -421,12 +423,12 @@ query {
         }
       }
 ----
-image::s4-36.png[caption="Figure 12: ", title='GraphQL Query', 400]
+image::s4-36.png[caption="Figure 12: ", title='GraphQL Query', 450]
 ---
 
 === Lets review the get_snmp.yaml and snmp_host_vars.j2 files
 === The devices variable will include the results of the GraphQL query
-image::s4-37.png[caption="Figure 13: ", title='get_snmp.yaml and snmp_host_vars.j2 files', 400]
+image::s4-37.png[caption="Figure 13: ", title='get_snmp.yaml and snmp_host_vars.j2 files', 475]
 
 ---
 === Lets review the all.yaml file and how it is related to get_ip.yaml and get_snmp.yaml
@@ -434,13 +436,13 @@ image::s4-37.png[caption="Figure 13: ", title='get_snmp.yaml and snmp_host_vars.
 === Here is a good example of where you can simplify the information required from users
 === Users would only need to complete this file for the change
 
-image::s4-38.png[caption="Figure 14: ", title='all.yaml file and how it is related to get_ip.yaml and get_snmp.yaml files', 470]
+image::s4-38.png[caption="Figure 14: ", title='all.yaml file and how it is related to get_ip.yaml and get_snmp.yaml files', 500]
 ---
 === This looks good so far, but you should never include a token or a password in file uploaded to a Git repository 
 === So then how do you include a password in a playbook associated to a CI/CD pipeline?
 
 
-[source, bash]
+[sidebar]
 ----
 ---
 - name: GET DEVICE INFORMATION FROM THE GRAPHQL API
@@ -482,9 +484,9 @@ image::s4-38.png[caption="Figure 14: ", title='all.yaml file and how it is relat
 === Click Add variable and add the variable using NB_HOST as the key, your url of the Nautobot server with port 8000 (http://server2:8000) as the value and click Mask variable and click the Add variable button
 
 [IMPORTANT]
-Replace server2 with the FQDN of your server
+Replace server2 with the FQDN of your server and include port 8000 (http://YourServer2:8000)
 
-image::s4-39.png[caption="Figure 15: ", title='GitLab Variables', 300]
+image::s4-39.png[caption="Figure 15: ", title='GitLab Variables', 350]
 
 
 ---
@@ -507,7 +509,9 @@ image::s4-40.png[caption="Figure 16: ", title='New Change With Nautobot', 450]
 ----
 git branch
 ----
-[source, bash]
+
+=== Here is the progression of the command above
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton :~/network-automation$ git branch
   1-network-change
@@ -527,10 +531,12 @@ git checkout master
 ----
 git remote -v show origin
 ----
-=== This local repo is out of date and needs to be updated
-[source, bash]
+
+=== Here is the progression of the commands above
+
+[sidebar]
 ----
-kennorton@C02G71AFMD6P-knorton :~/network-automation$ git remote -v show origin
+kennorton@C02G71AFMD6P-knorton :~/network-automation$ git remote -v show origin <1>
 Username for 'http://ed26757f4b2c.mylabserver.com': knorton
 Password for 'http://knorton@ed26757f4b2c.mylabserver.com': 
 * remote origin
@@ -546,6 +552,7 @@ Password for 'http://knorton@ed26757f4b2c.mylabserver.com':
     master pushes to master (local out of date)
 ----
 
+<1> This local repo is out of date and needs to be updated
 
 === Lets update the local repository if required
 === Below was performed from the VS Code terminal
@@ -554,7 +561,10 @@ Password for 'http://knorton@ed26757f4b2c.mylabserver.com':
 ----
 git pull origin master
 ----
-[source, bash]
+
+=== Here is the progression of the commands above
+
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton:~/network-automation$ git pull origin master
 remote: Enumerating objects: 9, done.
@@ -590,7 +600,7 @@ git branch 3-change-with-nautobot
 git checkout 3-change-with-nautobot
 ----
 === Here is a progression of the commands above
-[source, bash]
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
   1-network-change
@@ -621,7 +631,7 @@ nautobot_token: "{{ lookup('env', 'NB_TOKEN') }}"
 nautobot_host: "{{ lookup('env', 'NB_HOST') }}"
 ----
 
-image::s4-41.png[caption="Figure 17: ", title='get_ip.yaml and get_snmp.yaml file', 450]
+image::s4-41.png[caption="Figure 17: ", title='get_ip.yaml and get_snmp.yaml file', 550]
 
 ---
 === We have to include these changes to the CI/CD workflow in the .gitlab-ci.yml file
@@ -724,7 +734,7 @@ git push origin 3-change-with-nautobot
 The name of your branch maybe different
 
 === Here is progression of the commands above:
-[source, bash]
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git status
 On branch 3-change-with-nautobot
@@ -769,7 +779,7 @@ To http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation.git
 === Click Mark as ready
 === Click Merge
 
-image::s4-43.png[caption="Figure 19: ", title='Merge Request', 400]
+image::s4-43.png[caption="Figure 19: ", title='Merge Request', 500]
 
 === Here is a copy of the latest .gitlab-ci.yml file
 [source, bash]
@@ -801,7 +811,7 @@ build_switches:
     - cd infra
   script:
     - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
-    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
 
 staging_switches:
   stage: stage
@@ -881,15 +891,15 @@ push_to_production:
 === Under the build section
 === Click on the pipeline
 
-image::s4-44.png[caption="Figure 20: ", title='CI/CD Pipeline', 200]
+image::s4-44.png[caption="Figure 20: ", title='CI/CD Pipeline', 300]
 
 === When the pipeline completes the issue will automatically close
 === Go back into the issue and check the checkboxes if it was successful or repoen the issue
 
-image::s4-45.png[caption="Figure 21: ", title='Close The Issue', 400]
+image::s4-45.png[caption="Figure 21: ", title='Close The Issue', 600]
 
 
-== **CONGRATUATIONS!! 🎉**
+== **CONGRATULATIONS!! 🎉**
 
 ---
 

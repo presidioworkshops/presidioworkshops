@@ -47,9 +47,9 @@ image::s2-3.png['Stage 2 Summary', 1000]
 
 ---
 
-== **Let's fire up some switches**
+== **Let's fire up some switches on Server 1**
 
-=== We will use ContainerLab to create a 5 node spin leaf Arista environment with three Linux Clients
+=== We will use ContainerLab to create a 5 node spin leaf Arista environment with three Linux Clients on Server 1
 === These devices will all be created in Docker
 === Let’s check out docker from a terminal command prompt
 
@@ -63,7 +63,7 @@ docker container ls
 
 === There should be no containers running
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b1c:~/network-automation/infra$ docker ps
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
@@ -84,7 +84,7 @@ docker import ~/network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
 docker image ls
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/infra$ docker import network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
 sha256:1d338447c13d9594f6c3c99c13f24be285555595f590b57c44a54b71e2e664a7
@@ -103,15 +103,15 @@ cloud_user@ed26757f4b2c:~/network-automation/infra$
 
 [source, bash]
 ----
-sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml
+sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml --reconfigure --max-workers 30
 ----
 [IMPORTANT] 
-Note: Depending on the Server Specs – Performance may vary
+Note: Depending on the Server Specs – Performance may vary.  Takes about 5 to 7 minutes for the switches to complete.
 
 
-[source, bash]
+[sidebar]
 ----
-cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml 
+cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml --reconfigure --max-workers 30
 [sudo] password for cloud_user: 
 INFO[0000] Containerlab v0.48.6 started                 
 INFO[0000] Parsing & checking topology file: ceos_2spine_3leaf.yaml 
@@ -170,7 +170,7 @@ Notice all the configurations are default
 ----
 ssh admin@clab-Arista-2s-3l-spine1
 ----
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/infra$ ssh admin@clab-Arista-2s-3l-spine1
 The authenticity of host 'clab-arista-2s-3l-spine1 (2001:172:20:20::2)' can't be established.
@@ -205,7 +205,7 @@ spanning-tree mode mstp
 ----
 sudo containerlab -h
 ----
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab -h
 deploy container based lab environments with a user-defined interconnections

@@ -103,7 +103,19 @@ image::s4-7.png[caption="Figure 4: ", title='Code Branches', 200]
 === Go to a remote location where you have a copy of the remote repository from your Gitlab server
 === Perform the following to get latest copy of the remote repository
 === Lets use VS Code to make the change
+
 [source, bash]
+----
+git remote -v show origin
+----
+
+[source, bash]
+----
+git pull origin master
+----
+
+=== The following output shows the progression of the commands above
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git remote -v show origin <1>
 * remote origin
@@ -160,7 +172,7 @@ git checkout 1-network-change
 ----
 
 === The following output shows the progression of the commands above
-[source, bash]
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
 * master
@@ -195,7 +207,7 @@ image::s4-8.png[caption="Figure 5: ", title='Network Change File Structure', 200
 
 === Let’s review the hosts file:
 
-[source, bash]
+[sidebar]
 ----
 all:
   children:
@@ -219,7 +231,7 @@ all:
 [IMPORTANT]
 **This can be the one file completed by a help desk user in the future.  Easy to read without having to understand the commands required to configure the switches**
 
-[source, bash]
+[sidebar]
 ----
 ---
 configuration:
@@ -234,7 +246,7 @@ configuration:
 
 === **Let’s review the change.yaml file:**
 
-[source, bash]
+[sidebar]
 ----
 ---
 - name: MAKE CHANGE ON SPINE ARISTA SWITCHES
@@ -402,7 +414,9 @@ git commit -m "network change to add new vlan and update SNMP on Spine switches"
 git push origin 1-network-change
 ----
 
-[source, bash]
+
+=== The following output shows the progression of the commands above
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton:~/network-automation$ git status
 On branch 1-network-change
@@ -412,11 +426,11 @@ Changes not staged for commit:
         modified:   .gitlab-ci.yml
 
 no changes added to commit (use "git add" and/or "git commit -a")
-kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml
-kennorton@C02G71AFMD6P-knorton:~/network-automation$ git commit -m "network change to add new vlan and update SNMP on Spine switches"
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml <1>
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git commit -m "network change to add new vlan and update SNMP on Spine switches" <2>
 [1-network-change 70478d8] network change to add new vlan and update SNMP on Spine switches
  1 files changed, 18 insertions(+) 
-kennorton@C02G71AFMD6P-knorton:~/network-automation$ git push origin 1-network-change
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git push origin 1-network-change <3>
 Enumerating objects: 5, done.
 Counting objects: 100% (5/5), done.
 Delta compression using up to 12 threads
@@ -431,6 +445,10 @@ To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
  * [new branch]      1-network-change -> 1-network-change
 ----
 ---
+
+<1> git add of the .gitlab-ci.yml file
+<2> git commit to add the change to local repository
+<3> git push to push the code to the server and kickoff the pipeline
 
 == **Go to the Gitlab-CE Server**
 === Go to Merge Requests
