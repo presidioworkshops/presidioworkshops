@@ -103,7 +103,7 @@ image::s4-20.png[caption="Figure 2: ", title='Merge Request', 500]
 === Notice that I am starting out on the 1-network-change branch, lets switch to the master branch
 === It’s a good idea to check if your local repository is out of date from the remote repository
 
-[source, bash]
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton:~/network-automation$ git branch
 * 1-network-change
@@ -154,7 +154,7 @@ git checkout 2-testing
 
 
 === Here is a progression of the commands above
-[source, bash]
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
   1-network-change
@@ -190,7 +190,7 @@ image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
 
 === Let’s review the snapshots.yaml file:
 === This playbook will create a backup of the switch configurations for Batfish to use as a model.
-[source, bash]
+[sidebar]
 ----
 ---
 - name: CAPTURE DATE AND CREATE DIRECTORY
@@ -229,7 +229,7 @@ image::s4-21.png[caption="Figure 3: ", title='Tests File Structure', 200]
 === The answers to the questions are based on the modeling done by Batfish against the configurations.
 === One of the benefits of Batfish is that it does not need the switches to be up and running to test functionality.
 
-[source, bash]
+[sidebar]
 ----
 # Modules
 from pybatfish.client.commands import bf_init_snapshot, bf_session
@@ -268,6 +268,7 @@ if __name__ == "__main__":
 <2> Here are the questions for Batfish
 <3> We are leveraging the python assert function to check if the answer is not empty 
 <4> This is full output of the Batfish model
+
 ---
 
 === In the previous section we automated a change to add vlan 14 and subnet 192.168.14.0/24 to the leaf3 switch
@@ -275,15 +276,17 @@ if __name__ == "__main__":
 === We can use one or all of the clients to perform traditional tests like Ping and Traceroute
 === Let’s add a new test stage to the CI/CD file -> .gitlab-ci.yml
 
-[source, bash]
+[sidebar]
 ----
 stages:
 - build
 - stage
 - change
-- test
+- test <1>
 - backup
 ----
+<1> Add the test stage to the .gitlab-ci.yml file
+
 ---
 
 === Since the Linux clients are docker containers
@@ -332,6 +335,28 @@ Remember to save the files first!
 
 === Run the following commands below to push the code and kick off the pipeline
 [source, bash]
+----
+cd ~network-automation/tests/
+git add .gitlab-ci.yml
+----
+
+[source, bash]
+----
+git branch
+----
+
+[source, bash]
+----
+git commit -m "added test changes"
+----
+
+[source, bash]
+----
+git push origin 2-testing
+----
+
+=== Here is the progression of the commands above
+[sidebar]
 ----
 kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml <1>
 kennorton@C02G71AFMD6P-knorton:~/network-automation$ cd tests/

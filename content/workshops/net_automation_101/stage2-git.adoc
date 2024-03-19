@@ -45,20 +45,22 @@ image::s2-3.png['Stage 2 Summary', 1000]
 
 ---
 
-== **Use Git to pull down some code onto Server 1**
+== **Use Git to pull down some code onto Server 1 and Server 2**
 
-=== Login to your Ubuntu Server 1 as a user
+=== Login to your Ubuntu Server 1 and Server 2 as a user
 === Open a terminal window
-=== Run the following command:
+=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
+=== Run the following commands:
 [source, bash]
 ----
 git clone https://gitlab.com/knorton3/network-automation.git
+ls
 cd network-automation/infra
 git branch -m main master
 ----
 === This will create a new folder named **network-automation**
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~$ git clone https://gitlab.com/knorton3/network-automation.git
 Cloning into 'network-automation'...
@@ -73,6 +75,7 @@ Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  netwo
 cloud_user@ed26757f4b2c:~$ cd network-automation/infra
 cloud_user@ed26757f4b2c:~/network-automation/infra$ git branch -m main master
 ----
+
 === Run the following commands to avoid logging into the repository with each pull and push request
 [source, bash]
 ----
@@ -80,9 +83,6 @@ git config --global credential.helper cache
 git config --global lfs.cachecredentials true
 ----
 
-
-
-=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
 
 ---
 
@@ -94,7 +94,9 @@ git config --global lfs.cachecredentials true
 === Trust the author of the folder if prompted
 === Open a terminal window, View -> Terminal
 
-=== Run the following command from the terminal:
+=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
+=== This will create a new folder named network-automation
+=== Run the following commands from the terminal:
 [source, bash]
 ----
 git clone https://gitlab.com/knorton3/network-automation.git
@@ -107,10 +109,7 @@ git branch -m main master
 git config --global credential.helper cache
 git config --global lfs.cachecredentials true
 ----
-image::s2-4.png['Visual Studio Code', 500]
-
-=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
-=== This will create a new folder named network-automation
+image::s2-4.png['Visual Studio Code', 700]
 
 
 == End Result

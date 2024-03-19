@@ -35,18 +35,6 @@ image::ind-3.png['Servers', 1000]
 
 ---
 
-== **Let’s install Visual Studio Code on you Laptop**
-
-== Interactive Development Environment (IDE)
-
-image::s1-2.png[caption="Figure 1: ", title='Visual Studio Code', 600]
-
-== Download the latest and install it
-
-
-`https://code.visualstudio.com/`
-
----
 
 == **Server 1 Requirements**
 
@@ -374,7 +362,7 @@ Not required for acloudguru servers or any servers that will have a FQDN
 
 === Edit /etc/hosts
 
-[source, bash]
+[sidebar]
 ----
 127.0.0.1 localhost
 10.1.1.11 lab-server-1.domain.com <1>

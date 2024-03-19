@@ -45,16 +45,7 @@ image::s3-3.png['Stage 3 Summary', 1000]
 
 ---
 == **From Your Second Server**
-== **Let's Pull Down The Git Repository**
 
-=== Login to the second server as a user
-=== From the home directory pull down the latest git repository
-[source, bash]
-----
-git clone https://gitlab.com/knorton3/network-automation.git
-
-----
-=== This will take some time.  It is pulling down the Arista Lab Container Image along with other files
 === Run the following commands from the home directory
 [source, bash]
 ----
@@ -65,7 +56,7 @@ vi gitlab-dc-2.yaml
 [IMPORTANT]
 Change the hostname and external url (the URL needs to be in DNS server or your host file.)
 
-[source, bash]
+[sidebar]
 ----
 version: '3.7'
 services:
@@ -103,7 +94,7 @@ cd ~/network-automation/infra/gitlab
 docker-compose -f gitlab-dc-2.yaml up -d
 ----
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~$ cd ~/network-automation/infra/gitlab
 cloud_user@ed26757f4b2c:~/network-automation/infra/gitlab$ docker-compose -f gitlab-dc-2.yaml up -d
@@ -127,7 +118,7 @@ Creating gitlab-ce ... done
 
 [IMPORTANT]
 Wait for the server status to be fully "healthy". You can check by the "docker ps" command. This takes ~5 mins.
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation/infra/gitlab$ docker ps
 CONTAINER ID   IMAGE                     COMMAND             CREATED         STATUS                   PORTS                                                                                                               NAMES
@@ -142,11 +133,11 @@ docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
 ----
 === Capture the initial password and browse to the server
 
-[source, bash]
+[sidebar]
 ----
 http://Server2 <1>
 ----
-<1> Replace Server 2 with your information
+<1> Replace Server 2 with your host information
 
 === Enter root as the username and paste in the initial password
 
@@ -164,7 +155,7 @@ image::s3-5.png[caption="Figure 2: ", title='Home Screen', 500]
 ----
 http://Server2/admin/application_settings/general#js-signup-settings <1>
 ----
-<1> Replace Server 2 with your information
+<1> Replace Server 2 with your host information
 
 === On the new page, uncheck Sign-up enabled to deactivate. Then scroll down and click Save Changes
 
@@ -227,8 +218,10 @@ image::s3-11.png[caption="Figure 9: ", title='Create a New Project', 400]
 
 === Call the project Network Automation
 [IMPORTANT]
-Click internal for a visibility level and uncheck Initialize repository with a README
+**Click internal for a visibility level and uncheck Initialize repository with a README**
 
+=== Check Internal
+=== **Uncheck Initialize repository with a README** 
 === Click Save
 
 image::s3-12.png[caption="Figure 10: ", title='Create Network Automation Project', 400]
@@ -253,11 +246,13 @@ image::s3-13.png[caption="Figure 11: ", title='Git Remote', 400]
 
 
 [IMPORTANT]
-You only need to run the git push origin master from one location
+**You only need to run the git push origin main from one location**
+
+
 
 === Enter the following commands like the picture below shows
 
-[source, bash]
+[sidebar]
 ----
 cloud_user@ed26757f4b2c:~/network-automation$ git remote -v
 origin  https://github.com/knorton3/network-automation.git (fetch)
