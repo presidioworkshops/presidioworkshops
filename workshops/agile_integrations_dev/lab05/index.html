@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab 05 - Fuse Online | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab 05 - Fuse Online</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/agile_integrations_dev">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/agile_integrations_dev/lab04/">&larr; Previous: Lab 04 - SOAP to REST (Optional)</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/agile_integrations_dev/lab06/">Next: Lab 06 - Managed API Endpoints &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <h1 id="lab-5">Lab 5</h1>
+<h2 id="fuse-online">Fuse Online</h2>
+<ul>
+<li>Duration: 20 mins</li>
+<li>Audience: Developers and Architects</li>
+</ul>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/agenda-03.png &ldquo;Login&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h2 id="overview">Overview</h2>
+<p>When it comes to quick API development, you need both the integration experts as well as application developers to easily develop, deploy the APIs. Here is how to create a simple API with Fuse online.</p>
+<h3 id="why-red-hat">Why Red Hat?</h3>
+<p>Red Hat Fuse integration solution empowers integration experts, application developers, and business users to engage in enterprise-wide collaboration and high-productivity self-service.</p>
+<p>##Lab Instructions</p>
+<h3 id="step-1-create-database-connection">Step 1: Create database connection</h3>
+<ol>
+<li>
+<p>Navigate to OpenShift.</p>
+</li>
+<li>
+<p>Click on your Tools Project.</p>
+</li>
+<li>
+<p>Click on your Fuse Online Route and Log In.</p>
+</li>
+<li>
+<p>The first time that you hit the Fuse Online URL, you will be presented with an <em>Authorize Access</em> page.  Click the <strong>Allow selected permissions</strong> button to accept the defaults.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/design-54.png &ldquo;Accept permissions&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Click on <strong>Connections &gt; Create Connection</strong></p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/00-create-connection.png &ldquo;Create Connection&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Select <strong>Database</strong></p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/01-select-database.png &ldquo;Select Database&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Enter below values for Database Configuration</p>
+<pre><code>Connection URL: jdbc:postgresql://postgresql.OCPPROJECT.svc:5432/sampledb
+Username      : dbuser
+Password      : password
+Schema        : &lt;blank&gt;
+</code></pre></li>
+</ol>
+<p><em>Remember to replace the OCPPROJECT with the OpenShift project(NameSpace) you used in last lab.  It should be your username</em></p>
+<ol>
+<li>
+<p>Click <strong>Validate</strong> and verify if the connection is successful. Click <strong>Next</strong> to proceed.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/02-click-validate.png &ldquo;Validate&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Add Connection details:</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Connection Name: LocationDB</p>
+</li>
+<li>
+<p>Description: Location Database</p>
+</li>
+<li>
+<p>Click <strong>Create</strong>.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/03-connection-details.png &ldquo;Add Connection Details&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+</ul>
+<ol>
+<li>Verify that the Location Database is successfully created.</li>
+</ol>
+<h3 id="step-2-create-webhook-integration">Step 2: Create webhook integration</h3>
+<p>Description goes here</p>
+<ol>
+<li>
+<p>Click on <strong>Integrations &gt; Create Integration</strong></p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/04-create-integration.png &ldquo;Create Integration&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Choose <strong>Webhook</strong></p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/05-choose-weebhook.png &ldquo;Choose webhook&quot;Integration&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Click on Incoming webhook</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/06-incoming-webhook.png &ldquo;Add incoming webhook&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>It navigates to the Webhook Token screen. Click <strong>Next</strong></p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/07-webhook-configuration.png &ldquo;Webhook Configuration&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Define the Output Data Type.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Select type from the dropdown as JSON instance.</p>
+</li>
+<li>
+<p>Enter Data type Name: Custom</p>
+</li>
+<li>
+<p>For Definition:, copy below JSON data.</p>
+</li>
+<li>
+<p>Click Done</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;name&quot;: &quot;Kamarhati&quot;,
+  &quot;type&quot;: &quot;Regional Branch&quot;,
+  &quot;status&quot;: &quot;1&quot;,
+  &quot;location&quot;: {
+    &quot;lat&quot;: &quot;-28.32555&quot;,
+    &quot;lng&quot;: &quot;-5.91531&quot;
+  }
+}
+</code></pre><p><!-- raw HTML omitted --> <!-- raw HTML omitted --> &lt;img src=&quot;../images/08-data-type.png &ldquo;Data Type&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+</ul>
+<ol>
+<li>
+<p>Click on LocationDB from the catalog and then select Invoke SQL</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/09-invoke-sql.png &ldquo;Invoke SQL&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Enter the SQL statement and click <strong>Done</strong>.</p>
+<pre><code></code></pre></li>
+</ol>
+<p>INSERT INTO locations (id,name,lat,lng,location_type,status) VALUES (:#id,:#name,:#lat,:#lng,:#location_type,:#status )
+```</p>
+<pre><code>&lt;br&gt;&lt;img src=&quot;../images/10-invoke-sql-2.png &quot;Invoke SQL 2&quot; width=&quot;900&quot; /&gt;&lt;br&gt;&lt;br&gt;
+</code></pre>
+<ol>
+<li>
+<p>Click on Add step and select Data mapper</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/11-data-mapper.png &ldquo;Data Mapper&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Drag and drop the matching <strong>Source</strong> Data types to all their corresponding <strong>Targets</strong> as per the following screenshot. When finished, click <strong>Done</strong>.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/12-configure-mapper.png &ldquo;Configure Mapper&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Click <strong>Publish</strong> on the next screen</p>
+</li>
+<li>
+<p>Add Integration Name: addLocation.</p>
+</li>
+<li>
+<p>Again Click <strong>Publish</strong>.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/13-publish-integration.png &ldquo;Publish Integration&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+</ol>
+<p><em>Congratulations</em>. You successfully published the integration. (Wait for few minutes to for the integration to be built and published)</p>
+<h3 id="step-3-create-a-post-request">Step 3: Create a POST request</h3>
+<p>We will use an online cURL tool to create the 101st record field in database.  If you&rsquo;d prefer to use the Terminal in your Che instance, go ahead and skip the online cURL instructions and just use the cURL command in your Che Terminal.</p>
+<ol>
+<li>
+<p>Copy the External URL per the below screenshot</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/14-copy-URL.png &ldquo;Copy URL&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p>Open a browser window and navigate to: <a href="https://onlinecurl.com/">https://onlinecurl.com/</a></p>
+</li>
+<li>
+<p>Below are the values for the request.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>Past the URL you just copied for the curl command</p>
+</li>
+<li>
+<p>Click &ldquo;+ ADD Option&rdquo; 3 times</p>
+<ul>
+<li>for &ndash;request (x) enter:
+<ul>
+<li>POST</li>
+</ul>
+</li>
+<li>for &ndash;data (-d) enter:
+<ul>
+<li>{&ldquo;id&rdquo;: 101, &ldquo;name&rdquo;: &ldquo;Kamarhati&rdquo;, &ldquo;type&rdquo;: &ldquo;Regional Branch&rdquo;, &ldquo;status&rdquo;: &ldquo;1&rdquo;, &ldquo;location&rdquo;: { &ldquo;lat&rdquo;: &ldquo;-28.32555&rdquo;, &ldquo;lng&rdquo;: &ldquo;-5.91531&rdquo; }}</li>
+</ul>
+</li>
+<li>for &ndash;header (-H)
+<ul>
+<li>Content-Type: application/json</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Note: id:101 in the payload as we are creating 101th record in the database.</p>
+</li>
+<li>
+<p>Click START YOUR CURL</p>
+<ul>
+<li>URL: <a href="https://i-addlocation-fuse-18308937-d7b6-11e8-96c6-0a580a810006.apps.ocp-ai.redhatgov.io/webhook/4dTcVchE8evWz3dVvtHFK3wvfFbFzpVLPEMq1TkcF0MGIbJmu4">https://i-addlocation-fuse-18308937-d7b6-11e8-96c6-0a580a810006.apps.ocp-ai.redhatgov.io/webhook/4dTcVchE8evWz3dVvtHFK3wvfFbFzpVLPEMq1TkcF0MGIbJmu4</a></li>
+<li>&ndash;header (-H):  Content-Type: application/json</li>
+<li>&ndash;data (-d): {&ldquo;id&rdquo;: 101, &ldquo;name&rdquo;: &ldquo;Kamarhati&rdquo;, &ldquo;type&rdquo;: &ldquo;Regional Branch&rdquo;, &ldquo;status&rdquo;: &ldquo;1&rdquo;, &ldquo;location&rdquo;: { &ldquo;lat&rdquo;: &ldquo;-28.32555&rdquo;, &ldquo;lng&rdquo;: &ldquo;-5.91531&rdquo; }}</li>
+<li>&ndash;request (-X): POST</li>
+</ul>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/15-online-curl.png &ldquo;Online URL&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+</ul>
+<ol>
+<li>The page will load the 204 response information from the service which means the request was successfully fulfilled.</li>
+</ol>
+<ul>
+<li>
+<p>If you get an SSL error, please see the next step.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/16-response-header.png &ldquo;Response Header&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+</ul>
+<ol>
+<li>If you are using an Environment with self signed certificates and get an SSL error, you can also use the curl utility in the terminal of your Eclipse Che environment instead of online curl.</li>
+</ol>
+<ul>
+<li>
+<p>Please make sure to use the your URL you copied and pasted</p>
+<pre><code>curl -k \
+--header &quot;Content-Type: application/json&quot; \
+--request POST \
+--data '{&quot;id&quot;: 101, &quot;name&quot;: &quot;Kamarhati&quot;, &quot;type&quot;: &quot;Regional Branch&quot;, &quot;status&quot;: &quot;1&quot;, &quot;location&quot;: { &quot;lat&quot;: &quot;-28.32555&quot;, &quot;lng&quot;: &quot;-5.91531&quot; }}' \
+https://i-addlocation-tools1.apps.ocp-ai.redhatgov.io/webhook/KcZ3E86SUJTqIUsA8iB7Yb5Sa1KLp9cchnRO5twYnr6UTruYd1
+</code></pre></li>
+</ul>
+<ol>
+<li>
+<p>Click on <strong>Activity &gt; Refresh</strong> and verify if the newly record is created.</p>
+<p><!-- raw HTML omitted -->&lt;img src=&quot;../images/17-activity-refresh.png &ldquo;Activity Refresh&rdquo; width=&ldquo;900&rdquo; /&gt;<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+</li>
+<li>
+<p><em>(Optional)</em> Visit the application URL in the browser from the Location Service created in the previous lab and verify if the record can be fetched.</p>
+</li>
+</ol>
+<p><strong>RESPONSE</strong></p>
+<pre><code>  {
+    &quot;id&quot; : 101,
+    &quot;name&quot; : &quot;Kamarhati&quot;,
+    &quot;type&quot; : &quot;Regional Branch&quot;,
+    &quot;status&quot; : &quot;1&quot;,
+    &quot;location&quot; : {
+      &quot;lat&quot; : &quot;-28.32555&quot;,
+      &quot;lng&quot; : &quot;-5.91531&quot;
+    }
+  }
+</code></pre><h2 id="summary">Summary</h2>
+<p>In this lab you discovered how to create an adhoc API service using Fuse Online.</p>
+<h2 id="notes-and-further-reading">Notes and Further Reading</h2>
+<ul>
+<li>Fuse Online
+<ul>
+<li><a href="https://www.redhat.com/en/technologies/jboss-middleware/fuse-online">Webpage</a></li>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_fuse/7.1/html-single/fuse_online_sample_integration_tutorials/index">Sample tutorials</a></li>
+<li><a href="https://developers.redhat.com/blog/2017/11/02/work-done-less-code-fuse-online-tech-preview-today/">Blog</a></li>
+</ul>
+</li>
+</ul>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/agile_integrations_dev/lab04/">&larr; Previous: Lab 04 - SOAP to REST (Optional)</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/agile_integrations_dev/lab06/">Next: Lab 06 - Managed API Endpoints &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/agile_integrations_dev">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

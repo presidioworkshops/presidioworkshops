@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 4.1 - Automating A Change | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 4.1 - Automating A Change</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage3-cicd/">&larr; Previous: Stage 3.2 - CI/CD</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-testing/">Next: Stage 4.2 - PreDeployment Testing &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_4_automating_a_change"><strong>Stage 4 Automating A Change</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_30_minutes">Estimated time to complete: 30 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_4_we_will_discuss_the_process_of_automating_a_change">In Stage 4, we will discuss the process of automating a change.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_concepts_to_understand_how_to_use_gitlab_and_a_cicd_pipeline_to_automate_a_change">We will run through some of the concepts to understand how to use Gitlab and a CI/CD pipeline to automate a change.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_automating_common_tasks_is_one_of_the_advantages_to_help_increase_efficency_and_standardize_the_network">Automating common tasks is one of the advantages to help increase efficency and standardize the network.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_4">Here are the requirements for Stage 4</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_4_this_shows_all_the_technology_we_will_be_using_in_stage_4">Here is a diagram of Stage 4.  This shows all the technology we will be using in Stage 4.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_4">It also defines the use cases we will be working on in Stage 4.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_4">Here is a summary of Stage 4</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-3.png" alt="Stage 4 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_automate_a_change"><strong>Let’s Automate A Change</strong></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Login to the Gitlab-CE Server (Server 2) as a user
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_one_of_the_first_things_to_do_to_follow_the_gitlab_flow">One of the first things to do to follow the Gitlab flow.  </h3>
+
+</div>
+<div class="sect2">
+<h3 id="_create_an_issue_in_gitlab_to_document_the_change">Create an issue in Gitlab to document the change.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_by_creating_an_issue_we_can_link_it_to_the_change">By creating an issue we can link it to the change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_network_automation_project">Click on the Network Automation Project</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_issues_then_new_issue">Click Issues, then new issue</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_provide_a_title_network_change_for_the_issue_and_add_the_following_description">Provide a title <strong>Network Change</strong> for the issue and add the following description:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">- [ ] Add a new Vlan and advertise it in BGP
+- [ ] Add SNMP to the Spine Switches</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-4.png" alt="s4 4" height="400"/>
+</div>
+<div class="title">Figure 1: Network Change New Issue</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_preview_and_notice_the_checklist">Click preview and notice the checklist</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_create_issue">Click create issue</h3>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_assign_yourself_to_the_issue_on_the_far_right">Assign yourself to the issue on the far right</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-5.png" alt="s4 5" height="400"/>
+</div>
+<div class="title">Figure 2: Network Change New Issue</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Write down the new branch name, 1-network-change
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_create_a_merge_request_and_new_branch">Click create a merge request and new branch</h3>
+<hr/>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-6.png" alt="s4 6" height="500"/>
+</div>
+<div class="title">Figure 3: Merge Request</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_assign_to_me">Click assign to me</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_create_a_merge_request">Click create a merge request</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A Merge request doesn’t make any changes, but don’t close the merge request
+</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_click_code_branches">Click Code → Branches</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_the_new_merge_request_new_issue_and_new_branch">Notice the new merge request, new issue, and new branch</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-7.png" alt="s4 7" height="200"/>
+</div>
+<div class="title">Figure 4: Code Branches</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_go_bring_down_the_latest_version_of_the_repository"><strong>Let’s Go Bring Down The Latest Version Of The Repository</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_go_to_a_remote_locationwhere_you_have_a_copy_of_the_remote_repository_from_your_gitlab_server">Go to a remote location where you have a copy of the remote repository from your Gitlab server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_perform_the_following_to_get_latest_copy_of_the_remote_repository">Perform the following to get latest copy of the remote repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_use_vs_code_to_make_the_change">Lets use VS Code to make the change</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git remote -v show origin</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git pull origin master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_following_output_shows_the_progression_of_the_commands_above">The following output shows the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton network-automation % git remote -v show origin <i class="conum" data-value="1"></i><b>(1)</b>
+* remote origin
+  Fetch URL: http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation.git
+  Push  URL: http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation.git
+  HEAD branch: master
+  Remote branches:
+    1-network-change new (next fetch will store in remotes/origin)
+    master           tracked
+  Local ref configured for &#39;git push&#39;:
+    master pushes to master (local out of date) <i class="conum" data-value="2"></i><b>(2)</b>
+kennorton@C02G71AFMD6P-knorton network-automation % git pull origin master <i class="conum" data-value="3"></i><b>(3)</b>
+remote: Enumerating objects: 21, done.
+remote: Counting objects: 100% (21/21), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 21 (delta 12), reused 21 (delta 12), pack-reused 0
+Unpacking objects: 100% (21/21), 2.16 KiB | 116.00 KiB/s, done.
+From http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation
+ * branch            master     -&gt; FETCH_HEAD
+   fcc23a4..a0e0264  master     -&gt; origin/master
+Updating fcc23a4..a0e0264
+Fast-forward
+ .gitlab-ci.yml | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 .gitlab-ci.yml</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Check the remote repository</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Notice the local repository is out of date</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Pull down the changes from the remote repository</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_perform_the_following_command_to_see_the_status_of_the_branches">Perform the following command to see the status of the branches</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notice_the_only_branch_is_master_we_can_pull_down_the_remote_network_change_branch_using_the_following_command_but_we_need_to_create_a_local_branch">Notice the only branch is master. We can pull down the remote network change branch using the following command, but we need to create a local branch:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git fetch</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_you_need_to_create_a_new_local_branch_in_the_local_repository_using_the_following_command">You need to create a new local branch in the local repository using the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch 1-network-change</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_then_lets_switch_to_that_branch_with_the_following_command">Then let’s switch to that branch with the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git checkout 1-network-change</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_following_output_shows_the_progression_of_the_commands_above_2">The following output shows the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+* master
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git fetch
+From http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation
+ * [new branch]      1-network-change -&gt; origin/1-network-change
+kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+* master
+  remotes/origin/1-network-change
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch
+* master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch 1-network-change
+kennorton@C02G71AFMD6P-knorton network-automation % git branch
+  1-network-change
+* master
+kennorton@C02G71AFMD6P-knorton network-automation % git checkout 1-network-change
+Switched to branch &#39;1-network-change&#39;</pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_create_a_change"><strong>Let’s Create A Change</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lets_build_an_ansible_playbook_to_create_the_change">Let’s build an Ansible Playbook to create the change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_continue_to_use_visual_studio_code_to_create_the_change">Let’s continue to use Visual studio code to create the change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_files_in_the_change_directory">Let’s review the files in the change directory</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-8.png" alt="s4 8" height="200"/>
+</div>
+<div class="title">Figure 5: Network Change File Structure</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_hosts_file">Let’s review the hosts file:</h3>
+<div class="listingblock">
+<div class="content">
+<pre>all:
+  children:
+    leafs:
+      hosts:
+        clab-Arista-2s-3l-leaf3:
+    spines:
+      hosts:
+        clab-Arista-2s-3l-spine1:
+        clab-Arista-2s-3l-spine2:</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notice_only_one_leaf_switch_and_2_spine_switches">Notice only one leaf switch and 2 spine switches</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_change_will_only_be_deployed_to_those_three_devices">The change will only be deployed to those three devices</h3>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_host_vars_in_clab_arista_2s_3l_leaf3_yaml">Let’s review the host_vars in clab-Arista-2s-3l-leaf3.yaml:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_these_are_the_variables_defined_to_add_a_new_vlan_interface_to_leaf3">These are the variables defined to add a new vlan interface to leaf3</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_by_creating_this_yaml_file_you_can_simplify_the_addition_of_vlan_interfaces_in_the_future">By creating this yaml file you can simplify the addition of vlan interfaces in the future</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>This can be the one file completed by a help desk user in the future.  Easy to read without having to understand the commands required to configure the switches</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>---
+configuration:
+  vlans:
+    vlan: 14
+  ip_addr:
+    ip: &#34;192.168.14.1&#34;
+    mask: 24</pre>
+</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_change_yaml_file"><strong>Let’s review the change.yaml file:</strong></h3>
+<div class="listingblock">
+<div class="content">
+<pre>---
+- name: MAKE CHANGE ON SPINE ARISTA SWITCHES
+  hosts: spines <i class="conum" data-value="1"></i><b>(1)</b>
+  gather_facts: false
+  connection: network_cli
+  tasks:
+    - name: CONFIGURE SNMP ON SPINES
+      arista.eos.eos_snmp_server:
+        config:
+          communities:
+            - name: &#34;netdevops&#34;
+              acl_v4: &#34;list3&#34;
+              view: &#34;view1&#34;
+          contact: &#34;admin&#34;
+          hosts:
+            - host: &#34;host02&#34;
+              version: &#34;2c&#34;
+              user: &#34;user1&#34;
+          traps:
+            capacity:
+              arista_hardware_utilization_alert: True
+            bgp:
+              enabled: True
+
+- name: MAKE CHANGE ON LEAF ARISTA SWITCHES
+  hosts: leafs <i class="conum" data-value="2"></i><b>(2)</b>
+  gather_facts: false
+  connection: network_cli
+  tasks:
+    - name: ADD VLAN {{ configuration.vlans.vlan }}
+      eos_config:
+        lines:
+          - vlan {{ configuration.vlans.vlan }}
+    - name: RECONFIGURE INTERFACE ETHERNET 3
+      eos_config:
+        parents: interface ethernet 3
+          lines:
+            - switchport access vlan {{ configuration.vlans.vlan }}
+    - name: CONFIGURE INTERFACE VLAN {{ configuration.vlans.vlan }}
+      eos_config:
+        parents: interface vlan {{ configuration.vlans.vlan }}
+          lines:
+            - ip address virtual {{ configuration.ip_addr.ip }}/{{ configuration.ip_addr.mask }}</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We are only making the following SNMP changes to the spine switches defined in the host file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The following are the changes to the leaf switches to add a new vlan and vlan interface:</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-9.png" alt="s4 9" height="500"/>
+</div>
+<div class="title">Figure 6: Ansible Playbook For The Change For Spines</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_we_are_using_jinja2_templating_to_reference_the_hosts_vars_we_previously_reviewed">We are using Jinja2 templating to reference the hosts_vars we previously reviewed</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-10.png" alt="s4 10" height="500"/>
+</div>
+<div class="title">Figure 7: Ansible Playbook For The Change For Leaves</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_take_a_look_at_the_clab_arista_2s_3l_leaf3_yaml_and_pay_attention_to_the_structure">Take a look at the clab-Arista-2s-3l-leaf3.yaml and pay attention to the structure</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_file_starts_with_configuration_and_then_goes_to_vlans_and_then_vlan">The file starts with configuration and then goes to vlans and then vlan</h3>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_now_we_need_to_add_the_change_to_cicd_pipeline"><strong>Now we need to add the change to CI/CD pipeline</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_using_vs_code_keep_all_the_current_configuration_in_the_gitlab_ci_yml_file_we_just_need_to_add_to_it">Using VS Code keep all the current configuration in the gitlab-ci.yml file, we just need to add to it</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_add_the_following_workflow_and_stage_to_the_gitlab_ci_yml_file_using_visual_studio_code">Add the following workflow and stage to the gitlab-ci.yml file using Visual Studio Code</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+workflow: <i class="conum" data-value="1"></i><b>(1)</b>
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == &#39;master&#39;
+
+stages:
+  - build
+  - stage
+  - change <i class="conum" data-value="2"></i><b>(2)</b>
+  - backup
+
+network_change: <i class="conum" data-value="3"></i><b>(3)</b>
+  stage: change
+  before_script:
+    - cd change
+  script:
+    - ansible-playbook change.yaml -v
+  dependencies:
+    - staging_switches</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Copy and paste the workflow section to the top of the .gitlab.ci file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Add the - change stage to the stages section between stage and backup</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Copy and paste the network change stage in between the staging_switches stage and the backup_switches stage.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-11.png" alt="s4 11" height="500"/>
+</div>
+<div class="title">Figure 8: Changes For The CI/CD Pipeline</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_complete_gitlab_ci_yml_file">Complete .gitlab-ci.yml file</h3>
+<div class="paragraph">
+<p>Copy and paste this if you run into problems with your pipeline</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == &#39;master&#39;
+
+stages:
+  - build
+  - stage
+  - change
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+network_change:
+  stage: change
+  before_script:
+    - cd change
+  script:
+    - ansible-playbook change.yaml -v
+  dependencies:
+    - staging_switches
+
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/git_backup.yaml -v
+  dependencies:
+    - staging_switches</code></pre>
+</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_now_lets_go_push_the_changes_to_the_remote_repository">Now lets go push the changes to the remote repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_these_are_new_changes_made_in_the_vs_code_editor">These are new changes made in the VS Code editor</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git status
+git add .gitlab-ci.yml
+git commit -m &#34;network change to add new vlan and update SNMP on Spine switches&#34;
+git push origin 1-network-change</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_following_output_shows_the_progression_of_the_commands_above_3">The following output shows the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton:~/network-automation$ git status
+On branch 1-network-change
+Changes not staged for commit:
+  (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
+  (use &#34;git restore &lt;file&gt;...&#34; to discard changes in working directory)
+        modified:   .gitlab-ci.yml
+
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml <i class="conum" data-value="1"></i><b>(1)</b>
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git commit -m &#34;network change to add new vlan and update SNMP on Spine switches&#34; <i class="conum" data-value="2"></i><b>(2)</b>
+[1-network-change 70478d8] network change to add new vlan and update SNMP on Spine switches
+ 1 files changed, 18 insertions(+)
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git push origin 1-network-change <i class="conum" data-value="3"></i><b>(3)</b>
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 510 KiB | 510 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote:
+remote: To create a merge request for 1-network-change, visit:
+remote:   http://ed26757f4b2c.mylabserver.com/knorton/network-automation/-/merge_requests/new?merge_request%5Bsource_branch%5D=1-network-change
+remote:
+To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+ * [new branch]      1-network-change -&gt; 1-network-change</pre>
+</div>
+</div>
+<hr/>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>git add of the .gitlab-ci.yml file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>git commit to add the change to local repository</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>git push to push the code to the server and kickoff the pipeline</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_go_to_the_gitlab_ce_server"><strong>Go to the Gitlab-CE Server</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_go_to_merge_requests">Go to Merge Requests</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_draft_network_change_merge_request">Click on the Draft Network Change Merge Request</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_the_merge_request_update">Notice the Merge Request update</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_under_activity_you_can_review_the_changes">Under Activity you can review the changes</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-12.png" alt="s4 12" height="500"/>
+</div>
+<div class="title">Figure 9: Network Change Merge Request</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Click the <strong>ab406831</strong> link to review the changes.  The link ID will be different
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notice_how_the_git_push_didnt_automatically_kickoff_the_cicd_pipeline"><strong>Notice how the git push didn’t automatically kickoff the CI/CD pipeline.</strong></h3>
+
+</div>
+<div class="sect2">
+<h3 id="_by_adding_the_following_workflow_to_the_gitlab_ci_yml_file_it_pauses_the_pipeline_so_it_can_be_reviewed_before_it_is_merged_into_the_master_branch"><strong>By adding the following workflow to the gitlab-ci.yml file it pauses the pipeline so it can be reviewed before it is merged into the master branch</strong></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == &#39;master&#39;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_take_a_look_at_the_changes">Take a look at the changes</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_you_can_make_comments_on_the_change_and_add_a_to_do_if_needed">You can make comments on the change and add a to do if needed</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-13.png" alt="s4 13" height="200"/>
+</div>
+<div class="title">Figure 10: Network Change Merge Request Changes</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_go_back_to_merge_request_after_reviewing_the_changes_and_click_mark_as_ready">Go back to Merge Request after reviewing the changes and click Mark as ready</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-14.png" alt="s4 14" height="500"/>
+</div>
+<div class="title">Figure 11: Network Change Merge Request Mark Ready</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_once_you_click_mark_as_ready_you_are_ready_to_merge_the_1_network_change_branch_into_master">Once you click Mark as ready, you are ready to merge the 1-network-change branch into master</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-15.png" alt="s4 15" height="500"/>
+</div>
+<div class="title">Figure 12: Network Change Merge The Request</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_merge_and_leave_the_delete_source_branch_checked">Click Merge and leave the Delete source branch checked</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-16.png" alt="s4 16" height="500"/>
+</div>
+<div class="title">Figure 13: Network Change Merge The Pipeline Starts</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_under_the_build_section">Under the build section</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_pipeline">Click on the pipeline</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-17.png" alt="s4 17" height="200"/>
+</div>
+<div class="title">Figure 14: Network Change Merge The Pipeline</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_pipeline_completes_the_issue_will_automatically_close">When the pipeline completes the issue will automatically close</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-18.png" alt="s4 18" height="200"/>
+</div>
+<div class="title">Figure 18: Network Change Resolve The Issues</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_go_back_into_the_issue_and_check_the_checkboxes_if_it_was_successful">Go back into the issue and check the checkboxes if it was successful</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_or_you_can_reopen_the_issue_if_needed">Or you can reopen the issue if needed</h3>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_we_have_created_a_new_change_using_the_git_workflow_of_creating_an_issue_and_a_merge_request">At this point, we have created a new change using the Git Workflow of creating an issue and a Merge Request.</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage3-cicd/">&larr; Previous: Stage 3.2 - CI/CD</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-testing/">Next: Stage 4.2 - PreDeployment Testing &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

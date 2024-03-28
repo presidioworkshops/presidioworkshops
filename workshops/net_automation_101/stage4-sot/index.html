@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 4.3 - Source Of Truth | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 4.3 - Source Of Truth</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-testing/">&larr; Previous: Stage 4.2 - PreDeployment Testing</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/wrapup/">Next: Wrap Up &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_4_source_of_truth"><strong>Stage 4 Source Of Truth</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_45_minutes">Estimated time to complete: 45 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_4_we_will_discuss_what_a_source_of_truth_is_and_how_it_is_related_to_network_automation">In Stage 4, we will discuss what a source of truth is and how it is related to network automation.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_concepts_to_understand_how_to_use_nautobot_as_a_source_of_truth_to_validate_changes">We will run through some of the concepts to understand how to use Nautobot as a source of truth to validate changes.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_using_a_source_of_truth_sot_will_define_the_intended_or_desired_state_of_the_network_infrastructure_and_help_validate_changes_before_they_are_pushed_to_production">Using a source of truth (SoT) will define the intended or desired state of the network infrastructure and help validate changes before they are pushed to production.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_4">Here are the requirements for Stage 4</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_4_this_shows_all_the_technology_we_will_be_using_in_stage_4">Here is a diagram of Stage 4.  This shows all the technology we will be using in Stage 4.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_4">It also defines the use cases we will be working on in Stage 4.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_4">Here is a summary of Stage 4</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-3.png" alt="Stage 4 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_build_a_nautobot_server"><strong>Let’s Build A Nautobot Server</strong></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Login to Server 2
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_on_server_2">On Server 2</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_to_bring_up_a_nautobot_container">Run the following command to bring up a Nautobot container</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+This is an all in one lab instance of Nautobot.  <strong>This is not for Production.</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker run -itd --restart=always --name nautobot -p 8000:8000 --env NAPALM_USERNAME=&#34;admin&#34; --env NAPALM_PASSWORD=&#34;admin&#34; networktocode/nautobot-lab:1.6.2</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_this_will_spin_up_nautobot_server_in_minutes">This will spin up nautobot server in minutes</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_create_a_superuser_account_after_the_container_comes_up">Create a superuser account after the container comes up</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command">Run the following command</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it nautobot nautobot-server createsuperuser</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/nautobot$ docker exec -it nautobot nautobot-server createsuperuser
+Username: support
+Email address: knorton@presidio.com
+Password:
+Password (again):
+Superuser created successfully.
+cloud_user@ed26757f4b2c:~/nautobot$</pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_configure_the_nautobot_server"><strong>Let’s Configure The Nautobot Server</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_log_into_the_nautobot_server">Log into the Nautobot server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_open_a_web_browser_and_go_to">Open a web browser and go to:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://server2:8000 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace server2 with IP address or FQDN of your server 2</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_login_in_the_upper_right_hand_corner">Click Login in the upper right-hand corner</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_enter_the_superuser_username_and_password_you_just_created">Enter the superuser username and password you just created</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_nothing_is_configured_but_browse_around">Notice nothing is configured, but browse around</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-25.png" alt="s4 25" height="275"/>
+</div>
+<div class="title">Figure 1: Login To Nautobot</div>
+</div>
+<hr/>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-26.png" alt="s4 26" height="600"/>
+</div>
+<div class="title">Figure 2: Welcome To Nautobot</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_configure_a_nautobot_server"><strong>Let’s Configure A Nautobot Server</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_as_you_can_see_there_is_no_data_in_the_source_of_truth_sot">As you can see there is no data in the Source Of Truth (SOT)</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_add_some_data_via_the_api_and_web_interface">Let’s add some data via the API and web interface</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_first_we_need_to_create_a_token_on_the_nautobot_server">First, we need to create a token on the Nautobot server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_once_you_are_logged_into_nautobot">Once you are logged into Nautobot</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_go_to_the_pull_down_of_your_account_name_in_the_upper_right_hand_corner_and_select_admin">Go to the pull down of your account name in the upper right hand corner and select admin</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_under_users_click_on_tokens">Under Users → click on Tokens</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_add_in_the_right_hand_corner">Click add in the right hand corner</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_select_your_username_and_click_save">Select your username and click save</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_copy_the_new_token_down_to_safe_location">Copy the new token down to safe location</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-27.png" alt="s4 27" height="375"/>
+</div>
+<div class="title">Figure 3: Nautobot Token</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_hop_onto_server_1_the_server_running_the_gitlab_runner_and_install_some_ansible_plugins_for_nautobot">Let’s hop onto server 1 (the server running the GitLab runner)  and install some Ansible plugins for Nautobot</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_login_as_a_user">Login as a user</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_install_the_following_plugins_pynautobot_and_the_nautobot_ansible_collection_v4_5">Install the following plugins – pynautobot and the nautobot ansible collection v4.5</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_2">Run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">pip3 install pynautobot==1.5.0
+ansible-galaxy collection install networktocode.nautobot:4.5.0</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_the_progression_of_the_commands_above">Here is the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:/home/cloud_user$ pip3 install pynautobot==1.5.0 <i class="conum" data-value="1"></i><b>(1)</b>
+Collecting pynautobot==1.5.0
+  Downloading pynautobot-1.5.0-py3-none-any.whl (33 kB)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/lib/python3/dist-packages (from pynautobot==1.5.0) (1.25.8)
+Collecting requests&lt;3.0.0,&gt;=2.30.0
+  Downloading requests-2.31.0-py3-none-any.whl (62 kB)
+     |████████████████████████████████| 62 kB 1.9 MB/s
+Collecting charset-normalizer&lt;4,&gt;=2
+  Downloading charset_normalizer-3.3.2-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (141 kB)
+     |████████████████████████████████| 141 kB 38.8 MB/s
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/lib/python3/dist-packages (from requests&lt;3.0.0,&gt;=2.30.0-&gt;pynautobot==1.5.0) (2019.11.28)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/lib/python3/dist-packages (from requests&lt;3.0.0,&gt;=2.30.0-&gt;pynautobot==1.5.0) (2.8)
+Installing collected packages: charset-normalizer, requests, pynautobot
+  WARNING: The script normalizer is installed in &#39;/home/cloud_user/.local/bin&#39; which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+Successfully installed charset-normalizer-3.3.2 pynautobot-1.5.0 requests-2.31.0
+cloud_user@ed26757f4b1c:~$ ansible-galaxy collection install networktocode.nautobot:4.5.0 <i class="conum" data-value="1"></i><b>(1)</b>
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/networktocode-nautobot-4.5.0.tar.gz to /home/cloud_user/.ansible/tmp/ansible-local-137529gsphhq0t/tmp_4p3bt4j/networktocode-nautobot-4.5.0-34yakins
+Installing &#39;networktocode.nautobot:4.5.0&#39; to &#39;/home/cloud_user/.ansible/collections/ansible_collections/networktocode/nautobot&#39;
+networktocode.nautobot:4.5.0 was installed successfully</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>DON’T Install the latest version of the nautobot ansible plugin</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_add_the_token_to_the_environmental_variables_of_the_server">Let’s add the token to the environmental variables of the server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_in_production_the_recommendation_would_be_to_encrypt_the_token_with_a_vault_application_from_ansible_or_hashicorp_but_this_is_just_for_lab_purposes">In production the recommendation would be to encrypt the token with a Vault application from Ansible or Hashicorp, but this is just for lab purposes</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~/nautobot/add_device$ export NB_TOKEN=&#34;fbf4caacbd265dfc88aa430be6c31650a84179a7&#34; <i class="conum" data-value="1"></i><b>(1)</b>
+cloud_user@ed26757f4b1c:~/nautobot/add_device$ export NB_HOST=&#34;ed26757f4b2c.mylabserver.com&#34; <i class="conum" data-value="2"></i><b>(2)</b>
+cloud_user@ed26757f4b1c:~/nautobot/add_device$ printenv
+SHELL=/bin/bash
+NB_TOKEN=fbf4caacbd265dfc88aa430be6c31650a84179a7
+NB_HOST=ed26757f4b2c.mylabserver.com</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace your token in the command above</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Replace your Nautobot server name in the command above</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_then_cd_into_the_network_automationinfranautobot_directory_to_run_the_playbook">Then cd into the ~/network-automation/infra/nautobot/ directory to run the playbook</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/network-automation/infra/nautobot/</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_this_will_add_data_to_your_nautobot_server">This will add data to your Nautobot server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_playbook">Run the following playbook</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ansible-playbook ~/network-automation/infra/nautobot/add_info.yaml -vv</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_the_output_from_the_playbook">Here is the output from the playbook</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~$ ansible-playbook ~/network-automation/infra/nautobot/add_info.yaml -vv
+ansible-playbook [core 2.12.10]
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [&#39;/home/cloud_user/.ansible/plugins/modules&#39;, &#39;/usr/share/ansible/plugins/modules&#39;]
+  ansible python module location = /usr/lib/python3/dist-packages/ansible
+  ansible collection location = /home/cloud_user/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/bin/ansible-playbook
+  python version = 3.8.10 (default, Nov 22 2023, 10:22:35) [GCC 9.4.0]
+  jinja version = 2.10.1
+  libyaml = True
+Using /etc/ansible/ansible.cfg as config file
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match &#39;all&#39;
+Skipping callback &#39;default&#39;, as we already have a stdout callback.
+Skipping callback &#39;minimal&#39;, as we already have a stdout callback.
+Skipping callback &#39;oneline&#39;, as we already have a stdout callback.
+
+PLAYBOOK: add_info.yaml ***************************************************************************************************************
+1 plays in /home/cloud_user/network-automation/infra/nautobot/add_info.yaml
+
+PLAY [ADD INFO TO NAUTOBOT] ***********************************************************************************************************
+META: ran handlers
+
+TASK [ADD SITE] ***********************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:7
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;msg&#34;: &#34;site Connecticut created&#34;, &#34;site&#34;: {&#34;asn&#34;: null, &#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;contact_email&#34;: &#34;&#34;, &#34;contact_name&#34;: &#34;&#34;, &#34;contact_phone&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;display&#34;: &#34;Connecticut&#34;, &#34;facility&#34;: &#34;&#34;, &#34;id&#34;: &#34;0627a5df-5138-4c4e-b263-b203f4085956&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:02.227340Z&#34;, &#34;latitude&#34;: null, &#34;longitude&#34;: null, &#34;name&#34;: &#34;Connecticut&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/sites/0627a5df-5138-4c4e-b263-b203f4085956/notes/&#34;, &#34;physical_address&#34;: &#34;&#34;, &#34;region&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;shipping_address&#34;: &#34;&#34;, &#34;slug&#34;: &#34;connecticut&#34;, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;time_zone&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/sites/0627a5df-5138-4c4e-b263-b203f4085956/&#34;}}
+
+TASK [ADD MANUFACTURER] ***************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:15
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;manufacturer&#34;: {&#34;computed_fields&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;Arista&#34;, &#34;display&#34;: &#34;Arista&#34;, &#34;id&#34;: &#34;2c1dfb6d-4d46-4be0-aec0-c9cea0651d0c&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:03.618867Z&#34;, &#34;name&#34;: &#34;Arista&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/manufacturers/2c1dfb6d-4d46-4be0-aec0-c9cea0651d0c/notes/&#34;, &#34;relationships&#34;: &#34;&#34;, &#34;slug&#34;: &#34;arista&#34;, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/manufacturers/2c1dfb6d-4d46-4be0-aec0-c9cea0651d0c/&#34;}, &#34;msg&#34;: &#34;manufacturer Arista created&#34;}
+
+TASK [ADD LOCATION TYPE] **************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:23
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;location_type&#34;: {&#34;computed_fields&#34;: &#34;&#34;, &#34;content_types&#34;: [], &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;display&#34;: &#34;Network Closets&#34;, &#34;id&#34;: &#34;d498e24c-e809-4972-a1d1-8cd0833ed7ff&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:04.677708Z&#34;, &#34;name&#34;: &#34;Network Closets&#34;, &#34;nestable&#34;: false, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/location-types/d498e24c-e809-4972-a1d1-8cd0833ed7ff/notes/&#34;, &#34;parent&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;slug&#34;: &#34;network-closets&#34;, &#34;tree_depth&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/location-types/d498e24c-e809-4972-a1d1-8cd0833ed7ff/&#34;}, &#34;msg&#34;: &#34;location_type Network Closets created&#34;}
+
+TASK [ADD DEVICE TYPE] ****************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:30
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;device_type&#34;: {&#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;display&#34;: &#34;Arista ceos&#34;, &#34;front_image&#34;: null, &#34;id&#34;: &#34;051d49d9-65df-4d5b-b126-5d8e5c50fb42&#34;, &#34;is_full_depth&#34;: true, &#34;last_updated&#34;: &#34;2023-12-18T22:02:05.797213Z&#34;, &#34;manufacturer&#34;: &#34;2c1dfb6d-4d46-4be0-aec0-c9cea0651d0c&#34;, &#34;model&#34;: &#34;ceos&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/device-types/051d49d9-65df-4d5b-b126-5d8e5c50fb42/notes/&#34;, &#34;part_number&#34;: &#34;&#34;, &#34;rear_image&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;slug&#34;: &#34;ceos&#34;, &#34;subdevice_role&#34;: null, &#34;tags&#34;: [], &#34;u_height&#34;: 1, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/device-types/051d49d9-65df-4d5b-b126-5d8e5c50fb42/&#34;}, &#34;msg&#34;: &#34;device_type ceos created&#34;}
+
+TASK [ADD PLATFORM] *******************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:38
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;msg&#34;: &#34;platform EOS created&#34;, &#34;platform&#34;: {&#34;computed_fields&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;display&#34;: &#34;EOS&#34;, &#34;id&#34;: &#34;f5445430-3024-474f-b660-48d8c05181d1&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:06.874726Z&#34;, &#34;manufacturer&#34;: &#34;2c1dfb6d-4d46-4be0-aec0-c9cea0651d0c&#34;, &#34;name&#34;: &#34;EOS&#34;, &#34;napalm_args&#34;: null, &#34;napalm_driver&#34;: &#34;&#34;, &#34;network_driver&#34;: &#34;&#34;, &#34;network_driver_mappings&#34;: &#34;&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/platforms/f5445430-3024-474f-b660-48d8c05181d1/notes/&#34;, &#34;relationships&#34;: &#34;&#34;, &#34;slug&#34;: &#34;eos&#34;, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/platforms/f5445430-3024-474f-b660-48d8c05181d1/&#34;}}
+
+TASK [ADD DEVICE ROLE] ****************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:46
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;device_role&#34;: {&#34;color&#34;: &#34;008000&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;display&#34;: &#34;Switch&#34;, &#34;id&#34;: &#34;ab8891b0-9dd4-4624-a203-df73009b7aec&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:07.903963Z&#34;, &#34;name&#34;: &#34;Switch&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/device-roles/ab8891b0-9dd4-4624-a203-df73009b7aec/notes/&#34;, &#34;relationships&#34;: &#34;&#34;, &#34;slug&#34;: &#34;switch&#34;, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/device-roles/ab8891b0-9dd4-4624-a203-df73009b7aec/&#34;, &#34;vm_role&#34;: true}, &#34;msg&#34;: &#34;device_role Switch created&#34;}
+
+TASK [ADD ARISTA DEVICES] *************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:54
+changed: [localhost] =&gt; (item={&#39;name&#39;: &#39;clab-Arista-2s-3l-spine1&#39;, &#39;site&#39;: &#39;Connecticut&#39;, &#39;device_role&#39;: &#39;Switch&#39;, &#39;device_type&#39;: &#39;ceos&#39;, &#39;platform&#39;: &#39;EOS&#39;}) =&gt; {&#34;ansible_loop_var&#34;: &#34;item&#34;, &#34;changed&#34;: true, &#34;device&#34;: {&#34;asset_tag&#34;: null, &#34;cluster&#34;: null, &#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;config_context&#34;: {}, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;device_redundancy_group&#34;: null, &#34;device_redundancy_group_priority&#34;: null, &#34;device_role&#34;: &#34;ab8891b0-9dd4-4624-a203-df73009b7aec&#34;, &#34;device_type&#34;: &#34;051d49d9-65df-4d5b-b126-5d8e5c50fb42&#34;, &#34;display&#34;: &#34;clab-Arista-2s-3l-spine1&#34;, &#34;face&#34;: null, &#34;id&#34;: &#34;27fb7618-61dd-4101-ab3e-d2740d88d790&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:09.486185Z&#34;, &#34;local_context_data&#34;: null, &#34;local_context_schema&#34;: null, &#34;location&#34;: null, &#34;name&#34;: &#34;clab-Arista-2s-3l-spine1&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/27fb7618-61dd-4101-ab3e-d2740d88d790/notes/&#34;, &#34;parent_device&#34;: null, &#34;platform&#34;: &#34;f5445430-3024-474f-b660-48d8c05181d1&#34;, &#34;position&#34;: null, &#34;primary_ip&#34;: null, &#34;primary_ip4&#34;: null, &#34;primary_ip6&#34;: null, &#34;rack&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;secrets_group&#34;: null, &#34;serial&#34;: &#34;&#34;, &#34;site&#34;: &#34;0627a5df-5138-4c4e-b263-b203f4085956&#34;, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/27fb7618-61dd-4101-ab3e-d2740d88d790/&#34;, &#34;vc_position&#34;: null, &#34;vc_priority&#34;: null, &#34;virtual_chassis&#34;: null}, &#34;item&#34;: {&#34;device_role&#34;: &#34;Switch&#34;, &#34;device_type&#34;: &#34;ceos&#34;, &#34;name&#34;: &#34;clab-Arista-2s-3l-spine1&#34;, &#34;platform&#34;: &#34;EOS&#34;, &#34;site&#34;: &#34;Connecticut&#34;}, &#34;msg&#34;: &#34;device clab-Arista-2s-3l-spine1 created&#34;}
+changed: [localhost] =&gt; (item={&#39;name&#39;: &#39;clab-Arista-2s-3l-spine2&#39;, &#39;site&#39;: &#39;Connecticut&#39;, &#39;device_role&#39;: &#39;Switch&#39;, &#39;device_type&#39;: &#39;ceos&#39;, &#39;platform&#39;: &#39;EOS&#39;}) =&gt; {&#34;ansible_loop_var&#34;: &#34;item&#34;, &#34;changed&#34;: true, &#34;device&#34;: {&#34;asset_tag&#34;: null, &#34;cluster&#34;: null, &#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;config_context&#34;: {}, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;device_redundancy_group&#34;: null, &#34;device_redundancy_group_priority&#34;: null, &#34;device_role&#34;: &#34;ab8891b0-9dd4-4624-a203-df73009b7aec&#34;, &#34;device_type&#34;: &#34;051d49d9-65df-4d5b-b126-5d8e5c50fb42&#34;, &#34;display&#34;: &#34;clab-Arista-2s-3l-spine2&#34;, &#34;face&#34;: null, &#34;id&#34;: &#34;cc12f9c3-4820-425c-8122-a1d25a5c29a5&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:10.795711Z&#34;, &#34;local_context_data&#34;: null, &#34;local_context_schema&#34;: null, &#34;location&#34;: null, &#34;name&#34;: &#34;clab-Arista-2s-3l-spine2&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/cc12f9c3-4820-425c-8122-a1d25a5c29a5/notes/&#34;, &#34;parent_device&#34;: null, &#34;platform&#34;: &#34;f5445430-3024-474f-b660-48d8c05181d1&#34;, &#34;position&#34;: null, &#34;primary_ip&#34;: null, &#34;primary_ip4&#34;: null, &#34;primary_ip6&#34;: null, &#34;rack&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;secrets_group&#34;: null, &#34;serial&#34;: &#34;&#34;, &#34;site&#34;: &#34;0627a5df-5138-4c4e-b263-b203f4085956&#34;, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/cc12f9c3-4820-425c-8122-a1d25a5c29a5/&#34;, &#34;vc_position&#34;: null, &#34;vc_priority&#34;: null, &#34;virtual_chassis&#34;: null}, &#34;item&#34;: {&#34;device_role&#34;: &#34;Switch&#34;, &#34;device_type&#34;: &#34;ceos&#34;, &#34;name&#34;: &#34;clab-Arista-2s-3l-spine2&#34;, &#34;platform&#34;: &#34;EOS&#34;, &#34;site&#34;: &#34;Connecticut&#34;}, &#34;msg&#34;: &#34;device clab-Arista-2s-3l-spine2 created&#34;}
+changed: [localhost] =&gt; (item={&#39;name&#39;: &#39;clab-Arista-2s-3l-leaf1&#39;, &#39;site&#39;: &#39;Connecticut&#39;, &#39;device_role&#39;: &#39;Switch&#39;, &#39;device_type&#39;: &#39;ceos&#39;, &#39;platform&#39;: &#39;EOS&#39;}) =&gt; {&#34;ansible_loop_var&#34;: &#34;item&#34;, &#34;changed&#34;: true, &#34;device&#34;: {&#34;asset_tag&#34;: null, &#34;cluster&#34;: null, &#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;config_context&#34;: {}, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;device_redundancy_group&#34;: null, &#34;device_redundancy_group_priority&#34;: null, &#34;device_role&#34;: &#34;ab8891b0-9dd4-4624-a203-df73009b7aec&#34;, &#34;device_type&#34;: &#34;051d49d9-65df-4d5b-b126-5d8e5c50fb42&#34;, &#34;display&#34;: &#34;clab-Arista-2s-3l-leaf1&#34;, &#34;face&#34;: null, &#34;id&#34;: &#34;79a848d1-794c-4666-9a45-85c6589305c9&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:12.203307Z&#34;, &#34;local_context_data&#34;: null, &#34;local_context_schema&#34;: null, &#34;location&#34;: null, &#34;name&#34;: &#34;clab-Arista-2s-3l-leaf1&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/79a848d1-794c-4666-9a45-85c6589305c9/notes/&#34;, &#34;parent_device&#34;: null, &#34;platform&#34;: &#34;f5445430-3024-474f-b660-48d8c05181d1&#34;, &#34;position&#34;: null, &#34;primary_ip&#34;: null, &#34;primary_ip4&#34;: null, &#34;primary_ip6&#34;: null, &#34;rack&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;secrets_group&#34;: null, &#34;serial&#34;: &#34;&#34;, &#34;site&#34;: &#34;0627a5df-5138-4c4e-b263-b203f4085956&#34;, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/79a848d1-794c-4666-9a45-85c6589305c9/&#34;, &#34;vc_position&#34;: null, &#34;vc_priority&#34;: null, &#34;virtual_chassis&#34;: null}, &#34;item&#34;: {&#34;device_role&#34;: &#34;Switch&#34;, &#34;device_type&#34;: &#34;ceos&#34;, &#34;name&#34;: &#34;clab-Arista-2s-3l-leaf1&#34;, &#34;platform&#34;: &#34;EOS&#34;, &#34;site&#34;: &#34;Connecticut&#34;}, &#34;msg&#34;: &#34;device clab-Arista-2s-3l-leaf1 created&#34;}
+changed: [localhost] =&gt; (item={&#39;name&#39;: &#39;clab-Arista-2s-3l-leaf2&#39;, &#39;site&#39;: &#39;Connecticut&#39;, &#39;device_role&#39;: &#39;Switch&#39;, &#39;device_type&#39;: &#39;ceos&#39;, &#39;platform&#39;: &#39;EOS&#39;}) =&gt; {&#34;ansible_loop_var&#34;: &#34;item&#34;, &#34;changed&#34;: true, &#34;device&#34;: {&#34;asset_tag&#34;: null, &#34;cluster&#34;: null, &#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;config_context&#34;: {}, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;device_redundancy_group&#34;: null, &#34;device_redundancy_group_priority&#34;: null, &#34;device_role&#34;: &#34;ab8891b0-9dd4-4624-a203-df73009b7aec&#34;, &#34;device_type&#34;: &#34;051d49d9-65df-4d5b-b126-5d8e5c50fb42&#34;, &#34;display&#34;: &#34;clab-Arista-2s-3l-leaf2&#34;, &#34;face&#34;: null, &#34;id&#34;: &#34;19eba143-ead9-403c-b86d-060b37aafe58&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:13.805603Z&#34;, &#34;local_context_data&#34;: null, &#34;local_context_schema&#34;: null, &#34;location&#34;: null, &#34;name&#34;: &#34;clab-Arista-2s-3l-leaf2&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/19eba143-ead9-403c-b86d-060b37aafe58/notes/&#34;, &#34;parent_device&#34;: null, &#34;platform&#34;: &#34;f5445430-3024-474f-b660-48d8c05181d1&#34;, &#34;position&#34;: null, &#34;primary_ip&#34;: null, &#34;primary_ip4&#34;: null, &#34;primary_ip6&#34;: null, &#34;rack&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;secrets_group&#34;: null, &#34;serial&#34;: &#34;&#34;, &#34;site&#34;: &#34;0627a5df-5138-4c4e-b263-b203f4085956&#34;, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/19eba143-ead9-403c-b86d-060b37aafe58/&#34;, &#34;vc_position&#34;: null, &#34;vc_priority&#34;: null, &#34;virtual_chassis&#34;: null}, &#34;item&#34;: {&#34;device_role&#34;: &#34;Switch&#34;, &#34;device_type&#34;: &#34;ceos&#34;, &#34;name&#34;: &#34;clab-Arista-2s-3l-leaf2&#34;, &#34;platform&#34;: &#34;EOS&#34;, &#34;site&#34;: &#34;Connecticut&#34;}, &#34;msg&#34;: &#34;device clab-Arista-2s-3l-leaf2 created&#34;}
+changed: [localhost] =&gt; (item={&#39;name&#39;: &#39;clab-Arista-2s-3l-leaf3&#39;, &#39;site&#39;: &#39;Connecticut&#39;, &#39;device_role&#39;: &#39;Switch&#39;, &#39;device_type&#39;: &#39;ceos&#39;, &#39;platform&#39;: &#39;EOS&#39;}) =&gt; {&#34;ansible_loop_var&#34;: &#34;item&#34;, &#34;changed&#34;: true, &#34;device&#34;: {&#34;asset_tag&#34;: null, &#34;cluster&#34;: null, &#34;comments&#34;: &#34;&#34;, &#34;computed_fields&#34;: &#34;&#34;, &#34;config_context&#34;: {}, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;device_redundancy_group&#34;: null, &#34;device_redundancy_group_priority&#34;: null, &#34;device_role&#34;: &#34;ab8891b0-9dd4-4624-a203-df73009b7aec&#34;, &#34;device_type&#34;: &#34;051d49d9-65df-4d5b-b126-5d8e5c50fb42&#34;, &#34;display&#34;: &#34;clab-Arista-2s-3l-leaf3&#34;, &#34;face&#34;: null, &#34;id&#34;: &#34;bf1b5cf8-f51d-4d4a-9629-036cc2056bc2&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:15.031124Z&#34;, &#34;local_context_data&#34;: null, &#34;local_context_schema&#34;: null, &#34;location&#34;: null, &#34;name&#34;: &#34;clab-Arista-2s-3l-leaf3&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/bf1b5cf8-f51d-4d4a-9629-036cc2056bc2/notes/&#34;, &#34;parent_device&#34;: null, &#34;platform&#34;: &#34;f5445430-3024-474f-b660-48d8c05181d1&#34;, &#34;position&#34;: null, &#34;primary_ip&#34;: null, &#34;primary_ip4&#34;: null, &#34;primary_ip6&#34;: null, &#34;rack&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;secrets_group&#34;: null, &#34;serial&#34;: &#34;&#34;, &#34;site&#34;: &#34;0627a5df-5138-4c4e-b263-b203f4085956&#34;, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/devices/bf1b5cf8-f51d-4d4a-9629-036cc2056bc2/&#34;, &#34;vc_position&#34;: null, &#34;vc_priority&#34;: null, &#34;virtual_chassis&#34;: null}, &#34;item&#34;: {&#34;device_role&#34;: &#34;Switch&#34;, &#34;device_type&#34;: &#34;ceos&#34;, &#34;name&#34;: &#34;clab-Arista-2s-3l-leaf3&#34;, &#34;platform&#34;: &#34;EOS&#34;, &#34;site&#34;: &#34;Connecticut&#34;}, &#34;msg&#34;: &#34;device clab-Arista-2s-3l-leaf3 created&#34;}
+
+TASK [ADD INTERFACE TO A DEVICE] ******************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:66
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;interface&#34;: {&#34;bridge&#34;: null, &#34;cable&#34;: null, &#34;cable_peer&#34;: null, &#34;cable_peer_type&#34;: null, &#34;computed_fields&#34;: &#34;&#34;, &#34;connected_endpoint&#34;: null, &#34;connected_endpoint_reachable&#34;: null, &#34;connected_endpoint_type&#34;: null, &#34;count_ipaddresses&#34;: 0, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;device&#34;: &#34;bf1b5cf8-f51d-4d4a-9629-036cc2056bc2&#34;, &#34;display&#34;: &#34;vlan13&#34;, &#34;enabled&#34;: true, &#34;id&#34;: &#34;d604fbf1-197b-4a0e-b8db-36271f825006&#34;, &#34;label&#34;: &#34;&#34;, &#34;lag&#34;: null, &#34;last_updated&#34;: &#34;2023-12-18T22:02:16.631363Z&#34;, &#34;mac_address&#34;: null, &#34;mgmt_only&#34;: false, &#34;mode&#34;: null, &#34;mtu&#34;: null, &#34;name&#34;: &#34;vlan13&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/interfaces/d604fbf1-197b-4a0e-b8db-36271f825006/notes/&#34;, &#34;parent_interface&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;tagged_vlans&#34;: [], &#34;tags&#34;: [], &#34;type&#34;: &#34;virtual&#34;, &#34;untagged_vlan&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/interfaces/d604fbf1-197b-4a0e-b8db-36271f825006/&#34;}, &#34;msg&#34;: &#34;interface vlan13 created&#34;}
+
+TASK [ADD INTERFACE TO A DEVICE] ******************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:76
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;interface&#34;: {&#34;bridge&#34;: null, &#34;cable&#34;: null, &#34;cable_peer&#34;: null, &#34;cable_peer_type&#34;: null, &#34;computed_fields&#34;: &#34;&#34;, &#34;connected_endpoint&#34;: null, &#34;connected_endpoint_reachable&#34;: null, &#34;connected_endpoint_type&#34;: null, &#34;count_ipaddresses&#34;: 0, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;device&#34;: &#34;bf1b5cf8-f51d-4d4a-9629-036cc2056bc2&#34;, &#34;display&#34;: &#34;vlan14&#34;, &#34;enabled&#34;: true, &#34;id&#34;: &#34;e64ff347-f569-43c0-af26-1b196654381e&#34;, &#34;label&#34;: &#34;&#34;, &#34;lag&#34;: null, &#34;last_updated&#34;: &#34;2023-12-18T22:02:18.211204Z&#34;, &#34;mac_address&#34;: null, &#34;mgmt_only&#34;: false, &#34;mode&#34;: null, &#34;mtu&#34;: null, &#34;name&#34;: &#34;vlan14&#34;, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/interfaces/e64ff347-f569-43c0-af26-1b196654381e/notes/&#34;, &#34;parent_interface&#34;: null, &#34;relationships&#34;: &#34;&#34;, &#34;tagged_vlans&#34;: [], &#34;tags&#34;: [], &#34;type&#34;: &#34;virtual&#34;, &#34;untagged_vlan&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/dcim/interfaces/e64ff347-f569-43c0-af26-1b196654381e/&#34;}, &#34;msg&#34;: &#34;interface vlan14 created&#34;}
+
+TASK [ADD IP ADDRESS] *****************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:86
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;ip_address&#34;: {&#34;address&#34;: &#34;192.168.13.1/24&#34;, &#34;assigned_object&#34;: null, &#34;assigned_object_id&#34;: null, &#34;assigned_object_type&#34;: null, &#34;computed_fields&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;display&#34;: &#34;192.168.13.1/24&#34;, &#34;dns_name&#34;: &#34;&#34;, &#34;family&#34;: 4, &#34;id&#34;: &#34;1e5b0fd5-f6dd-40c9-98b8-0faae3753e6f&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:19.370808Z&#34;, &#34;nat_inside&#34;: null, &#34;nat_outside&#34;: null, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/ipam/ip-addresses/1e5b0fd5-f6dd-40c9-98b8-0faae3753e6f/notes/&#34;, &#34;relationships&#34;: &#34;&#34;, &#34;role&#34;: null, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/ipam/ip-addresses/1e5b0fd5-f6dd-40c9-98b8-0faae3753e6f/&#34;, &#34;vrf&#34;: null}, &#34;msg&#34;: &#34;ip_address 192.168.13.1/24 created&#34;}
+
+TASK [ADD IP ADDRESS] *****************************************************************************************************************
+task path: /home/cloud_user/network-automation/infra/nautobot/add_info.yaml:94
+changed: [localhost] =&gt; {&#34;changed&#34;: true, &#34;ip_address&#34;: {&#34;address&#34;: &#34;192.168.14.1/24&#34;, &#34;assigned_object&#34;: null, &#34;assigned_object_id&#34;: null, &#34;assigned_object_type&#34;: null, &#34;computed_fields&#34;: &#34;&#34;, &#34;created&#34;: &#34;2023-12-18&#34;, &#34;custom_fields&#34;: {}, &#34;description&#34;: &#34;&#34;, &#34;display&#34;: &#34;192.168.14.1/24&#34;, &#34;dns_name&#34;: &#34;&#34;, &#34;family&#34;: 4, &#34;id&#34;: &#34;45765efe-77a0-464f-a14a-b3f514208f5a&#34;, &#34;last_updated&#34;: &#34;2023-12-18T22:02:20.509881Z&#34;, &#34;nat_inside&#34;: null, &#34;nat_outside&#34;: null, &#34;notes_url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/ipam/ip-addresses/45765efe-77a0-464f-a14a-b3f514208f5a/notes/&#34;, &#34;relationships&#34;: &#34;&#34;, &#34;role&#34;: null, &#34;status&#34;: &#34;active&#34;, &#34;tags&#34;: [], &#34;tenant&#34;: null, &#34;url&#34;: &#34;http://ed26757f4b2c.mylabserver.com:8000/api/ipam/ip-addresses/45765efe-77a0-464f-a14a-b3f514208f5a/&#34;, &#34;vrf&#34;: null}, &#34;msg&#34;: &#34;ip_address 192.168.14.1/24 created&#34;}
+META: ran handlers
+META: ran handlers
+
+PLAY RECAP ****************************************************************************************************************************
+localhost                  : ok=11   changed=11   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0</pre>
+</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_go_back_to_the_web_browser_and_refresh_the_nautobot_server">Go back to the Web Browser and refresh the Nautobot server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_devices_devices">Click on Devices → Devices</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_you_should_see_5_devices">You should see 5 devices</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_you_just_added_5_new_devices_using_the_nautobot_api">You just added 5 new devices using the Nautobot API</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_check_out_the_devices_by_clicking_on_a_device">Check out the devices by clicking on a device</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-28.png" alt="s4 28" height="325"/>
+</div>
+<div class="title">Figure 4: Nautobot Devices</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_to_support_the_new_vlan_change">To support the new VLAN change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_ipam_ip_addresses_and_select_192_168_13_124">Click IPAM → IP Addresses and select 192.168.13.1/24</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_edit_in_upper_right_hand_corner">Click Edit in upper right-hand corner</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_scroll_down_to_interface_assignment_and_select_the_following">Scroll down to Interface Assignment and select the following:</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-29.png" alt="s4 29" height="200"/>
+</div>
+<div class="title">Figure 5: Nautobot Interface Assignment</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_update_and_click_ip_addresses_and_then_click_on_the_192_168_14_124_ip_address_and_assign_vlan14_to_the_same_device_under_the_interface_assignment_section">Click update and click IP Addresses and then click on the 192.168.14.1/24 IP Address and assign vlan14 to the same device under the Interface Assignment section</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_on_the_ip_address_page_you_should_see_the_checkboxes_for_assigned">On the IP Address page you should see the checkboxes for assigned</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-30.png" alt="s4 30" height="150"/>
+</div>
+<div class="title">Figure 6: Nautobot IP Addresses</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_now_we_have_associated_the_two_new_vlans_to_the_leaf3_switch">Now we have associated the two new VLANs to the Leaf3 switch</h3>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_next_we_need_to_add_the_snmp_change_to_nautobot">Next we need to add the SNMP change to Nautobot</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_extensibility_drop_down_and_select_config_context">Click on the Extensibility drop down and select Config Context</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-31.png" alt="s4 31" height="300"/>
+</div>
+<div class="title">Figure 7: Config Context</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_add_a_new_config_context">Add a new Config Context</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_name_it_snmp_and_scroll_down_to_the_data_section">Name it snmp and scroll down to the data section</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_add_the_following_json_data_into_the_data_section_and_click_create">Add the following JSON data into the data section and click Create:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">{
+    &#34;config&#34;: {
+        &#34;communities&#34;: [
+            {
+                &#34;acl_v4&#34;: &#34;list3&#34;,
+                &#34;name&#34;: &#34;netdevops&#34;,
+                &#34;view&#34;: &#34;view1&#34;
+            }
+        ],
+        &#34;contact&#34;: &#34;admin&#34;,
+        &#34;hosts&#34;: [
+            {
+                &#34;host&#34;: &#34;host02&#34;,
+                &#34;user&#34;: &#34;user1&#34;,
+                &#34;version&#34;: &#34;2c&#34;
+            }
+        ]
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_this_will_add_the_snmp_configuration_to_each_switch">This will add the SNMP configuration to each Switch</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_a_device_and_verify_the_snmp_config_context">Click on a device and verify the SNMP Config Context</h3>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_instead_of_creating_the_vlan_and_snmp_change_using_static_data_from_the_playbook_and_host_vars">Instead of creating the VLAN and SNMP change using static data from the playbook and host_vars</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_add_the_new_vlans_and_snmp_from_the_source_of_truth_sot_nautobot">Lets add the new VLANs and SNMP from the Source of Truth (SoT) Nautobot</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_this_will_allow_us_to_query_the_sot_prior_to_successfully_adding_the_changes_to_production">This will allow us to query the SoT prior to successfully adding the changes to production</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_now_lets_create_a_couple_ansible_playbooks_to_grab_the_data_from_the_sot_and_create_configurations_from_it_for_the_change">Now let’s create a couple Ansible Playbooks to grab the data from the SoT and create configurations from it for the change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_change_will_remain_the_same_open_the_change_sot_folder_and_review_the_get_ip_yaml">The change will remain the same, open the change_sot folder and review the get_ip.yaml.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_the_variables_we_will_query_in_nautobot">Notice the variables we will query in Nautobot</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_check_out_the_nautobot_query_this_introduces_the_graphql">Check out the Nautobot Query - This introduces the GraphQL</h3>
+<div class="listingblock">
+<div class="content">
+<pre>---
+- name: GET DEVICE INFORMATION FROM THE GRAPHQL API
+  hosts: localhost
+  vars:
+  # FILL IN WITH PROPER REGION VALUE FOR YOUR SYSTEM
+    site_slug: &#34;connecticut&#34;
+    switch_name: &#34;clab-Arista-2s-3l-leaf3&#34;
+    vlan: &#34;14&#34;
+    nautobot_host: &#34;http://172.31.102.7:8000/&#34;
+    nautobot_token: &#34;fbf4caacbd265dfc88aa430be6c31650a84179a7&#34;
+    nautobot_query: |
+      query {
+              devices(site: &#34;{{ site_slug }}&#34;, name: &#34;{{ switch_name }}&#34;) {
+                name
+                interfaces (name: &#34;vlan{{ vlan }}&#34;){
+                  ip_addresses {
+                    address
+                     }
+                   }
+                 }
+               }
+  tasks:
+    - name: GET SITE DEVICES INFORMATION FROM NAUTOBOT
+      networktocode.nautobot.query_graphql:
+        url: &#34;{{ nautobot_host }}&#34;
+        token: &#34;{{ nautobot_token }}&#34;
+        validate_certs: false
+        query: &#34;{{ nautobot_query }}&#34;
+        update_hostvars: true
+    - debug:
+        var: devices
+        verbosity: 1
+    - name: RENDER THE SITE REPORT
+      template:
+        src: ip_host_vars.j2
+        dest: ./inventory/host_vars/{{ switch_name }}.yaml</pre>
+</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_login_to_nautobot_server_and_click_on_graphql_in_the_lower_right">Login to Nautobot Server and click on graphql in the lower right</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-32.png" alt="s4 32" height="50"/>
+</div>
+<div class="title">Figure 8: GraphQL</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cut_and_paste_the_following_query_at_the_line_32_of_the_left_screen_and_hit_the_play_button_at_the_top">Cut and paste the following query at the line 32 of the left screen and hit the play button at the top</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">query {
+             devices(site: &#34;connecticut&#34;) {
+                name
+                interfaces {
+                  ip_addresses {
+                    address
+            }
+          }
+      }
+    }</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-33.png" alt="s4 33" height="450"/>
+</div>
+<div class="title">Figure 9: GraphQL Query</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_let_modify_the_query_and_hit_the_play_button_again_to_try_the_flexibility_of_graphql">Let modify the query and hit the play button again to try the flexibility of GraphQL</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_how_we_can_modify_query_and_receive_new_results">Notice how we can modify query and receive new results</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">query {
+             devices(site: &#34;connecticut&#34;, name: &#34;clab-Arista-2s-3l-leaf3&#34;) {
+                name
+                interfaces (name: &#34;vlan14&#34;){
+                  ip_addresses {
+                    address
+            }
+          }
+      }
+    }</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-34.png" alt="s4 34" height="450"/>
+</div>
+<div class="title">Figure 10: GraphQL Query</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_the_next_part_of_the_ansible_playbook_to_check_out_is_the_debug_variable_and_the_jinja2_template_to_create_the_host_vars_yaml_file">The next part of the Ansible Playbook to check out is the debug variable and the jinja2 template to create the host_vars yaml file</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_devices_variable_will_include_the_results_of_the_graphql_query">The devices variable will include the results of the GraphQL query</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-35.png" alt="s4 35" height="550"/>
+</div>
+<div class="title">Figure 11: GraphQL Query</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_let_modify_the_query_to_capture_the_snmp_info_and_hit_the_play_button_again_to_try_the_flexibility_of_graphql">Let modify the query to capture the SNMP info and hit the play button again to try the flexibility of GraphQL</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_how_we_can_modify_query_and_receive_new_results_2">Notice how we can modify query and receive new results</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">query {
+              devices(site: &#34;connecticut&#34;, name: [&#34;clab-Arista-2s-3l-spine1&#34;, &#34;clab-Arista-2s-3l-spine2&#34;]) {
+          name
+          config_context
+        }
+      }</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-36.png" alt="s4 36" height="450"/>
+</div>
+<div class="title">Figure 12: GraphQL Query</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_get_snmp_yaml_and_snmp_host_vars_j2_files">Lets review the get_snmp.yaml and snmp_host_vars.j2 files</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_devices_variable_will_include_the_results_of_the_graphql_query_2">The devices variable will include the results of the GraphQL query</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-37.png" alt="s4 37" height="475"/>
+</div>
+<div class="title">Figure 13: get_snmp.yaml and snmp_host_vars.j2 files</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_all_yaml_file_and_how_it_is_related_to_get_ip_yaml_and_get_snmp_yaml">Lets review the all.yaml file and how it is related to get_ip.yaml and get_snmp.yaml</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_all_yaml_are_the_default_variables_used_in_the_playbooks">all.yaml are the default variables used in the playbooks</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_here_is_a_good_example_of_where_you_can_simplify_the_information_required_from_users">Here is a good example of where you can simplify the information required from users</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_users_would_only_need_to_complete_this_file_for_the_change">Users would only need to complete this file for the change</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-38.png" alt="s4 38" height="500"/>
+</div>
+<div class="title">Figure 14: all.yaml file and how it is related to get_ip.yaml and get_snmp.yaml files</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_this_looks_good_so_far_but_you_should_never_include_a_token_or_a_password_in_file_uploaded_to_a_git_repository">This looks good so far, but you should never include a token or a password in file uploaded to a Git repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_so_then_how_do_you_include_a_password_in_a_playbook_associated_to_a_cicd_pipeline">So then how do you include a password in a playbook associated to a CI/CD pipeline?</h3>
+<div class="listingblock">
+<div class="content">
+<pre>---
+- name: GET DEVICE INFORMATION FROM THE GRAPHQL API
+  hosts: localhost
+  vars:
+  # FILL IN WITH PROPER REGION VALUE FOR YOUR SYSTEM
+  nautobot_host: &#34;http://172.31.102.7:8000/&#34; <i class="conum" data-value="1"></i><b>(1)</b>
+  nautobot_token: &#34;fbf4caacbd265dfc88aa430be6c31650a84179a7&#34; <i class="conum" data-value="1"></i><b>(1)</b>
+  nautobot_query: |
+    query {
+     devices(site: &#34;{{ site_slug }}&#34;, name: {{ snmp.switch_names.names | tojson }}) {
+    name
+    config_context
+  }
+}
+  tasks:
+    - name: GET SITE DEVICES INFORMATION FROM NAUTOBOT
+      networktocode.nautobot.query_graphql:
+        url: &#34;{{ nautobot_host }}&#34;
+        token: &#34;{{ nautobot_token }}&#34;
+        validate_certs: false
+        query: &#34;{{ nautobot_query }}&#34;
+        update_hostvars: true
+    - debug:
+        var: devices
+        verbosity: 1
+    - name: RENDER THE SITE REPORT
+      template:
+        src: snmp_host_vars.j2
+        dest: ./inventory/host_vars/{{ item.name }}.yaml
+      with_items:
+        - &#34;{{ switch_names }}&#34;</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>We can use variables in GitLab</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_on_the_gitlab_server_in_the_network_automation_repository">On the Gitlab Server in the Network Automation repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_go_to_settings_cicd_and_expand_variables">Go to Settings → CI/CD → and expand variables</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_add_variable_and_add_the_variable_using_nb_token_as_the_key_your_token_as_the_value_and_click_mask_variable_and_click_the_add_variable_button">Click Add variable and add the variable using NB_TOKEN as the key, your token as the value and click Mask variable and click the Add variable button</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_add_variable_and_add_the_variable_using_nb_host_as_the_key_your_url_of_the_nautobot_server_with_port_8000_httpserver28000_as_the_value_and_click_mask_variable_and_click_the_add_variable_button">Click Add variable and add the variable using NB_HOST as the key, your url of the Nautobot server with port 8000 (<a href="http://server2:8000" class="bare">http://server2:8000</a>) as the value and click Mask variable and click the Add variable button</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Replace server2 with the FQDN of your server and include port 8000 (<a href="http://YourServer2:8000" class="bare">http://YourServer2:8000</a>)
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-39.png" alt="s4 39" height="350"/>
+</div>
+<div class="title">Figure 15: GitLab Variables</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_create_a_new_change"><strong>Let’s Create A New Change</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_an_issue_named_change_with_nautobot_and_create_a_merge_request">Create an Issue named <strong>Change with Nautobot</strong> and create a merge request</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_copy_and_paste_the_following_description">Copy and paste the following description:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">- [ ] Query Nautobot to add new vlan 14
+- [ ] Query Nautobot to add SNMP to the Spine Switches</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-40.png" alt="s4 40" height="450"/>
+</div>
+<div class="title">Figure 16: New Change With Nautobot</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_go_to_a_remote_location_where_you_have_a_copy_of_the_remote_repository_from_your_gitlab_server">Go to a remote location where you have a copy of the remote repository from your Gitlab server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_continue_to_use_vs_code_on_your_laptop">Let’s continue to use VS Code on your laptop</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_it_is_a_good_habit_to_first_sync_up_changes_with_a_remote_repository_before_working_on_it">It is a good habit to first sync up changes with a remote repository before working on it</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_3">Run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_the_progression_of_the_command_above">Here is the progression of the command above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton :~/network-automation$ git branch
+  1-network-change
+  2-testing
+* Master</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notice_that_i_am_starting_out_on_the_master_branch">Notice that I am starting out on the Master branch</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_if_you_are_not_on_the_master_branch_run_the_following_command">If you are not on the master branch, run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git checkout master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_its_a_good_idea_to_check_if_your_local_repository_is_out_of_date_from_the_remote_repository">It’s a good idea to check if your local repository is out of date from the remote repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_4">Run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git remote -v show origin</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_the_progression_of_the_commands_above_2">Here is the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton :~/network-automation$ git remote -v show origin <i class="conum" data-value="1"></i><b>(1)</b>
+Username for &#39;http://ed26757f4b2c.mylabserver.com&#39;: knorton
+Password for &#39;http://knorton@ed26757f4b2c.mylabserver.com&#39;:
+* remote origin
+  Fetch URL: http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+  Push  URL: http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+  HEAD branch: master
+  Remote branches:
+    3-change-with-nautobot               new (next fetch will store in remotes/origin)
+    master                               tracked
+    refs/remotes/origin/1-network-change stale (use &#39;git remote prune&#39; to remove)
+    refs/remotes/origin/2-testing        stale (use &#39;git remote prune&#39; to remove)
+  Local ref configured for &#39;git push&#39;:
+    master pushes to master (local out of date)</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This local repo is out of date and needs to be updated</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_update_the_local_repository_if_required">Lets update the local repository if required</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_below_was_performed_from_the_vs_code_terminal">Below was performed from the VS Code terminal</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_5">Run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git pull origin master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_the_progression_of_the_commands_above_3">Here is the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton:~/network-automation$ git pull origin master
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 9 (delta 3), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (9/9), 2.14 KiB | 546.00 KiB/s, done.
+From http://ed26757f4b2c.mylabserver.com/knorton/network-automation
+ * branch            master     -&gt; FETCH_HEAD
+   7b37b11..6ccd843  master     -&gt; origin/master
+Updating 7b37b11..6ccd843
+Fast-forward
+ .gitlab-ci.yml   | 24 ++++++++++++++++++++++++
+ tests/batfish.py |  2 +-
+ 2 files changed, 25 insertions(+), 1 deletion(-)</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notice_the_only_branches_are_master_1_network_change_and_2_testing">Notice the only branches are master, 1-network-change, and 2-testing</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_we_can_pull_down_the_remote_network_change_branch_using_the_following_command">We can pull down the remote network change branch using the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git fetch</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_but_you_need_to_create_a_new_local_branch_in_the_local_repository_using_the_following_command">But you need to create a new local branch in the local repository using the following command:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_your_branch_name_maybe_different">Your branch name maybe different</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch 3-change-with-nautobot</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_then_lets_switch_to_that_branch_with_the_following_command">Then let’s switch to that branch with the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git checkout 3-change-with-nautobot</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_a_progression_of_the_commands_above">Here is a progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+  1-network-change
+  2-testing
+* master
+  remotes/origin/1-network-change
+  remotes/origin/2-testing
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git fetch
+From http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation
+ * [new branch]      3-change-with-nautobot -&gt; origin/3-change-with-nautobot
+kennorton@C02G71AFMD6P-knorton network-automation % git branch
+  1-network-change
+  2-testing
+* master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch 3-change-with-nautobot
+kennorton@C02G71AFMD6P-knorton network-automation % git checkout 3-change-with-nautobot
+Switched to branch &#39;3-change-with-nautobot&#39;
+kennorton@C02G71AFMD6P-knorton network-automation %</pre>
+</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_in_the_get_ip_yaml_and_get_snmp_yaml_file_in_the_change_sot_directory">In the get_ip.yaml and get_snmp.yaml file in the change_sot directory</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_change_the_nautobot_token_to_include_the_following_in_both_files">Change the nautobot_token to include the following in both files:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">nautobot_token: &#34;{{ lookup(&#39;env&#39;, &#39;NB_TOKEN&#39;) }}&#34;
+nautobot_host: &#34;{{ lookup(&#39;env&#39;, &#39;NB_HOST&#39;) }}&#34;</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-41.png" alt="s4 41" height="550"/>
+</div>
+<div class="title">Figure 17: get_ip.yaml and get_snmp.yaml file</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_we_have_to_include_these_changes_to_the_cicd_workflow_in_the_gitlab_ci_yml_file">We have to include these changes to the CI/CD workflow in the .gitlab-ci.yml file</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_now_in_your_ide_update_the_change_stage_to_change_with_sot_and_add_the_document_and_production_stages">Now in your IDE update the change stage to change_with_sot and add the document and production stages</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_also_add_the_variables_at_the_top_of_the_gitlab_ci_yml_file">Also add the variables at the top of the .gitlab-ci.yml file</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-42.png" alt="s4 42" height="350"/>
+</div>
+<div class="title">Figure 18: .gitlab-ci.yaml update</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_change_the_top_of_the_gitlab_ci_yml_to_reflect_the_following">Change the top of the .gitlab-ci.yml to reflect the following:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+variables:
+  NB_TOKEN: &#34;$NB_TOKEN&#34;
+  NB_HOST: &#34;$NB_HOST&#34;
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == &#39;master&#39;
+
+stages:
+  - build
+  - stage
+  - change_with_sot
+  - test
+  - backup
+  - document
+  - production</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_modify_the_change_stage_to_reflect_the_following">Modify the change stage to reflect the following:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">network_change:
+  stage: change_with_sot
+  before_script:
+    - pip install pynautobot==1.5.0
+    - ansible-galaxy collection install networktocode.nautobot:4.5.0
+    - cd change_sot
+    - mkdir inventory/host_vars
+    - ansible-playbook get_snmp.yaml -v
+    - ansible-playbook get_ip.yaml -v
+  script:
+    - ansible-playbook change.yaml -v</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_add_a_document_and_production_stages_at_the_bottom_of_the_gitlab_ci_yml_file_to_reflect_the_following">Lets add a document and production stages at the bottom of the .gitlab-ci.yml file to reflect the following:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_normally_the_push_to_production_stage_would_include_the_changes_to_be_pushed_to_production_switches">Normally the push to production stage would include the changes to be pushed to production switches</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Remember to save all your modified files
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">document_switches:
+  stage: document
+  before_script:
+    - cd document
+  script:
+    - ansible-playbook document.yaml -v
+    - docker container rm -f netdevops-nginx || true
+    - docker rmi $(docker images -q --filter=reference=&#34;netdevops-nginx:1.0&#34;) || true
+    - docker build -t netdevops-nginx:1.0 .
+    - docker run -d -p 80:80 --name netdevops-nginx netdevops-nginx:1.0
+  dependencies:
+    - test_model_switches
+
+push_to_production:
+  stage: production
+  script:
+    - echo Pushing to production........
+  dependencies:
+    - document_switches</code></pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_now_lets_go_push_the_changes_to_the_remote_repository"><strong>Now lets go push the changes to the remote repository</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_run_the_following_commands_shown_below">Run the following commands shown below:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git status</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/network-automation
+git add change_sot/get_snmp.yaml
+git add change_sot/get_ip.yaml
+git add .gitlab-ci.yml
+git commit -m &#34;Updated the gitlab-ci file to add the change with nautobot&#34;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git push origin 3-change-with-nautobot</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The name of your branch maybe different
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_progression_of_the_commands_above">Here is progression of the commands above:</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton network-automation % git status
+On branch 3-change-with-nautobot
+Changes not staged for commit:
+  (use &#34;git add &lt;file&gt;...&#34; to update what will be committed)
+  (use &#34;git restore &lt;file&gt;...&#34; to discard changes in working directory)
+        modified:   .gitlab-ci.yml
+        modified:   change_sot/get_ip.yaml
+        modified:   change_sot/get_snmp.yaml
+
+no changes added to commit (use &#34;git add&#34; and/or &#34;git commit -a&#34;)
+kennorton@C02G71AFMD6P-knorton network-automation % git add change_sot/get_snmp.yaml
+kennorton@C02G71AFMD6P-knorton network-automation % git add change_sot/get_ip.yaml
+kennorton@C02G71AFMD6P-knorton network-automation % git add .gitlab-ci.yml
+kennorton@C02G71AFMD6P-knorton network-automation % git commit -m &#34;Updated the gitlab-ci file to add the change with nautobot&#34;
+
+[3-change-with-nautobot 23a8eb8] Updated the gitlab-ci file to add the change with nautobot
+ 3 files changed, 6 insertions(+), 5 deletions(-)
+kennorton@C02G71AFMD6P-knorton network-automation % git branch
+  1-network-change
+  2-testing
+* 3-change-with-nautobot
+  master
+kennorton@C02G71AFMD6P-knorton network-automation % git push origin 3-change-with-nautobot
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 12 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 660 bytes | 660.00 KiB/s, done.
+Total 6 (delta 5), reused 0 (delta 0), pack-reused 0
+remote:
+remote: To create a merge request for 3-change-with-nautobot, visit:
+remote:   http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation/-/merge_requests/new?merge_request%5Bsource_branch%5D=3-change-with-nautobot
+remote:
+To http://ccoe-netdev-02.presidio-demo.com/knorton/network-automation.git
+   87eee58..23a8eb8  3-change-with-nautobot -&gt; 3-change-with-nautobot</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_log_back_onto_the_gitlab_server_under_the_network_automation_repository">Log back onto the GitLab Server under the network-automation repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_the_merge_request_update_click_merge_requests_and_select_the_recent_merge_request">Notice the Merge Request update – click Merge Requests and select the recent merge request</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_under_activity_you_can_review_the_changes">Under Activity you can review the changes</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_the_e520d96b_link_to_review_the_changes_the_link_id_will_be_different">Click the e520d96b link to review the changes (the link ID will be different)</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_mark_as_ready">Click Mark as ready</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_merge">Click Merge</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-43.png" alt="s4 43" height="500"/>
+</div>
+<div class="title">Figure 19: Merge Request</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_a_copy_of_the_latest_gitlab_ci_yml_file">Here is a copy of the latest .gitlab-ci.yml file</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+variables:
+  NB_TOKEN: &#34;$NB_TOKEN&#34;
+  NB_HOST: &#34;$NB_HOST&#34;
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == &#39;master&#39;
+
+stages:
+  - build
+  - stage
+  - change_with_sot
+  - test
+  - backup
+  - document
+  - production
+
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+network_change:
+  stage: change_with_sot
+  before_script:
+    - pip install pynautobot==1.5.0
+    - ansible-galaxy collection install networktocode.nautobot:4.5.0
+    - cd change_sot
+    - mkdir inventory/host_vars
+    - ansible-playbook get_snmp.yaml -v
+    - ansible-playbook get_ip.yaml -v
+  script:
+    - ansible-playbook change.yaml -v
+
+test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.14.1
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1
+
+test_model_switches:
+  stage: test
+  before_script:
+    - cd tests
+    - docker rmi -f $(docker images -q --filter=reference=&#34;batfish/allinone:latest&#34;) || true
+  script:
+    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true
+    - ansible-playbook snapshots.yaml -v 
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install pybatfish
+    - python3 batfish.py
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/git_backup.yaml -v
+  dependencies:
+    - staging_switches
+
+document_switches:
+  stage: document
+  before_script:
+    - cd document
+  script:
+    - ansible-playbook document.yaml -v
+    - docker container rm -f netdevops-nginx || true
+    - docker rmi $(docker images -q --filter=reference=&#34;netdevops-nginx:1.0&#34;) || true
+    - docker build -t netdevops-nginx:1.0 .
+    - docker run -d -p 80:80 --name netdevops-nginx netdevops-nginx:1.0
+  dependencies:
+    - test_model_switches
+
+push_to_production:
+  stage: production
+  script:
+    - echo Pushing to production........
+  dependencies:
+    - document_switches</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_under_the_build_section">Under the build section</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_pipeline">Click on the pipeline</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-44.png" alt="s4 44" height="300"/>
+</div>
+<div class="title">Figure 20: CI/CD Pipeline</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_when_the_pipeline_completes_the_issue_will_automatically_close">When the pipeline completes the issue will automatically close</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_go_back_into_the_issue_and_check_the_checkboxes_if_it_was_successful_or_repoen_the_issue">Go back into the issue and check the checkboxes if it was successful or repoen the issue</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-45.png" alt="s4 45" height="600"/>
+</div>
+<div class="title">Figure 21: Close The Issue</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_congratulations"><strong>CONGRATULATIONS!! 🎉</strong></h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_you_completed_the_following">At this point, You completed the following:</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/ind-5.png" alt="ind 5" height="500"/>
+</div>
+<div class="title">Figure 22: Network Automation</div>
+</div>
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-testing/">&larr; Previous: Stage 4.2 - PreDeployment Testing</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/wrapup/">Next: Wrap Up &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

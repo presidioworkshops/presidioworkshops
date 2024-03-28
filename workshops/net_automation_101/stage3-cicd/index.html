@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 3.2 - CI/CD | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 3.2 - CI/CD</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage3-gitlab/">&larr; Previous: Stage 3.1 - GitLab</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-change/">Next: Stage 4.1 - Automating A Change &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_3_cicd_basics"><strong>Stage 3 CI/CD Basics</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_45_minutes">Estimated time to complete: 45 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_3_we_will_discuss_continous_integration_and_continous_deployment_basics_cicd">In Stage 3, we will discuss Continous Integration and Continous Deployment basics (CI/CD).</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_concepts_to_understand_the_power_of_cicd">We will run through some of the concepts to understand the power of CI/CD.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_cicd_is_the_glue_to_automate_the_workflow_for_deploying_network_infrastructure">CI/CD is the glue to automate the workflow for deploying network infrastructure.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_3">Here are the requirements for Stage 3</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_3_this_shows_all_the_technology_we_will_be_using_in_stage_3">Here is a diagram of Stage 3.  This shows all the technology we will be using in Stage 3.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_3">It also defines the use cases we will be working on in Stage 3.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_3">Here is a summary of Stage 3</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-3.png" alt="Stage 3 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_install_the_gitlab_runner_on_server_1"><strong>Let’s install the GitLab Runner on Server 1</strong></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Log back into Server 1</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_install_the_gitlab_runner">Install the GitLab Runner</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo curl -L --output /usr/local/bin/gitlab-runner https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>&#34;curl: (23) Failed writing body (0 != 15784)&#34; is not an error. Do not troubleshoot this.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_give_permission_to_execute">Give Permission to Execute</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo chmod +x /usr/local/bin/gitlab-runner</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_a_user_for_the_runner">Create a User for the Runner</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo useradd --comment &#39;GitLab Runner&#39; --create-home gitlab-runner --shell /bin/bash
+sudo usermod -a -G docker gitlab-runner</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_update_a_gitlab_runner_password_and_remember_the_password">Update a gitlab-runner password and remember the password</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo passwd gitlab-runner</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_install_and_run_the_runner_if_fails_proceed_to_next_step">Install and Run the Runner (if fails proceed to next step)</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
+sudo gitlab-runner start</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If above step fails perform the following commands and run the above step again
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo mv /etc/systemd/system/gitlab-runner.service  /etc/systemd/system/gitlab-runner.service.bak
+sudo rm /etc/systemd/system/gitlab-runner.service.bak</code></pre>
+</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_logout_of_the_gitlab_ce_web_interface_as_a_user_and_login_as_root">Logout of the Gitlab-CE Web Interface as a user and login as root</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_as_root_on_your_gitlab_server_server_2_go_to_the_following">As root on your GitLab server (Server-2) go to the following:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_admin_area_cicd_runners_new_instance_project_runner">Admin Area → CI/CD → Runners → New Instance (Project) Runner</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://server2/admin/runners/new <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace Server 2 with your information</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_linux_for_a_platform_and_a_tag_of_netdevops_and_check_run_untagged_jobs_click_create_runner">Click Linux for a Platform and a Tag of Netdevops and check “run untagged jobs” click create runner</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-14a.png" alt="s3 14a" height="400"/>
+</div>
+<div class="title">Figure 1: Setup Gitlab Runner</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_copy_the_command_from_step_1_toserver_1and_make_it_one_line_with_sudo_in_front_of_it_for_example"><strong>Copy the command from Step 1 to Server-1 and make it one line with sudo in front of it, for example.</strong></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo gitlab-runner register --url http://server2  --token glrt-k7HmELRbaHVxnnZa4DYf <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace Server 2 with your information along with your token</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-15.png" alt="s3 15" height="200"/>
+</div>
+<div class="title">Figure 2: Gitlab Runner</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~$ sudo gitlab-runner register --url http://server2 --token glrt-k7HmELRbaHVxnnZa4DYf
+
+Please enter the gitlab-ci coordinator URL (e.g. https://gitlab.com/):
+[http://server2]:
+Token specified trying to verify runner...
+WARNING: If you want to register use the &#39;-r&#39; instead of &#39;-t&#39;.
+Verifying runner... is alive                        runner=glrt-k7H
+Please enter the executor: docker, shell, ssh, virtualbox, docker-ssh+machine, kubernetes, docker-ssh, parallels, docker+machine:
+shell <i class="conum" data-value="1"></i><b>(1)</b>
+Runner registered successfully. Feel free to start it, but if it&#39;s running already the config should be automatically reloaded!
+cloud_user@ed26757f4b1c:~$ sudo gitlab-runner list
+Listing configured runners                          ConfigFile=/etc/gitlab-runner/config.toml
+server2                                             Executor=shell Token=glrt-k7HmELRbaHVxnnZa4DYf URL=http://server2</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Type shell for an executor</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_this_command_next">Run this command next:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo gitlab-runner list</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enter_the_following_command_to_give_the_runner_access_to_docker">Enter the following command to give the runner access to Docker:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo usermod -a -G docker gitlab-runner</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command">Run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo visudo</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_now_add_the_following_to_the_bottom_of_the_file_and_type_ctrl_x_type_y_and_then_enter_to_save_the_file">Now add the following to the bottom of the file and type CTRL + X, type y and then enter to save the file</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">gitlab-runner ALL=(ALL) NOPASSWD: ALL</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-16.png" alt="s3 16" height="200"/>
+</div>
+<div class="title">Figure 3: Gitlab Permission</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>If you get an error trying to save the file,e.g.,</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">/etc/sudoers: near line syntax error 31 &lt;&lt;&lt;
+sudo: parsing error in /etc/sudoers near line 31</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>DO NOT SAVE THE FILE</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_prepare_the_runner_on_server_1"><strong>Lets prepare the Runner on Server 1</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_modify_the_following_file_homegitlab_runner_bash_logout">Modify the following file - /home/gitlab-runner/.bash_logout</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo vi /home/gitlab-runner/.bash_logout</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_comment_out_the_following_by_adding_before_each_line_here_is_an_example">Comment out the following by adding # before each line.  Here is an example</h3>
+<div class="paragraph">
+<p>In vi type i to insert, add the comments and then press esc and shift zz to save and exit the file</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># if [ &#34;$SHLVL&#34; = 1 ]; then
+#   [ -x /usr/bin/clear_console ] &amp;&amp; /usr/bin/clear_console -q
+# fi</code></pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_go_back_to_the_gitlab_ce_server_server2"><strong>Go back to the Gitlab-CE Server (Server2)</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_notice_the_runner_is_created">Notice the runner is created</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_go_to_runners_page">Click Go to runners page</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_it_should_show_online">It should show online</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-17.png" alt="s3 17" height="500"/>
+</div>
+<div class="title">Figure 4: Gitlab Runner</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_create_a_cicd_pipeline"><strong>Let’s Create A CI/CD Pipeline</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_log_out_of_root_and_login_to_the_gitlab_ce_web_interface_as_a_user">Log out of root and login to the Gitlab-CE Web Interface as a User</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_network_automation_repository">Click on the Network Automation Repository</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://server2/username/network-automation <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace server FQDN and username with your information</td>
+</tr>
+</tbody></table>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Make sure you are in new navigation mode
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_go_to_build_pipeline_editor">Go to Build → Pipeline Editor</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_configure_pipeline">Click Configure Pipeline</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_review_the_example_and_erase_the_example_configuration">Review the example and erase the example configuration</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_copy_the_following">Copy the following:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">---
+
+stages:
+  - build
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_the_validate_button_before_committing_the_changes_below">Click the validate button before committing the changes below</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-18.png" alt="s3 18" height="500"/>
+</div>
+<div class="title">Figure 5: Gitlab Pipeline Editor</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_check_your_pipeline"><strong>Let’s Check Your Pipeline</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_go_to_build_pipelines">Go to Build → Pipelines</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-19.png" alt="s3 19" height="500"/>
+</div>
+<div class="title">Figure 6: Gitlab Pipeline</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_add_more_to_your_pipeline"><strong>Let’s Add More To Your Pipeline</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_copy_the_following_and_click_validate">Copy the following and click validate:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+
+stages:
+  - build
+  - stage
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - ansible-playbook build.yaml -v
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/manual_backup.yaml -v
+  dependencies:
+    - staging_switches</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_then_commit_changes_if_it_validates">Then commit changes if it validates</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-20.png" alt="s3 20" height="500"/>
+</div>
+<div class="title">Figure 7: Updated The Pipeline</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_checkout_the_pipeline"><strong>Checkout The Pipeline</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_notice_the_new_stages_in_the_pipeline_but_the_pipeline_stops_due_to_an_error">Notice the new stages in the Pipeline, but the pipeline stops due to an error</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-21.png" alt="s3 21" height="200"/>
+</div>
+<div class="title">Figure 8: Failed Pipeline</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_failed_pipeline_and_click_the_staging_switches_to_see_the_details">Click on the failed pipeline and click the staging switches to see the details</h3>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update_the_pipeline"><strong>Update The Pipeline</strong>*</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_click_on_build_pipeline_editor">Click on Build → Pipeline Editor</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_copy_the_following_to_include_the_following_to_the_staging_switches_section">Copy the following to include the following to the staging_switches section:</h3>
+<div class="paragraph">
+<p>pip install ansible-pylibssh</p>
+</div>
+<div class="paragraph">
+<p>ansible-galaxy collection install arista.eos</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+
+stages:
+  - build
+  - stage
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml --reconfigure --max-workers 30 || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/manual_backup.yaml -v
+  dependencies:
+    - staging_switches</code></pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_success"><strong>Success</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_now_you_have_automated_the_following_in_a_cicd_pipeline">Now you have automated the following in a CI/CD pipeline:</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>The creation of 5 switches and 3 Linux clients</strong></p>
+</li>
+<li>
+<p><strong>The configuration of 5 switches with VXLAN and routing with complete IP reachability</strong></p>
+</li>
+<li>
+<p><strong>The backup of the 5 switch configurations to a folder on Server 1</strong></p>
+</li>
+</ul>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_create_a_backup_repository_optional"><strong>Let’s Create A Backup Repository - Optional</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lets_automate_the_backup_of_the_configs_and_upload_the_configurations_to_gitlab">Lets automate the backup of the configs and upload the configurations to Gitlab</h3>
+
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_new_repository_on_the_gitlab_ce_server_called_backup">Create a new repository on the Gitlab-CE Server called Backup</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_go_back_to_projects_and_click_new_project">Go back to projects and click New project</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_create_blank_project">Click Create blank project</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_name_the_project_backup_a">Name the project Backup a</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_internal">CLick internal</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_uncheck_initialize_repository_with_a_readme"><strong>Uncheck Initialize repository with a README</strong></h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-22.png" alt="s3 22" height="500"/>
+</div>
+<div class="title">Figure 9: Backup Repository</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Uncheck &#34;initialize repository with a README&#34;</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_jump_on_the_server_running_the_gitlab_runner_server_1"><strong>Jump on the Server running the Gitlab-Runner - Server 1</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lets_create_an_ssh_key_pair_to_automatically_push_the_configuration_through_the_cicd_pipeline_without_prompting_for_a_username_and_password">Lets create an SSH key pair to automatically push the configuration through the CI/CD pipeline without prompting for a username and password</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_login_as_the_gitlab_runner_and_follow_the_steps_below_to_create_an_ssh_key">Login as the gitlab-runner and follow the steps below to create an ssh key</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">su gitlab-runner</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~
+ssh-keygen</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~$ su gitlab-runner
+Password: 
+gitlab-runner@ed26757f4b1c:/home/cloud_user$ cd ~
+gitlab-runner@ed26757f4b1c:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/gitlab-runner/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/gitlab-runner/.ssh/id_rsa.pub 
+Your public key has been saved in /home/gitlab-runner/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:AO6s6kw4FID/JhCa3I+KwmGze0tZpc7Mx3XL3sa8EmE gitlab-runner@ed26757f4b1c.mylabserver.com
+The key&#39;s randomart image is:
++---[RSA 3072]----+
+|o   .            	      |
+|+  . .           	      |
+|o=. . ..                   |
+|+.o+  o.   E           |
+| o .=o  S....           |
+|o+.oX.. . o..          |
+|*.*= = o   o+         |
+|=*..  .   ...+            |
+|++o..      .oo.        |
++----[SHA256]-----+</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_this_command">Run this command</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cat /home/gitlab-runner/.ssh/id_rsa.pub</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_copy_the_contents_of_your_public_key_to_the_clipboard">Copy the contents of your public key to the clipboard</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_go_to_the_gitlab_server">Go to the Gitlab server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_edit_your_profile_under_your_user_settings_to_add_the_public_key">Edit your profile under your user settings to add the public key</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_select_ssh_keys_and_add_new_key">Select SSH Keys and add new key</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-23.png" alt="s3 23" height="300"/>
+</div>
+<div class="title">Figure 10: SSH Key</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_paste_the_key_in_the_key_text_box_and_click_add_key">Paste the key in the key text box and click add key</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-24.png" alt="s3 24" height="500"/>
+</div>
+<div class="title">Figure 11: Paste SSH Key</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_on_server1_cd_to_the_ssh_directory_for_the_gitlab_runner_user">On Server1 cd to the .ssh directory for the gitlab-runner user</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/.ssh</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_create_and_save_a_new_file_named_config_in_the_ssh_folder">Create and save a new file named “config” in the .ssh folder</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">vi config</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_type_i_and_copy_and_paste_the_following">Type i and copy and paste the following:</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Host server2 <i class="conum" data-value="1"></i><b>(1)</b>
+   Hostname server2 <i class="conum" data-value="1"></i><b>(1)</b>
+   User git
+   Port 2222
+   Preferredauthentications publickey
+   IdentityFile ~/.ssh/id_rsa</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Type esc and then shift + zz to save and exit the file</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Port 2222 for external connectivity translates to 22 for internal in Docker.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Change the host and hostname values to reflect your Gitlab-CE Server.  Use the FQDN.</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_restart_sshd">Restart sshd</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo systemctl restart sshd</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_to_test_connectivity">Run the following command to test connectivity</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh -T git@server2 <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Change the hostname values to reflect your Gitlab-CE Server. Use the FQDN.</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~$ ssh -T git@ccoe-netdev-02.presidio-demo.com
+The authenticity of host &#39;[ccoe-netdev-02.presidio-demo.com]:2222 ([10.129.225.179]:2222)&#39; can&#39;t be established.
+ECDSA key fingerprint is SHA256:JhIlzg5flNje7/tMtzv6e8S/axpapbp38sh61unVBQs.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &#39;[ccoe-netdev-02.presidio-demo.com]:2222,[10.129.225.179]:2222&#39; (ECDSA) to the list of known hosts.
+Welcome to GitLab, @knorton!</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+If you are recieving an ssh timeout, make sure port 2222 is open to Server2. If you are using a cloud platform you may need to add the Server2 internal IP address to the Server1 host file.
+</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_jump_back_on_the_server_1_running_the_gitlab_runner">Jump back on the Server 1 running the Gitlab-Runner</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_login_to_your_new_backup_repository">Login to your new backup repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_backup_the_config_and_upload_the_configurations_to_gitlab">Let’s backup the config and upload the configurations to Gitlab</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands_while_logged_in_as_the_gitlab_runner">Run the following commands while logged in as the gitlab-runner:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~
+cd network-automation/backup/
+git init</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_on_the_gitlab_ce_server_capture_the_git_remote_add_origin_command_from_your_backup_git_repository_on_the_gitlab_server">On the Gitlab-Ce server capture the git remote add origin command from your backup git repository on the GitLab Server</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git remote add origin git@server2:knorton/backup.git <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Grab the git remote add origin command from your backup git repository on the GitLab Server</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git add .</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git config --global user.email &#34;knorton@presidio.com&#34; <i class="conum" data-value="1"></i><b>(1)</b>
+git config --global user.name &#34;Ken Norton&#34; <i class="conum" data-value="2"></i><b>(2)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Change the user email with your email address</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Change the user name with your name</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git commit -m &#34;Initial commit of backup&#34;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git push --set-upstream origin master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_follow_the_git_commands_in_the_image_below">Follow the git commands in the image below</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~$ su gitlab-runner
+Password: 
+gitlab-runner@ed26757f4b1c:/home/cloud_user$ cd ~
+gitlab-runner@ed26757f4b1c:/home$ cd network-automation/backup/
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git init
+Initialized empty Git repository in /home/gitlab-runner/network-automation/backup/.git/
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git remote add origin git@server2:knorton/backup.git <i class="conum" data-value="1"></i><b>(1)</b>
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git add .
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.email &#34;knorton@presidio.com&#34;
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git config --global user.name &#34;Ken Norton&#34;
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git commit -m &#34;Initial commit of backup&#34;
+[master (root-commit) cf49541] Initial commit of backup
+ 5 files changed, 324 insertions(+)
+ create mode 100644 2023-12-17/show_run_clab-Arista-2s-3l-leaf1.txt
+ create mode 100644 2023-12-17/show_run_clab-Arista-2s-3l-leaf2.txt
+ create mode 100644 2023-12-17/show_run_clab-Arista-2s-3l-leaf3.txt
+ create mode 100644 2023-12-17/show_run_clab-Arista-2s-3l-spine1.txt
+ create mode 100644 2023-12-17/show_run_clab-Arista-2s-3l-spine2.txt
+gitlab-runner@ed26757f4b1c:~/network-automation/backup$ git push --set-upstream origin master
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (8/8), 2.12 KiB | 1.06 MiB/s, done.
+Total 8 (delta 4), reused 0 (delta 0)
+To ed26757f4b2c.mylabserver.com:knorton/backup.git
+ * [new branch]      master -&gt; master
+Branch &#39;master&#39; set up to track remote branch &#39;master&#39; from &#39;origin&#39;.</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Grab the git remote add origin command from your backup git repository on the GitLab Server</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_go_back_to_the_network_automation_repository">Go back to the Network Automation repository</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lets_modify_the_backup_stage_in_cicd_pipeline_to_reflect_the_highlighted_area_in_the_diagram_and_click_commit_changes">Let’s modify the backup stage in CI/CD Pipeline to reflect the highlighted area in the diagram and click commit changes</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-25.png" alt="s3 25" height="500"/>
+</div>
+<div class="title">Figure 12: Update PipeLine To Reflect Git Backup</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_go_back_to_the_backup_repository">Go back to the Backup repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_check_out_the_switch_configurations">Check out the switch configurations</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-26.png" alt="s3 26" height="400"/>
+</div>
+<div class="title">Figure 13: Switch Configuration In Git Backup</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_we_are_now_taking_all_the_manual_steps_performed_in_stage_2_and_automating_them_into_a_cicd_pipeline">At this point, we are now taking all the manual steps performed in Stage 2 and automating them into a CI/CD Pipeline</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage3-gitlab/">&larr; Previous: Stage 3.1 - GitLab</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-change/">Next: Stage 4.1 - Automating A Change &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

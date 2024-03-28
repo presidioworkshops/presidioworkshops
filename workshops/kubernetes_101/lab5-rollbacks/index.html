@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Lab 5 - Webhooks and Rollbacks | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Lab 5 - Webhooks and Rollbacks</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/kubernetes_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/kubernetes_101/lab4-devmanage/">&larr; Previous: Lab 4 - Developing and Managing Your Application</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/kubernetes_101/lab6-replicationrecovery/">Next: Lab 6 - Replication and Recovery &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <h1 id="build-triggers-webhooks-and-rollbacks---oh-my">Build Triggers, Webhooks and Rollbacks - Oh My!</h1>
+<p>Once you have an app deployed in OpenShift you can take advantage of some continuous capabilities that help to enable DevOps and automate your management process.  We will cover some of those in this lab: Build triggers, webhooks, and rollbacks.</p>
+<h2 id="a-bit-of-configuration">A bit of configuration</h2>
+<p>We are going to do some integration and coding with an external git repository.  For this lab we are going to use github, if you don&rsquo;t already have an account, <a href="https://github.com/join?source=header-home">you can create one here</a>.</p>
+<p>OK, let&rsquo;s fork the dc-metro-map app from <strong>my</strong> account into <strong>your</strong> github account.  Goto <a href="https://github.com/RedHatGov/openshift-workshops.git">https://github.com/RedHatGov/openshift-workshops</a> and look to the top right for the &ldquo;Fork&rdquo; button.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<blockquote>
+<p>Click the &ldquo;Fork&rdquo; button</p>
+</blockquote>
+<p>Github should redirect you to the newly created fork of the source code.</p>
+<h2 id="build-trigger--code-change-webhook">Build Trigger / Code Change Webhook</h2>
+<p>When using S2I there are a few different things that can be used to <a href="https://docs.openshift.com/enterprise/3.1/dev_guide/builds.html#build-triggers">trigger</a> a rebuild of your source code.  The first is a configuration change, the second is an image change, and the last (which we are covering here) is a webhook.  A webhook is basically your git source code repository telling OpenShift that the code we care about has changed.  Let&rsquo;s set that up for our project now to see it in action.</p>
+<p>Jump back to your OpenShift web console and let&rsquo;s add the webapp to our project.  You should know how to do this from previous lab work, but this time point to <em>your</em> github URL for the source code.  If you need a refresher expand the box below.</p>
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse4e2e64082fae6ff51c3e42b4372a76f3" class="collapsed">
+      
+        Web Console Steps
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse4e2e64082fae6ff51c3e42b4372a76f3" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<p>The node.js builder template creates a number of resources for you, but what we care about right now is the build configuration because that contains the webhooks.  So to get the URL:</p>
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse8392b2b1779753452a39f6568a39835e" class="collapsed">
+      
+        CLI Steps
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse8392b2b1779753452a39f6568a39835e" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc describe bc/dc-metro-map | grep -i webhook
+</code></pre></div><!-- raw HTML omitted -->
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsefc91e03e83074a16efbfb1f3546c048d" class="collapsed">
+      
+        Web Console Steps
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsefc91e03e83074a16efbfb1f3546c048d" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<!-- raw HTML omitted -->
+<blockquote>
+<p>Now switch back over to github</p>
+</blockquote>
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapseabe8e3357fc98c6159e2e120ccbe5ff7" class="collapsed">
+      
+        Github Steps
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapseabe8e3357fc98c6159e2e120ccbe5ff7" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <p>Let&rsquo;s put the webhook URL into the repository. At the main page for this repository (the fork), you should see a tab bar with code, pull requests, pulse, graphs, and settings.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<p>Now you will see a vertical list of settings groups.<!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<p>Good work! Now any &ldquo;push&rdquo; to the forked repository will send a webhook that triggers OpenShift to: re-build the code and image using s2i, and then perform a new pod deployment.  In fact Github should have sent a test trigger and OpenShift should have kicked off a new build already.</p>
+<h2 id="deployment-triggers">Deployment Triggers</h2>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>In addition to setting up triggers for rebuilding code, we can setup a different type of trigger to deploy pods.  Deployment triggers can be due to a configuration change (e.g. environment variables) or due to an image change.  This powerful feature will be covered in one of the advanced labs. See the Triggers link under More Information below.</p>
+<!-- raw HTML omitted -->
+<h2 id="rollbacks">Rollbacks</h2>
+<p>Well, what if something isn&rsquo;t quite right with the latest version of our app?  Let&rsquo;s say some feature we thought was ready for the world really isn&rsquo;t - and we didn&rsquo;t figure that out until after we deployed it.  No problem, we can roll it back with the click of a button.  Let&rsquo;s check that out:</p>
+<div class="panel-group">
+  
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapsef211f56d1dcf83d2cda88c2bd7f9a654" class="collapsed">
+      
+        CLI Steps
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapsef211f56d1dcf83d2cda88c2bd7f9a654" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <!-- raw HTML omitted -->
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ oc rollback dc-metro-map-1
+$ oc get pods -w
+</code></pre></div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      
+      <a data-toggle="collapse" href="#collapse3e20b0dc1b756fc8d35973b0ef801d0f" class="collapsed">
+      
+        Web Console Steps
+      </a>
+    </h4>
+  </div>
+  
+  <div id="collapse3e20b0dc1b756fc8d35973b0ef801d0f" class="panel-collapse collapse ">
+  
+    <div class="panel-body">
+       <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>You can go back to the overview page to see your previous deployment spinning down and your new one spinning up.<!-- raw HTML omitted --></p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<p>OpenShift has done a graceful removal of the old pod and created a new one.</p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>Note that the old pod wasn&rsquo;t killed until the new pod was successfully started and ready to be used.  This is so that OpenShift could continue to route traffic to the old pod until the new one was ready.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>You can integrate your CI/CD tools to do rollbacks with the REST API. See the Rollbacks With the REST API link under More Information below.</p>
+<!-- raw HTML omitted -->
+<h1 id="summary">Summary</h1>
+<p>In this lab we saw how you can configure a source code repository to trigger builds with webhooks.  This webhook could come from Github, Jenkins, Travis-CI, or any tool capable of sending a URL POST.  Keep in mind that there are other types of build triggers you can setup.  For example: if a new version of the upstream RHEL image changes.  We also inspected our deployment history and did a rollback of our running deployment to one based on an older image with the click of a button.</p>
+<h1 id="more-information">More Information</h1>
+<p><a href="https://docs.openshift.com/enterprise/3.1/dev_guide/deployments.html#triggers">Triggers</a><!-- raw HTML omitted -->
+<a href="https://docs.openshift.com/enterprise/3.1/rest_api/openshift_v1.html#create-a-deploymentconfigrollback-2">Rollbacks With the REST API</a></p>
+<hr>
+<h3>Workshop Details</h3>
+<div class="row">
+  <div class="col-lg-4 col-md-5 col-sm-12" id="workshopFooterDetails">
+    <table>
+      <tr>
+        <td class="text-right"><b>Domain</b></td>
+        <td><span class="domain"></span></td>
+        <td rowspan="3">
+          
+        </td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Workshop</b></td>
+        <td><span class="prefix"></span></td>
+      </tr>
+      <tr>
+        <td class="text-right"><b>Student ID</b></td>
+        <td><span class="userid"></span></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-lg-8 col-md-7 col-sm-12">
+    <form id="footerForm" onsubmit="return false;" class="row" style="padding: 1.75rem 0 0 0;">
+      <div class="form-group col-sm-6 col-md-6 col-lg-2">
+        <label for="userid">Student ID</label>
+        <select id="userid" name="userid" class="form-control">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+          <option value="17">17</option>
+          <option value="18">18</option>
+          <option value="19">19</option>
+          <option value="20">20</option>
+          <option value="21">21</option>
+          <option value="22">22</option>
+          <option value="23">23</option>
+          <option value="24">24</option>
+          <option value="25">25</option>
+          <option value="26">26</option>
+          <option value="27">27</option>
+          <option value="28">28</option>
+          <option value="29">29</option>
+          <option value="30">30</option>
+          <option value="31">31</option>
+          <option value="32">32</option>
+          <option value="33">33</option>
+          <option value="34">34</option>
+          <option value="35">35</option>
+          <option value="36">36</option>
+          <option value="37">37</option>
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+          <option value="42">42</option>
+          <option value="43">43</option>
+          <option value="44">44</option>
+          <option value="45">45</option>
+          <option value="46">46</option>
+          <option value="47">47</option>
+          <option value="48">48</option>
+          <option value="49">49</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-4">
+        <label for="domain">Domain</label>
+        <select id="domain" name="domain" class="form-control">
+          <option value="presidioworkshops.com">presidioworkshops.com</option>
+        </select>
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <label for="prefix">Workshop</label>
+        <input id="prefix" name="prefix" type="text" size="16" class="form-control" placeholder="example" />
+      </div>
+      <div class="form-group col-sm-6 col-md-6 col-lg-3">
+        <button type="submit" class="btn btn-primary form-control" style="margin-bottom:1rem;">Enter</button>
+        <button type="reset" class="btn btn-default form-control">Default</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<script type="text/javascript" src="/node_modules/js-cookie/src/js.cookie.js"></script>
+<script type="text/javascript">
+<!--
+  
+  var Cookies2 = Cookies.noConflict();
+
+  var cookiePathArr = cleanArray(window.location.pathname.split('/'));
+  var cookiePath = '/' + cookiePathArr[0] + '/' + cookiePathArr[1] + '/';
+
+  function cleanArray(actual) {
+    var newArray = new Array();
+    for (var i = 0; i < actual.length; i++) {
+      if (actual[i]) {
+        newArray.push(actual[i]);
+      }
+    }
+    return newArray;
+  }
+  function replaceClassText() {
+    jQuery("span.domain").html(Cookies2.get("domain"));
+    jQuery("span.userid").html(Cookies2.get("userid"));
+    jQuery("span.prefix").html(Cookies2.get("prefix"));
+  }
+  function pageLoadWorkshopFooterTest() {
+    
+    if (Cookies2.get("domain") === undefined) {
+      resetWorkshopFooter();
+    }
+    else {
+      replaceClassText();
+      setWorkshopFooterInputValues()
+    }
+  }
+  function setWorkshopFooterData() {
+    
+    Cookies2.set("domain", jQuery("select#domain").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    Cookies2.set("userid", jQuery("select#userid").val(), { path: cookiePath, expires: 7 } );
+    replaceClassText();
+  }
+  function setWorkshopFooterInputValues() {
+    jQuery("select#domain").val(Cookies2.get("domain"));
+    jQuery("input#prefix").val(Cookies2.get("prefix"));
+    jQuery("select#userid").val(Cookies2.get("userid"));
+  }
+  function resetWorkshopFooter() {
+    
+    jQuery("select#domain, select#userid").prop("selectedIndex", 0);
+    jQuery("input#prefix").val(jQuery("input#prefix").attr('placeholder'));
+    
+    Cookies2.set("domain", jQuery("select#domain option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("userid", jQuery("select#userid option").first().val(), { path: cookiePath, expires: 7 } ); 
+    Cookies2.set("prefix", jQuery("input#prefix").val(), { path: cookiePath, expires: 7 } );
+    
+    
+    replaceClassText();
+  }
+
+  jQuery(document).ready(function() {
+    pageLoadWorkshopFooterTest();
+
+    jQuery("form#footerForm").submit(function() {
+      setWorkshopFooterData();
+      return false; 
+    });
+
+    jQuery("form#footerForm").bind("reset", function() {
+      resetWorkshopFooter();
+      return true;
+    });
+
+    return false;
+  });
+-->
+</script>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/kubernetes_101/lab4-devmanage/">&larr; Previous: Lab 4 - Developing and Managing Your Application</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/kubernetes_101/lab6-replicationrecovery/">Next: Lab 6 - Replication and Recovery &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/kubernetes_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

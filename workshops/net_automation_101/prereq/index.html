@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Prerequisites | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Prerequisites</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage1/">Next: Stage 1.1 - Server Builds &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_prerequisites"><strong>Prerequisites</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_20_mintues">Estimated time to complete: 20 mintues</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s1-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_to_prepare_for_the_workshop_we_need_to_install_some_software_on_your_laptop_or_desktop">To prepare for the workshop, we need to install some software on your laptop or desktop.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_although_it_is_not_required_having_a_basic_knowledge_of_linux_will_help_you_in_the_workshop">Although it is not required, having a basic knowledge of Linux will help you in the workshop.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_being_familiar_with_common_linux_commands_and_editors_like_nano_and_vim_will_help_you_navigate_the_workshop">Being familiar with common Linux commands and editors like Nano and Vim will help you navigate the workshop.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_install_git_on_you_laptop"><strong>Let’s install Git on you Laptop</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_git_is_a_free_and_open_source_distributed_version_control_system_designed_to_handle_everything_from_small_to_very_large_projects_with_speed_and_efficiency">Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s0-1.png" alt="s0 1" height="600"/>
+</div>
+<div class="title">Figure 1: Git</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_the_latest_and_install_it">Download the latest and install it</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code><a href="https://git-scm.com/" class="bare">https://git-scm.com/</a></code></p>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_also_need_to_install_and_configure_git_lfs_to_support_the_uploading_and_downloading_of_large_files_in_git">We will also need to install and configure git-lfs to support the uploading and downloading of large files in Git.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code><a href="https://git-lfs.com/" class="bare">https://git-lfs.com/</a></code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_install_git_lfs">Install git-lfs.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s0-2.png" alt="s0 2" height="300"/>
+</div>
+<div class="title">Figure 2: Git-lfs</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_open_a_terminal_window_and_type_the_following_command_on_your_laptop">Open a terminal window and type the following command on your laptop.</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git lfs install</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_install_visual_studio_code_on_you_laptop"><strong>Let’s install Visual Studio Code on you Laptop</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_interactive_development_environment_ide">Interactive Development Environment (IDE)</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s1-2.png" alt="s1 2" height="600"/>
+</div>
+<div class="title">Figure 1: Visual Studio Code</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_download_the_latest_and_install_it_2">Download the latest and install it</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code><a href="https://code.visualstudio.com/" class="bare">https://code.visualstudio.com/</a></code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result"><strong>End Result</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_you_have_a_couple_new_applications_on_your_laptop_that_you_will_use_throughout_the_workshop">At this point you have a couple new applications on your laptop that you will use throughout the workshop.</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage1/">Next: Stage 1.1 - Server Builds &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

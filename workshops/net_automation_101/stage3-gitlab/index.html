@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 3.1 - GitLab | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 3.1 - GitLab</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-ansible/">&larr; Previous: Stage 2.3 - Ansible</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage3-cicd/">Next: Stage 3.2 - CI/CD &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_3_gitlab_basics"><strong>Stage 3 GitLab Basics</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_20_minutes">Estimated time to complete: 20 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_3_we_will_discuss_gitlab_basics">In Stage 3, we will discuss GitLab basics.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_concepts_to_understand_the_power_of_gitlab">We will run through some of the concepts to understand the power of GitLab.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_understanding_the_gitlab_server_is_a_key_part_of_infrastructure_automation">Understanding the GitLab server is a key part of infrastructure automation.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_3">Here are the requirements for Stage 3</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_3_this_shows_all_the_technology_we_will_be_using_in_stage_3">Here is a diagram of Stage 3.  This shows all the technology we will be using in Stage 3.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_3">It also defines the use cases we will be working on in Stage 3.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_3">Here is a summary of Stage 3</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-3.png" alt="Stage 3 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_from_your_second_server"><strong>From Your Second Server</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_run_the_following_commands_from_the_home_directory">Run the following commands from the home directory</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/network-automation/infra/gitlab
+vi gitlab-dc-2.yaml</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Change the hostname and external url (the URL needs to be in DNS server or your host file.)
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>version: &#39;3.7&#39;
+services:
+  web:
+    image: &#39;gitlab/gitlab-ce:latest&#39;
+    container_name: gitlab-ce
+    restart: unless-stopped
+    hostname: &#39;ed26757f4b2c.mylabserver.com&#39; <i class="conum" data-value="1"></i><b>(1)</b>
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        # Add any other gitlab.rb configuration here, each on its own line
+        external_url &#39;http://ed26757f4b2c.mylabserver.com&#39; <i class="conum" data-value="1"></i><b>(1)</b>
+    ports:
+      - &#39;2222:22&#39;
+      - &#39;80:80&#39;
+      - &#39;8443:443&#39;
+    volumes:
+    - &#39;~/srv/gitlab/config:/etc/gitlab&#39;
+    - &#39;~/srv/gitlab/logs:/var/log/gitlab&#39;
+    - &#39;~/srv/gitlab/data:/var/opt/gitlab&#39;
+    shm_size: &#39;2gb&#39;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>type i to insert in vi,
+make your changes to the file and press esc</p>
+</div>
+<div class="paragraph">
+<p>Shift + zz to save the file and exit</p>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Change the hostname and external url (the URL needs to be in DNS server or your host file.)</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands">Run the following commands:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~/network-automation/infra/gitlab
+docker-compose -f gitlab-dc-2.yaml up -d</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~$ cd ~/network-automation/infra/gitlab
+cloud_user@ed26757f4b2c:~/network-automation/infra/gitlab$ docker-compose -f gitlab-dc-2.yaml up -d
+Creating network &#34;gitlab_default&#34; with the default driver
+Pulling web (gitlab/gitlab-ce:latest)...
+latest: Pulling from gitlab/gitlab-ce
+44ba2882f8eb: Pull complete
+8fb498f93123: Pull complete
+e3d9eb42a8a1: Pull complete
+e12e5f53f387: Pull complete
+07af258bd5cf: Pull complete
+e67086a39069: Pull complete
+0618726461d6: Pull complete
+c1d678382927: Pull complete
+Digest: sha256:62165f88747fc33220a3c0229357b775c3358d3fad3ca8e4c7ca9ff6a2b05395
+Status: Downloaded newer image for gitlab/gitlab-ce:latest
+Creating gitlab-ce ... done</pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Wait for the server status to be fully &#34;healthy&#34;. You can check by the &#34;docker ps&#34; command. This takes ~5 mins.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/network-automation/infra/gitlab$ docker ps
+CONTAINER ID   IMAGE                     COMMAND             CREATED         STATUS                   PORTS                                                                                                               NAMES
+03b5a344de2c   gitlab/gitlab-ce:latest   &#34;/assets/wrapper&#34;   5 minutes ago   Up 5 minutes (healthy)   0.0.0.0:80-&gt;80/tcp, :::80-&gt;80/tcp, 0.0.0.0:2222-&gt;22/tcp, :::2222-&gt;22/tcp, 0.0.0.0:8443-&gt;443/tcp, :::8443-&gt;443/tcp   gitlab-ce</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_how_fast_it_is_to_create_a_gitlab_server"><strong>See how fast it is to create a GitLab Server</strong> 🤯</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_run_the_following_commands_to_get_the_initial_root_password">Run the following commands to get the initial root password</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker exec -it gitlab-ce grep &#39;Password:&#39; /etc/gitlab/initial_root_password</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_capture_the_initial_password_and_browse_to_the_server">Capture the initial password and browse to the server</h3>
+<div class="listingblock">
+<div class="content">
+<pre>http://Server2 <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace Server 2 with your host information</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enter_root_as_the_username_and_paste_in_the_initial_password">Enter root as the username and paste in the initial password</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-4.png" alt="s3 4" height="400"/>
+</div>
+<div class="title">Figure 1: Login to Gitlab</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_browse_around_and_feel_free_to_learn_more_about_gitlab">Browse around and feel free to learn more about Gitlab</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-5.png" alt="s3 5" height="500"/>
+</div>
+<div class="title">Figure 2: Home Screen</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_before_we_proceed_it_is_worth_changing_a_few_portal_settings">Before we proceed, it is worth changing a few portal settings</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_turn_off_open_registration_for_everyone">Turn off open registration for everyone </h3>
+
+</div>
+<div class="sect2">
+<h3 id="_to_do_this_click_the_deactivate_button_available_on_the_upper_bar_with_a_warning">To do this, click the Deactivate button available on the upper bar with a warning</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://Server2/admin/application_settings/general#js-signup-settings <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace Server 2 with your host information</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_on_the_new_page_uncheck_sign_up_enabled_to_deactivate_then_scroll_down_and_clicksave_changes">On the new page, uncheck Sign-up enabled to deactivate. Then scroll down and click Save Changes</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-6.png" alt="s3 6" height="400"/>
+</div>
+<div class="title">Figure 3: Open Registration</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_before_we_proceed_it_is_worth_changing_the_root_password">Before we proceed, it is worth changing the root password</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_to_do_this_go_to_the_page">To do this, go to the page:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://Server2/-/profile/password/edit <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_and_enter_a_temporary_password_and_a_new_password">and enter a temporary password and a new password.</h3>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace Server 2 with your information</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_we_approve_the_change_by_clicking_save_password_and_log_back_in_as_root">We approve the change by clicking Save password and log back in as root</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-7.png" alt="s3 7" height="400"/>
+</div>
+<div class="title">Figure 4: Change Root Password</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_let_check_out_the_admin_area">Let check out the Admin area</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">http://Server2/admin <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Replace Server 2 with your information</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_create_a_new_user">Let’s create a new user</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_the_new_user_button">Click the New User button</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-8.png" alt="s3 8" height="400"/>
+</div>
+<div class="title">Figure 5: Admin Portal</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enter_in_your_information_to_create_the_user_and_click_create_user">Enter in your information to create the User and click create user</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-9.png" alt="s3 9" height="400"/>
+</div>
+<div class="title">Figure 6: New User</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_edit_to_create_a_password_for_the_user">Click edit to create a password for the user</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_edit_the_user_in_the_upper_right_to_change_the_password">Edit the user in the upper right to change the password</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-9a.png" alt="s3 9a" height="150"/>
+</div>
+<div class="title">Figure 7: Edit password</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-10.png" alt="s3 10" height="400"/>
+</div>
+<div class="title">Figure 8: Change Password</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_save_changes">Save Changes</h3>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_logout_of_root_and_login_with_the_new_user_account"><strong>Logout of root and login with the new user account</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lets_create_a_blank_project">Let’s create a blank project</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-11.png" alt="s3 11" height="400"/>
+</div>
+<div class="title">Figure 9: Create a New Project</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_call_the_project_network_automation">Call the project Network Automation</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>Click internal for a visibility level and uncheck Initialize repository with a README</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_check_internal">Check Internal</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_uncheck_initialize_repository_with_a_readme"><strong>Uncheck Initialize repository with a README</strong></h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_save">Click Save</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-12.png" alt="s3 12" height="400"/>
+</div>
+<div class="title">Figure 10: Create Network Automation Project</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_under_the_push_to_an_existing_folder_section">Under the Push to an Existing Folder section</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_copy_the_following_command_to_your_clipboard_but_dont_yet_run_the_command">Copy the following command to your clipboard (but don’t yet run the command):</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git remote add origin http://server2/knorton/network-automation.git <i class="conum" data-value="1"></i><b>(1)</b></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Your FQDN in the URL will be different than the one above</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-13.png" alt="s3 13" height="400"/>
+</div>
+<div class="title">Figure 11: Git Remote</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_go_back_to_theserver_terminals_and_visual_studio_code_ide_on_you_workstation">Go back to the server terminals and Visual Studio Code IDE on you workstation</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_in_all_the_locations_where_you_have_downloaded_the_repository">In all the locations where you have downloaded the repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_we_need_disassociate_our_cloned_repository_and_point_it_to_your_new_gitlab_ce_server">We need disassociate our cloned repository and point it to your new Gitlab-CE server.</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<strong>You only need to run the git push origin main from one location</strong>
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_enter_the_following_commands_like_the_picture_below_shows">Enter the following commands like the picture below shows</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/network-automation$ git remote -v
+origin  https://github.com/knorton3/network-automation.git (fetch)
+origin  https://github.com/knorton3/network-automation.git (push)
+cloud_user@ed26757f4b2c:~/network-automation$ git remote remove origin <i class="conum" data-value="1"></i><b>(1)</b>
+cloud_user@ed26757f4b2c:~/network-automation$ git remote add origin http://server2/knorton/network-automation.git <i class="conum" data-value="2"></i><b>(2)</b>
+cloud_user@ed26757f4b2c:~/network-automation$ git push origin master
+Username for &#39;http://server2&#39;: knorton <i class="conum" data-value="3"></i><b>(3)</b>
+Password for &#39;http://knorton@server2&#39;: <i class="conum" data-value="4"></i><b>(4)</b>
+Enumerating objects: 273, done.
+Counting objects: 100% (273/273), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (168/168), done.
+Writing objects: 100% (273/273), 391.62 MiB | 10.65 MiB/s, done.
+Total 273 (delta 119), reused 209 (delta 87)
+remote: Resolving deltas: 100% (119/119), done.
+To http://server2/knorton/network-automation.git
+ * [new branch]      master -&gt; master</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Removing the original origin</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Your FQDN in the URL will be different than the one above</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>When prompted for the Username. Use the newly created user you just made.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>When prompted for the Password. Use the newly created user you just made.</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_hit_refresh_on_your_browser_pointing_to_your_gitlab_server_and_notice_all_the_files_from_the_original_repository_are_now_there">Hit refresh on your browser pointing to your GitLab Server and notice all the files from the original repository are now there</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_all_the_commit_comments_are_still_there">Notice all the commit comments are still there</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s3-14.png" alt="s3 14" height="400"/>
+</div>
+<div class="title">Figure 12: Network Automation Repository</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_you_will_have_built_a_new_gitlab_server_and_pushed_all_the_code_to_a_new_git_repository">At this point, you will have built a new GitLab Server and pushed all the code to a new Git repository.</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-ansible/">&larr; Previous: Stage 2.3 - Ansible</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage3-cicd/">Next: Stage 3.2 - CI/CD &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

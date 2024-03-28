@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 4.2 - PreDeployment Testing | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 4.2 - PreDeployment Testing</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-change/">&larr; Previous: Stage 4.1 - Automating A Change</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-sot/">Next: Stage 4.3 - Source Of Truth &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_4_predeployment_testing"><strong>Stage 4 PreDeployment Testing</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimate_time_to_complete_45_minutes">Estimate time to complete: 45 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_4_we_will_discuss_the_process_of_testing_a_change">In Stage 4, we will discuss the process of testing a change.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_concepts_to_understand_how_to_use_batfish_and_a_linux_container_to_perform_tradional_testing">We will run through some of the concepts to understand how to use Batfish and a Linux container to perform tradional testing.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_performing_automated_testing_is_one_of_the_advantages_to_help_reduce_risk_during_a_change_to_the_network">Performing automated testing is one of the advantages to help reduce risk during a change to the network.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_4">Here are the requirements for Stage 4</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_4_this_shows_all_the_technology_we_will_be_using_in_stage_4">Here is a diagram of Stage 4.  This shows all the technology we will be using in Stage 4.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_4">It also defines the use cases we will be working on in Stage 4.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_4">Here is a summary of Stage 4</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-3.png" alt="Stage 4 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_do_some_testing"><strong>Let’s Do Some Testing</strong></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Login to the Gitlab-CE Server (Server 2) as a user
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="sect2">
+<h3 id="_we_just_created_a_change_but_what_if_the_change_breaks_the_network">We just created a change, but what if the change breaks the network</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_we_need_to_test_the_change_deploying_to_production">We need to test the change deploying to production</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_start_with_creating_a_new_issue_and_merge_request_in_gitlab_network_automation_repository">Let’s start with creating a new issue and Merge Request in Gitlab network Automation Repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_network_automation_project">Click on the Network Automation Project</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_issues_then_new_issue">Click Issues, then new issue</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_provide_a_title_testing_for_the_issue_and_add_the_following_description">Provide a title <strong>Testing</strong> for the issue and add the following description:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">- [ ] Adding traditional and model testing with Batfish</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-19.png" alt="s4 19" height="500"/>
+</div>
+<div class="title">Figure 1: Testing New Issue</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_preview_and_notice_the_checklist">Click preview and notice the checklist</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_create_issue">Click create issue</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_assign_yourself_to_the_issue_on_the_far_right">Assign yourself to the issue on the far right</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Write down the new branch name, 2-testing
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_create_a_merge_request_and_new_branch">Click create a merge request and new branch</h3>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_click_assign_to_me">Click assign to me</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_create_a_merge_request">Click create a merge request</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+A Merge request doesn’t make any changes, but don’t close the merge request
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-20.png" alt="s4 20" height="500"/>
+</div>
+<div class="title">Figure 2: Merge Request</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_click_code_branches">Click Code → Branches</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_the_new_merge_request_new_issue_and_new_branch">Notice the new merge request, new issue, and new branch</h3>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_go_bring_down_the_latest_version_of_the_repository"><strong>Let’s Go Bring Down The Latest Version Of The Repository</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_go_to_a_remote_locationwhere_you_have_a_copy_of_the_remote_repository_from_your_gitlab_server">Go to a remote location where you have a copy of the remote repository from your Gitlab server</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_perform_the_following_to_get_latest_copy_of_the_remote_repository">Perform the following to get latest copy of the remote repository</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_continue_to_use_vs_code_to_make_our_changes">Let’s continue to use VS Code to make our changes</h3>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_notice_that_i_am_starting_out_on_the_1_network_change_branch_lets_switch_to_the_master_branch">Notice that I am starting out on the 1-network-change branch, lets switch to the master branch</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_its_a_good_idea_to_check_if_your_local_repository_is_out_of_date_from_the_remote_repository">It’s a good idea to check if your local repository is out of date from the remote repository</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton:~/network-automation$ git branch
+* 1-network-change
+  master
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git checkout master
+Switched to branch &#39;master&#39;
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ git remote -v show origin
+Username for &#39;http://ed26757f4b2c.mylabserver.com&#39;: knorton
+Password for &#39;http://knorton@ed26757f4b2c.mylabserver.com&#39;:
+* remote origin
+  Fetch URL: http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+  Push  URL: http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+  HEAD branch: master
+  Remote branches:
+    master                               tracked
+    refs/remotes/origin/1-network-change stale (use &#39;git remote prune&#39; to remove)
+  Local ref configured for &#39;git push&#39;:
+    master pushes to master (local out of date) <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This local repository is out of date and needs to be updated</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_update_the_local_repository"><strong>Lets update the local repository</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_run_the_following_command_from_vs_code">Run the following command from VS Code</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git pull origin master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_notice_the_only_branch_is_master_and_1_network_change">Notice the only branch is master and 1-network-change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_we_can_pull_down_the_remote_testing_branch_using_the_following_command">We can pull down the remote testing branch using the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git fetch</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_but_you_still_need_to_create_a_new_local_testing_branch_in_the_local_repository_using_the_following_command">But you still need to create a new local testing branch in the local repository using the following command:</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Your branch name maybe different
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch 2-testing</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_then_lets_switch_to_that_branch_with_the_following_command">Then let’s switch to that branch with the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git checkout 2-testing</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_a_progression_of_the_commands_above">Here is a progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+  1-network-change
+* master
+  remotes/origin/1-network-change
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git fetch
+From http://ed26757f4b2c.mylabserver.com/knorton/network-automation
+ * [new branch]      2-testing  -&gt; origin/2-testing
+kennorton@C02G71AFMD6P-knorton network-automation % git branch --all
+  1-network-change
+* master
+  remotes/origin/1-network-change
+  remotes/origin/2-testing
+  remotes/origin/master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch
+  1-network-change
+* master
+kennorton@C02G71AFMD6P-knorton network-automation % git branch 2-testing
+kennorton@C02G71AFMD6P-knorton network-automation % git checkout 2-testing
+Switched to branch &#39;2-testing&#39;</pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_create_some_tests"><strong>Let’s Create Some Tests</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_lets_build_an_ansible_playbook_to_create_the_testing">Let’s build an Ansible Playbook to create the testing</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_use_visual_studio_code_to_review_the_tests_folder">Let’s use Visual studio code to review the tests folder</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_files_in_the_tests_directory">Let’s review the files in the tests directory</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-21.png" alt="s4 21" height="200"/>
+</div>
+<div class="title">Figure 3: Tests File Structure</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_snapshots_yaml_file">Let’s review the snapshots.yaml file:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_this_playbook_will_create_a_backup_of_the_switch_configurations_for_batfish_to_use_as_a_model">This playbook will create a backup of the switch configurations for Batfish to use as a model.</h3>
+<div class="listingblock">
+<div class="content">
+<pre>---
+- name: CAPTURE DATE AND CREATE DIRECTORY
+  hosts: localhost
+  tasks:
+    - name: Capture Date
+      command: date +&#34;%Y-%m-%d&#34;
+      register: time
+      changed_when: false
+      delegate_to: localhost
+    - name: Create Directory
+      file:
+        path: /home/gitlab-runner/network-automation/configs <i class="conum" data-value="1"></i><b>(1)</b>
+        state: directory
+  run_once: yes
+- name: BACKUP ARISTA SWITCHES
+  hosts: eos
+  gather_facts: false
+  connection: network_cli
+  tasks:
+    - name: ARISTA SWITCH CONFIG
+      eos_command:
+        commands: show run
+      register: output
+    - name: COPY SWITCH CONFIGS
+      copy:
+        content: &#34;{{ output.stdout[0] }}&#34;
+        dest: &#34;/home/gitlab-runner/network-automation/configs/show_run_{{ inventory_hostname }}.txt&#34; <i class="conum" data-value="1"></i><b>(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>This is the location of where the configurations will be stored for Batfish to model.
+---</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lets_review_the_batfish_py_file">Let’s review the Batfish.py file:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_this_is_a_python_script_to_leverage_the_pybatfish_model">This is a python script to leverage the pybatfish model.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_batfish_uses_a_series_of_questions_to_test_the_network">Batfish uses a series of questions to test the network.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_the_answers_to_the_questions_are_based_on_the_modeling_done_by_batfish_against_the_configurations">The answers to the questions are based on the modeling done by Batfish against the configurations.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_one_of_the_benefits_of_batfish_is_that_it_does_not_need_the_switches_to_be_up_and_running_to_test_functionality">One of the benefits of Batfish is that it does not need the switches to be up and running to test functionality.</h3>
+<div class="listingblock">
+<div class="content">
+<pre># Modules
+from pybatfish.client.commands import bf_init_snapshot, bf_session
+from pybatfish.question.question import load_questions
+from pybatfish.question import bfq
+import os
+# Variables
+bf_address = &#34;127.0.0.1&#34;
+snapshot_path = &#34;/home/gitlab-runner/network-automation/&#34;
+output_dir = &#34;/home/gitlab-runner/network-automation/&#34;
+# Body
+if __name__ == &#34;__main__&#34;:
+    # Setting host to connect
+    bf_session.host = bf_address
+    # Loading confgs and questions
+    bf_init_snapshot(snapshot_path, overwrite=True) <i class="conum" data-value="1"></i><b>(1)</b>
+    load_questions()
+    # Running questions
+    r = bfq.nodeProperties().answer().frame() <i class="conum" data-value="2"></i><b>(2)</b>
+    assert r.empty is False <i class="conum" data-value="3"></i><b>(3)</b>
+    print(r)
+    r1 = bfq.nodeProperties(properties=&#34;SNMP_Trap_servers&#34;).answer().frame() <i class="conum" data-value="2"></i><b>(2)</b>
+    assert r1.empty is False <i class="conum" data-value="3"></i><b>(3)</b>
+    print(r1)
+
+    print(&#34;ANALYSIS // lpmRoutes()&#34;)
+    r2 = bfq.lpmRoutes(ip=&#39;192.168.14.1&#39;).answer().frame() <i class="conum" data-value="2"></i><b>(2)</b>
+    assert r2.empty is False <i class="conum" data-value="3"></i><b>(3)</b>
+    print(r2)
+    # Saving output
+    if not os.path.exists(output_dir):
+        os.mkdir(output_dir)
+    r.to_csv(f&#34;{output_dir}/results.csv&#34;)<i class="conum" data-value="4"></i><b>(4)</b></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Here is where we are loading the configurations</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Here are the questions for Batfish</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>We are leveraging the python assert function to check if the answer is not empty</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>This is full output of the Batfish model</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_in_the_previous_section_we_automated_a_change_to_add_vlan_14_and_subnet_192_168_14_024_to_the_leaf3_switch">In the previous section we automated a change to add vlan 14 and subnet 192.168.14.0/24 to the leaf3 switch</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_as_part_of_the_containerlab_deployment_we_created_3_linux_container_clients">As part of the Containerlab deployment, we created 3 Linux container clients</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_we_can_use_one_or_all_of_the_clients_to_perform_traditional_tests_like_ping_and_traceroute">We can use one or all of the clients to perform traditional tests like Ping and Traceroute</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_add_a_new_test_stage_to_the_cicd_file_gitlab_ci_yml">Let’s add a new test stage to the CI/CD file → .gitlab-ci.yml</h3>
+<div class="listingblock">
+<div class="content">
+<pre>stages:
+- build
+- stage
+- change
+- test <i class="conum" data-value="1"></i><b>(1)</b>
+- backup</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Add the test stage to the .gitlab-ci.yml file</td>
+</tr>
+</tbody></table>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_since_the_linux_clients_are_docker_containers">Since the Linux clients are docker containers</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_we_can_use_the_docker_exec_command_to_update_the_networking_stack_on_third_linux_client">We can use the Docker Exec command to update the networking stack on third Linux client</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_add_an_ip_address_of_192_168_14_8_to_eth1_of_the_linux_client">Lets add an IP address of 192.168.14.8 to eth1 of the Linux client</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_add_the_default_route_to_point_to_the_new_vlan_interface_of_192_168_14_1">Lets add the default route to point to the new vlan interface of 192.168.14.1</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_delete_the_existing_default_route">Delete the existing default route</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_add_a_ping_and_traceroute_to_test_the_change">Add a ping and traceroute to test the change</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_add_this_job_between_network_change_and_the_backup_switches">Add this job between network_change and the backup_switches</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.14.1
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_now_lets_reference_the_batfish_py_file_in_the_gitlab_ci_yml_file_in_a_new_job">Now lets reference the batfish.py file in the .gitlab-ci.yml file in a new job</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_add_this_job_between_network_change_and_the_backup_switches_and_after_test_traditional_switches_job">Add this job between network_change and the backup_switches and after test_traditional_switches job</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">test_model_switches:
+  stage: test
+  before_script:
+    - cd tests
+    - docker rmi -f $(docker images -q --filter=reference=&#34;batfish/allinone:latest&#34;) || true
+  script:
+    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true
+    - ansible-playbook snapshots.yaml -v 
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install pybatfish
+    - python3 batfish.py</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_now_lets_go_push_the_changes_to_the_remote_repository">Now lets go push the changes to the remote repository</h3>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Remember to save the files first!
+</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands_below_to_push_the_code_and_kick_off_the_pipeline">Run the following commands below to push the code and kick off the pipeline</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">cd ~network-automation/tests/
+git add .gitlab-ci.yml</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git branch</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git commit -m &#34;added test changes&#34;</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git push origin 2-testing</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_here_is_the_progression_of_the_commands_above">Here is the progression of the commands above</h3>
+<div class="listingblock">
+<div class="content">
+<pre>kennorton@C02G71AFMD6P-knorton:~/network-automation$ git add .gitlab-ci.yml <i class="conum" data-value="1"></i><b>(1)</b>
+kennorton@C02G71AFMD6P-knorton:~/network-automation$ cd tests/
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git branch <i class="conum" data-value="2"></i><b>(2)</b>
+  1-network-change
+* 2-testing
+  master
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git commit -m &#34;added test changes&#34; <i class="conum" data-value="3"></i><b>(3)</b>
+[2-testing 19301d9] added test changes
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+kennorton@C02G71AFMD6P-knorton:~/network-automation/tests$ git push origin 2-testing <i class="conum" data-value="4"></i><b>(4)</b>
+Username for &#39;http://ed26757f4b2c.mylabserver.com&#39;: knorton
+Password for &#39;http://knorton@ed26757f4b2c.mylabserver.com&#39;:
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 431 bytes | 431.00 KiB/s, done.
+Total 4 (delta 3), reused 0 (delta 0)
+remote:
+remote: View merge request for 2-testing:
+remote:   http://ed26757f4b2c.mylabserver.com/knorton/network-automation/-/merge_requests/6
+remote:
+To http://ed26757f4b2c.mylabserver.com/knorton/network-automation.git
+   60f97a8..19301d9  2-testing -&gt; 2-testing</pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>Adding the modified .gitlab-ci.yml file to the local repository</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Checking to make sure we are working on the correct git branch</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Commiting the latest changes to the local repository</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>Push the changes to the 2-testing remote repository on the Gitlab-CE server
+---</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_login_to_the_gitlab_ci_as_a_user">Login to the GitLab-CI as a user</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_notice_the_merge_request_update_click_merge_requests_and_select_the_recent_merge_request">Notice the Merge Request update – click Merge Requests and select the recent merge request</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_under_activity_you_can_review_the_changes">Under Activity you can review the changes</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_the_4d86023d_link_to_review_the_changes_the_link_id_will_be_unique">Click the 4d86023d link to review the changes (the link ID will be unique)</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_resolve_conflicts_if_needed">Click Resolve conflicts if needed</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_mark_as_ready">Click Mark as ready</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_merge">Click Merge</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-22.png" alt="s4 22" height="400"/>
+</div>
+<div class="title">Figure 4: Merge Request</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_in_case_you_are_getting_an_error_with_your_gitlab_ci_yml_file">In case you are getting an error with your .gitlab-ci.yml file</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_here_is_a_copy_of_the_complete_file_at_this_point">Here is a copy of the complete file at this point</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_working_with_yaml_files_can_be_challenging">Working with YAML files can be challenging</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">---
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_TAG
+      when: never
+    - if: $CI_COMMIT_BRANCH == &#39;master&#39;
+
+stages:
+  - build
+  - stage
+  - change
+  - test
+  - backup
+
+build_switches:
+  stage: build
+  before_script:
+    - cd infra
+  script:
+    - sudo containerlab destroy -t ceos_2spine_3leaf.yaml || true
+    - sudo -E CLAB_LABDIR_BASE=/var/clab containerlab deploy -t ceos_2spine_3leaf.yaml || true
+
+staging_switches:
+  stage: stage
+  before_script:
+    - cd build
+  script:
+    - sleep 60
+    - pip install ansible-pylibssh
+    - ansible-galaxy collection install arista.eos
+    - ansible-playbook build.yaml -v
+
+network_change:
+  stage: change
+  before_script:
+    - cd change
+  script:
+    - ansible-playbook change.yaml -v
+  dependencies:
+    - staging_switches
+
+test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.14.1
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1
+
+test_model_switches:
+  stage: test
+  before_script:
+    - cd tests
+    - docker rmi -f $(docker images -q --filter=reference=&#34;batfish/allinone:latest&#34;) || true
+  script:
+    - docker run -d --restart=always --name batfish -v batfish-data:/data -p 8888:8888 -p 9997:9997 -p 9996:9996 batfish/allinone || true
+    - ansible-playbook snapshots.yaml -v 
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install pybatfish
+    - python3 batfish.py
+
+backup_switches:
+  stage: backup
+  before_script:
+    - cd backup
+  script:
+    - ansible-playbook playbooks/git_backup.yaml -v
+  dependencies:
+    - staging_switches</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_under_the_build_section">Under the build section</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_on_the_pipeline">Click on the pipeline</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-23.png" alt="s4 23" height="200"/>
+</div>
+<div class="title">Figure 5: CI/CD Pipeline</div>
+</div>
+<hr/>
+</div>
+<div class="sect2">
+<h3 id="_when_the_pipeline_completes_the_issue_will_automatically_close">When the pipeline completes the issue will automatically close</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_go_back_into_the_issue_and_check_the_checkboxes_if_it_was_successful">Go back into the issue and check the checkboxes if it was successful</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-24.png" alt="s4 24" height="150"/>
+</div>
+<div class="title">Figure 6: Close The Issue</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_try_something"><strong>Let’s Try Something</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_change_the_lpm_route_in_the_the_batfish_py_file_to_a_network_that_doesnt_exist">Change the lpm route in the the batfish.py file to a network that doesn’t exist</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">    print(&#34;ANALYSIS // lpmRoutes()&#34;)
+    r2 = bfq.lpmRoutes(ip=&#39;192.168.15.1&#39;).answer().frame() <i class="conum" data-value="1"></i><b>(1)</b>
+    assert r2.empty is False
+    print(r2)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_in_the_gitlab_ci_yml_file">In the .gitlab-ci.yml file</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_change_the_traditional_test_to_ping_an_interface_that_doesnt_exist">Change the traditional test to ping an interface that doesn’t exist</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">test_traditional_switches:
+  stage: test
+  before_script:
+    - sleep 60
+  script:
+    - docker exec clab-Arista-2s-3l-client3 ifconfig eth1 192.168.14.8 netmask 255.255.255.0
+    - docker exec clab-Arista-2s-3l-client3 route add default gw 192.168.14.1 eth1 || true
+    - docker exec clab-Arista-2s-3l-client3 route delete default gw 172.20.20.1 eth0 || true
+    - docker exec clab-Arista-2s-3l-client3 ping -c 5 192.168.15.1 <i class="conum" data-value="1"></i><b>(1)</b>
+    - docker exec clab-Arista-2s-3l-client3 traceroute 192.168.11.1</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>E.g. 192.168.15.1</td>
+</tr>
+</tbody></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_save_the_file_and_and_push_the_change_and_merge_it_into_the_master_branch_and_watch_the_pipeline_fail">Save the file and and push the change and merge it into the master branch and watch the pipeline fail</h3>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-24a.png" alt="s4 24a" height="400"/>
+</div>
+<div class="title">Figure 7: Traditional Test Failed</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s4-24b.png" alt="s4 24b" height="400"/>
+</div>
+<div class="title">Figure 8: Batfish Model Test Failed</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_this_shows_how_the_pipeline_will_fail_if_the_test_dont_pass">This shows how the pipeline will fail if the test don’t pass.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_if_the_test_dontt_pass_then_nothing_is_eventually_deployed_to_production">If the test dont’t pass then nothing is eventually deployed to production.</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_remember_to_change_the_configuration_back_to_192_168_14_1">Remember to change the configuration back to 192.168.14.1</h3>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_we_have_incorporated_automated_and_traditional_testing_with_the_new_change_using_the_git_workflow_of_creating_an_issue_and_a_merge_request">At this point, we have incorporated automated and traditional testing with the new change using the Git Workflow of creating an issue and a Merge Request.</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-change/">&larr; Previous: Stage 4.1 - Automating A Change</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage4-sot/">Next: Stage 4.3 - Source Of Truth &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

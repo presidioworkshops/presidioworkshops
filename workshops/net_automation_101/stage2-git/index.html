@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 2.1 - Git | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 2.1 - Git</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage1/">&larr; Previous: Stage 1.1 - Server Builds</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-docker/">Next: Stage 2.2 - Docker and ContainerLab &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_2_git_basics"><strong>Stage 2 Git Basics</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_10_minutes">Estimated time to complete: 10 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_2_we_will_discuss_git_basics">In Stage 2, we will discuss Git basics.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_commands_and_concepts_to_understand_the_power_of_git">We will run through some of the commands and concepts to understand the power of Git.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_understanding_the_git_workflow_is_a_key_part_of_infrastructure_automation">Understanding the Git workflow is a key part of infrastructure automation.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_2">Here are the requirements for Stage 2</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_2_this_shows_all_the_technology_we_will_be_using_in_stage_2">Here is a diagram of Stage 2.  This shows all the technology we will be using in Stage 2.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_2">It also defines the use cases we will be working on in Stage 2.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_2">Here is a summary of Stage 2</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-3.png" alt="Stage 2 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_git_to_pull_down_some_code_onto_server_1_and_server_2"><strong>Use Git to pull down some code onto Server 1 and Server 2</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_login_to_your_ubuntu_server_1_and_server_2_as_a_user">Login to your Ubuntu Server 1 and Server 2 as a user</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_open_a_terminal_window">Open a terminal window</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_this_will_take_some_time_it_is_pulling_down_the_arista_lab_container_image_along_with_other_files">This will take some time.  It is pulling down the Arista Lab Container Image along with other files</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands">Run the following commands:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://gitlab.com/knorton3/network-automation.git
+ls
+cd network-automation/infra
+git branch -m main master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_this_will_create_a_new_folder_named_network_automation">This will create a new folder named <strong>network-automation</strong></h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~$ git clone https://gitlab.com/knorton3/network-automation.git
+Cloning into &#39;network-automation&#39;...
+remote: Enumerating objects: 214, done.
+remote: Counting objects: 100% (157/157), done.
+remote: Compressing objects: 100% (151/151), done.
+remote: Total 214 (delta 58), reused 0 (delta 0), pack-reused 57
+Receiving objects: 100% (214/214), 391.58 MiB | 6.09 MiB/s, done.
+Resolving deltas: 100% (84/84), done.
+cloud_user@ed26757f4b2c:~$ ls
+Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  network-automation
+cloud_user@ed26757f4b2c:~$ cd network-automation/infra
+cloud_user@ed26757f4b2c:~/network-automation/infra$ git branch -m main master</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands_to_avoid_logging_into_the_repository_with_each_pull_and_push_request">Run the following commands to avoid logging into the repository with each pull and push request</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git config --global credential.helper cache
+git config --global lfs.cachecredentials true</code></pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_use_git_to_pull_down_some_code_onto_your_workstation"><strong>Use Git to pull down some code onto your workstation</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_a_folder_named_naw">Create a folder named NAW</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_open_visual_studio_code_on_your_workstation">Open Visual Studio Code on your workstation</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_click_file_open_folder_and_open_the_naw_folder">Click File → Open Folder and open the NAW folder</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_trust_the_author_of_the_folder_if_prompted">Trust the author of the folder if prompted</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_open_a_terminal_window_view_terminal">Open a terminal window, View → Terminal</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_this_will_take_some_time_it_is_pulling_down_the_arista_lab_container_image_along_with_other_files_2">This will take some time.  It is pulling down the Arista Lab Container Image along with other files</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_this_will_create_a_new_folder_named_network_automation_2">This will create a new folder named network-automation</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands_from_the_terminal">Run the following commands from the terminal:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git clone https://gitlab.com/knorton3/network-automation.git
+cd network-automation/infra
+git branch -m main master</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands_to_avoid_logging_into_the_repository_with_each_pull_and_push_request_2">Run the following commands to avoid logging into the repository with each pull and push request</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">git config --global credential.helper cache
+git config --global lfs.cachecredentials true</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-4.png" alt="Visual Studio Code" width="700"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_you_will_have_pulled_down_all_the_code_from_the_git_repository">At this point, you will have pulled down all the code from the Git repository</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage1/">&larr; Previous: Stage 1.1 - Server Builds</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-docker/">Next: Stage 2.2 - Docker and ContainerLab &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+

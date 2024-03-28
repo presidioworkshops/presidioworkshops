@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network Automation 101 Workshop on Presidio Workshops</title>
+    <link>http://presidioworkshops.com/workshops/net_automation_101/</link>
+    <description>Recent content in Network Automation 101 Workshop on Presidio Workshops</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="http://presidioworkshops.com/workshops/net_automation_101/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Prerequisites</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/prereq/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/prereq/</guid>
+      <description>Prerequisites   Estimated time to complete: 20 mintues     To prepare for the workshop, we need to install some software on your laptop or desktop.   Although it is not required, having a basic knowledge of Linux will help you in the workshop.   Being familiar with common Linux commands and editors like Nano and Vim will help you navigate the workshop.    Let’s install Git on you Laptop   Git is a free and open source distributed version control system designed to handle everything from small to very large projects with speed and efficiency.</description>
+    </item>
+    
+    <item>
+      <title>Stage 1.1 - Server Builds</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage1/</guid>
+      <description>Stage 1   Estimated time to complete: 20 mintues     In Stage 1, we will brainstorm ideas on how we can introduce network automation into your environment. We will discuss use cases and tasks that are manually done today that could be automated.   The second part of Stage 1 is to install and initially build the two servers.    Here is a summary of Stage 1      Server 1 and Server 2 Diagram      Server 1 Requirements   Ubuntu version 20.</description>
+    </item>
+    
+    <item>
+      <title>Stage 2.1 - Git</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage2-git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage2-git/</guid>
+      <description>Stage 2 Git Basics   Estimated time to complete: 10 minutes     In Stage 2, we will discuss Git basics.   We will run through some of the commands and concepts to understand the power of Git.   Understanding the Git workflow is a key part of infrastructure automation.    Here are the requirements for Stage 2      Here is a diagram of Stage 2.</description>
+    </item>
+    
+    <item>
+      <title>Stage 2.2 - Docker and ContainerLab</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage2-docker/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage2-docker/</guid>
+      <description>Stage 2 Docker and ContainerLab Basics   Estimated time to complete: 15 minutes     In Stage 2, we will discuss Docker and ContainerLab basics.   We will run through some of the commands and concepts to better understand Docker and ContainerLab.   Utilizing containers to create multiple network devices in minutes.   Allows us to easily deploy and test changes prior to releasing it to production.</description>
+    </item>
+    
+    <item>
+      <title>Stage 2.3 - Ansible</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage2-ansible/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage2-ansible/</guid>
+      <description>Stage 2 Ansible Basics   Estimated time to complete: 45 minutes     In Stage 2, we will discuss Ansible basics.   We will run through some of the commands and concepts to better understand Ansible.   Utilizing Ansible to configure network devices in minutes.   Allows us to easily deploy and test changes prior to releasing it to production.    Here are the requirements for Stage 2      Here is a diagram of Stage 2.</description>
+    </item>
+    
+    <item>
+      <title>Stage 3.1 - GitLab</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage3-gitlab/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage3-gitlab/</guid>
+      <description>Stage 3 GitLab Basics   Estimated time to complete: 20 minutes     In Stage 3, we will discuss GitLab basics.   We will run through some of the concepts to understand the power of GitLab.   Understanding the GitLab server is a key part of infrastructure automation.    Here are the requirements for Stage 3      Here is a diagram of Stage 3.</description>
+    </item>
+    
+    <item>
+      <title>Stage 3.2 - CI/CD</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage3-cicd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage3-cicd/</guid>
+      <description>Stage 3 CI/CD Basics   Estimated time to complete: 45 minutes     In Stage 3, we will discuss Continous Integration and Continous Deployment basics (CI/CD).   We will run through some of the concepts to understand the power of CI/CD.   CI/CD is the glue to automate the workflow for deploying network infrastructure.    Here are the requirements for Stage 3      Here is a diagram of Stage 3.</description>
+    </item>
+    
+    <item>
+      <title>Stage 4.1 - Automating A Change</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage4-change/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage4-change/</guid>
+      <description>Stage 4 Automating A Change   Estimated time to complete: 30 minutes     In Stage 4, we will discuss the process of automating a change.   We will run through some of the concepts to understand how to use Gitlab and a CI/CD pipeline to automate a change.   Automating common tasks is one of the advantages to help increase efficency and standardize the network.</description>
+    </item>
+    
+    <item>
+      <title>Stage 4.2 - PreDeployment Testing</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage4-testing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage4-testing/</guid>
+      <description>Stage 4 PreDeployment Testing   Estimate time to complete: 45 minutes     In Stage 4, we will discuss the process of testing a change.   We will run through some of the concepts to understand how to use Batfish and a Linux container to perform tradional testing.   Performing automated testing is one of the advantages to help reduce risk during a change to the network.</description>
+    </item>
+    
+    <item>
+      <title>Stage 4.3 - Source Of Truth</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/stage4-sot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/stage4-sot/</guid>
+      <description>Stage 4 Source Of Truth   Estimated time to complete: 45 minutes     In Stage 4, we will discuss what a source of truth is and how it is related to network automation.   We will run through some of the concepts to understand how to use Nautobot as a source of truth to validate changes.   Using a source of truth (SoT) will define the intended or desired state of the network infrastructure and help validate changes before they are pushed to production.</description>
+    </item>
+    
+    <item>
+      <title>Wrap Up</title>
+      <link>http://presidioworkshops.com/workshops/net_automation_101/wrapup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://presidioworkshops.com/workshops/net_automation_101/wrapup/</guid>
+      <description>That wraps up what we have planned for today. We hope you’ve learned something valuable about Network Automation that you can apply in your daily role.
+ What do you think? How can we help you understand Network Automation better?
+ Please provide feedback so we can make it better and enhance the workshop.
+ Thank you for your time and participation!
+ </description>
+    </item>
+    
+  </channel>
+</rss>

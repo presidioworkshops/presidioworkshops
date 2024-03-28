@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Stage 2.2 - Docker and ContainerLab | Presidio Workshops</title>
+
+    
+    
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly.min.css" />
+    <link rel="stylesheet" href="/node_modules/patternfly/dist/css/patternfly-additions.min.css" />
+
+    
+    <link rel="stylesheet" href="/node_modules/highlight.js/styles/darkula.css" />
+
+    
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/asciidoc.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
+    
+    <script id="adobe_dtm" src="//www.redhat.com/dtm.js" type="text/javascript"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery/dist/jquery.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/c3/c3.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/d3/d3.min.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="/node_modules/patternfly/node_modules/drmonty-datatables-colvis/js/dataTables.colVis.js"></script>
+    <script src="/node_modules/patternfly/node_modules/datatables.net-colreorder/js/dataTables.colReorder.js"></script>
+
+    
+    
+    <script src="/node_modules/patternfly/dist/js/patternfly.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-combobox/js/bootstrap-combobox.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/moment/min/moment.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/patternfly-bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+    
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+
+    
+    <script src="/node_modules/patternfly/node_modules/jquery-match-height/dist/jquery.matchHeight-min.js"></script>
+    
+    <script src="/js/clipboard.min.js"></script>
+    <script src="/js/clip.js"></script>
+    
+    <script src="/node_modules/highlight.js/lib/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body class="">
+    
+
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top " role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand" href="/">
+      <img src="img/presidio-white.png" width="150" height="auto">
+      
+      </a>
+    </div>
+    <div class="collapse navbar-collapse navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+          
+            <li>
+              <a href="/">Home</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/about/">About</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/contact/">Contact</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/events/">Events</a>
+            </li>
+          
+        
+          
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Workshops <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_ci/">Agile Integrations Workshop - Citizen Integrator</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/agile_integrations_dev/">Agile Integrations Workshop - Developer</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/automation/">Automation Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/cloudforms41/">CloudForms Workshops</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_containers/">Container Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/containers_101/">Containers 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/secure_software_factory/">DevSecOps Workshop - Secure Software Factory</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/security_kubernetes/">Kubernetes Security Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/kubernetes_101/">Kubernetes Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/strangling_the_monolith/">Monolith to Microservices Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/net_automation_101/">Network Automation 101 Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/selinux_policy/">SELinux Policy Workshop</a>
+                  </li>
+                
+                  <li>
+                    <a href="/workshops/source_to_image/">Source to Image</a>
+                  </li>
+                
+              </ul>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="jumbotron jumbotron-page text-center">
+  <h1>Stage 2.2 - Docker and ContainerLab</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+    
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-git/">&larr; Previous: Stage 2.1 - Git</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-ansible/">Next: Stage 2.3 - Ansible &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <div class="sect1">
+<h2 id="_stage_2_docker_and_containerlab_basics"><strong>Stage 2 Docker and ContainerLab Basics</strong></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_estimated_time_to_complete_15_minutes">Estimated time to complete: 15 minutes</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-0.png" alt="Stages" width="1000"/>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_in_stage_2_we_will_discuss_docker_and_containerlab_basics">In Stage 2, we will discuss Docker and ContainerLab basics.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_will_run_through_some_of_the_commands_and_concepts_to_better_understand_docker_and_containerlab">We will run through some of the commands and concepts to better understand Docker and ContainerLab.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_utilizing_containers_to_create_multiple_network_devices_in_minutes">Utilizing containers to create multiple network devices in minutes.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_allows_us_to_easily_deploy_and_test_changes_prior_to_releasing_it_to_production">Allows us to easily deploy and test changes prior to releasing it to production.</h2>
+<div class="sectionbody">
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_are_the_requirements_for_stage_2">Here are the requirements for Stage 2</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-1.png" alt="Requirements" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_diagram_of_stage_2_this_shows_all_the_technology_we_will_be_using_in_stage_2">Here is a diagram of Stage 2.  This shows all the technology we will be using in Stage 2.</h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="_it_also_defines_the_use_cases_we_will_be_working_on_in_stage_2">It also defines the use cases we will be working on in Stage 2.</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-2.png" alt="Diagram" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_here_is_a_summary_of_stage_2">Here is a summary of Stage 2</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="/workshops/net_automation_101/images/s2-3.png" alt="Stage 2 Summary" width="1000"/>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lets_fire_up_some_switches_on_server_1"><strong>Let’s fire up some switches on Server 1</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_we_will_use_containerlab_to_create_a_5_node_spin_leaf_arista_environment_with_three_linux_clients_on_server_1">We will use ContainerLab to create a 5 node spin leaf Arista environment with three Linux Clients on Server 1</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_these_devices_will_all_be_created_in_docker">These devices will all be created in Docker</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_lets_check_out_docker_from_a_terminal_command_prompt">Let’s check out docker from a terminal command prompt</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_commands">Run the following commands:</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_both_of_these_commands_perform_the_same_tasks">Both of these commands perform the same tasks</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker ps
+docker container ls</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_there_should_be_no_containers_running">There should be no containers running</h3>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b1c:~/network-automation/infra$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+cloud_user@ed26757f4b1c:~/network-automation/infra$</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_we_need_to_import_the_arista_switch_container_image_into_your_docker_repository_be_patient">We need to import the Arista switch container image into your docker repository – be patient</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command">Run the following command:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker import ~/network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_this_will_take_some_time_it_is_pulling_down_the_arista_lab_container_image_into_docker">This will take some time.  It is pulling down the Arista Lab Container Image into Docker</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_after_it_completes">Run the following command after it completes:</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">docker image ls</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/network-automation/infra$ docker import network-automation/infra/cEOS-lab-4.25.10M.tar.tar ceos:4.25.10M
+sha256:1d338447c13d9594f6c3c99c13f24be285555595f590b57c44a54b71e2e664a7
+cloud_user@ed26757f4b2c:~$ docker image ls
+REPOSITORY   TAG        IMAGE ID       CREATED              SIZE
+ceos         4.25.10M   1d338447c13d   About a minute ago   1.62GB
+cloud_user@ed26757f4b2c:~/network-automation/infra$</pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_a_5_node_spin_leaf_arista_environment"><strong>Create a 5 node spin leaf Arista environment</strong></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_we_will_use_containerlab_to_create_a_5_node_spin_leaf_arista_environment_with_three_linux_clients">We will use ContainerLab to create a 5 node spin leaf Arista environment with three Linux Clients</h3>
+
+</div>
+<div class="sect2">
+<h3 id="_run_the_following_command_to_spin_up_the_network_and_linux_clients">Run the following command to spin up the network and Linux clients</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml --reconfigure --max-workers 30</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Note: Depending on the Server Specs – Performance may vary.  Takes about 5 to 7 minutes for the switches to complete.
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab deploy -t ~/network-automation/infra/ceos_2spine_3leaf.yaml --reconfigure --max-workers 30
+[sudo] password for cloud_user:
+INFO[0000] Containerlab v0.48.6 started
+INFO[0000] Parsing &amp; checking topology file: ceos_2spine_3leaf.yaml
+INFO[0000] Creating docker network: Name=&#34;clab&#34;, IPv4Subnet=&#34;172.20.20.0/24&#34;, IPv6Subnet=&#34;2001:172:20:20::/64&#34;, MTU=&#39;ל&#39;
+INFO[0000] Could not read docker config: open /root/.docker/config.json: no such file or directory
+INFO[0000] Pulling ghcr.io/hellt/network-multitool:latest Docker image
+INFO[0005] Done pulling ghcr.io/hellt/network-multitool:latest
+INFO[0006] Creating lab directory: /home/cloud_user/network-automation/infra/clab-Arista-2s-3l
+INFO[0006] Creating container: &#34;client3&#34;
+INFO[0006] Creating container: &#34;spine2&#34;
+INFO[0009] Creating container: &#34;client1&#34;
+INFO[0009] Creating container: &#34;client2&#34;
+INFO[0010] Creating container: &#34;leaf2&#34;
+INFO[0010] Creating container: &#34;leaf1&#34;
+INFO[0011] Creating link: leaf2:eth2 &lt;--&gt; spine2:eth2
+INFO[0011] Creating link: client2:eth1 &lt;--&gt; leaf2:eth3
+INFO[0011] Creating container: &#34;leaf3&#34;
+INFO[0011] Creating link: leaf1:eth2 &lt;--&gt; spine2:eth1
+INFO[0011] Creating link: client1:eth1 &lt;--&gt; leaf1:eth3
+INFO[0012] Creating container: &#34;spine1&#34;
+INFO[0012] Creating link: leaf3:eth2 &lt;--&gt; spine2:eth3
+INFO[0012] Creating link: client3:eth1 &lt;--&gt; leaf3:eth3
+INFO[0012] Creating link: leaf1:eth1 &lt;--&gt; spine1:eth1
+INFO[0012] Creating link: leaf2:eth1 &lt;--&gt; spine1:eth2
+INFO[0013] Creating link: leaf3:eth1 &lt;--&gt; spine1:eth3
+INFO[0013] Running postdeploy actions for Arista cEOS &#39;leaf1&#39; node
+INFO[0013] Running postdeploy actions for Arista cEOS &#39;spine2&#39; node
+INFO[0013] Running postdeploy actions for Arista cEOS &#39;leaf2&#39; node
+INFO[0013] Running postdeploy actions for Arista cEOS &#39;leaf3&#39; node
+INFO[0013] Running postdeploy actions for Arista cEOS &#39;spine1&#39; node
+INFO[0288] Adding containerlab host entries to /etc/hosts file
+INFO[0288] Adding ssh config for containerlab nodes
++---+---------------------------+--------------+---------------------------------+-------+---------+-----------------+-----------------------+
+| # |           Name            | Container ID |              Image              | Kind  |  State  |  IPv4 Address   |     IPv6 Address      |
++---+---------------------------+--------------+---------------------------------+-------+---------+-----------------+-----------------------+
+| 1 | clab-Arista-2s-3l-client1 | bed4b729f4ae | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.31/24 | 2001:172:20:20::31/64 |
+| 2 | clab-Arista-2s-3l-client2 | f524c21bf58b | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.32/24 | 2001:172:20:20::32/64 |
+| 3 | clab-Arista-2s-3l-client3 | 44ac3410b3b1 | ghcr.io/hellt/network-multitool | linux | running | 172.20.20.33/24 | 2001:172:20:20::33/64 |
+| 4 | clab-Arista-2s-3l-leaf1   | 103c3bf271eb | ceos:4.25.10M                   | ceos  | running | 172.20.20.21/24 | 2001:172:20:20::21/64 |
+| 5 | clab-Arista-2s-3l-leaf2   | d80dd032c45f | ceos:4.25.10M                   | ceos  | running | 172.20.20.22/24 | 2001:172:20:20::22/64 |
+| 6 | clab-Arista-2s-3l-leaf3   | d4b34bf63926 | ceos:4.25.10M                   | ceos  | running | 172.20.20.23/24 | 2001:172:20:20::23/64 |
+| 7 | clab-Arista-2s-3l-spine1  | 5784ac1282df | ceos:4.25.10M                   | ceos  | running | 172.20.20.11/24 | 2001:172:20:20::11/64 |
+| 8 | clab-Arista-2s-3l-spine2  | 0efa144679ad | ceos:4.25.10M                   | ceos  | running | 172.20.20.12/24 | 2001:172:20:20::12/64 |
++---+---------------------------+--------------+---------------------------------+-------+---------+-----------------+-----------------------+</pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_login_to_the_spine_switch"><strong>Login to the Spine switch</strong></h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tbody><tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+All username are admin and passwords are admin.
+Notice all the configurations are default
+</td>
+</tr>
+</tbody></table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">ssh admin@clab-Arista-2s-3l-spine1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/network-automation/infra$ ssh admin@clab-Arista-2s-3l-spine1
+The authenticity of host &#39;clab-arista-2s-3l-spine1 (2001:172:20:20::2)&#39; can&#39;t be established.
+ECDSA key fingerprint is SHA256:J9FdkpeHpi5dq94nRSVAOJyvtyCnvhapwmLMjBh7vqU.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added &#39;clab-arista-2s-3l-spine1,2001:172:20:20::2&#39; (ECDSA) to the list of known hosts.
+Password:
+spine1&gt;en
+spine1#sho run
+! Command: show running-config
+! device: spine1 (cEOSLab, EOS-4.25.10M-29053933.42510M (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$cd2Qg0NlrcsduKJ0$4.dQJtZlHWX3lywq1wbJHzTjuLL0VsH60ehELYN3.VfSkLPnYgRpIehMC29ikbMP0kkT3HCzzCV0UQnRt/tgh/
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname spine1
+!
+spanning-tree mode mstp
+!</pre>
+</div>
+</div>
+<hr/>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_containerlab_commands"><strong>ContainerLab Commands</strong></h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">sudo containerlab -h</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>cloud_user@ed26757f4b2c:~/network-automation/infra$ sudo containerlab -h
+deploy container based lab environments with a user-defined interconnections
+
+Usage:
+  containerlab [command]
+
+Available Commands:
+  completion  generate completion script
+  config      configure a lab
+  deploy      deploy a lab
+  destroy     destroy a lab
+  exec        execute a command on one or multiple containers
+  generate    generate a Clos topology file, based on provided flags
+  graph       generate a topology graph
+  help        Help about any command
+  inspect     inspect lab details
+  save        save containers configuration
+  tools       various tools your lab might need
+  version     show containerlab version or upgrade
+
+Flags:
+  -d, --debug count        enable debug mode
+  -h, --help               help for containerlab
+      --log-level string   logging level; one of [trace, debug, info, warning, error, fatal] (default &#34;info&#34;)
+      --name string        lab name
+  -r, --runtime string     container runtime
+      --timeout duration   timeout for external API requests (e.g. container runtimes), e.g: 30s, 1m, 2m30s (default 2m0s)
+  -t, --topo string        path to the topology file
+      --vars string        path to the topology template variables file
+
+Use &#34;containerlab [command] --help&#34; for more information about a command.
+cloud_user@ed26757f4b2c:~$</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_end_result">End Result</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_at_this_point_you_have_deployed_5_arista_switches_with_3_linux_clients_in_containers_with_default_configurations">At this point, you have deployed 5 Arista switches with 3 Linux clients in containers with default configurations.</h3>
+
+</div>
+</div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pager">
+    
+    
+    <li class="previous">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-git/">&larr; Previous: Stage 2.1 - Git</a>
+    </li>
+    
+    
+    
+    
+    <li class="next">
+      <a href="http://presidioworkshops.com/workshops/net_automation_101/stage2-ansible/">Next: Stage 2.3 - Ansible &rarr;</a>
+    </li>
+    
+    
+  </ul>
+</nav>
+
+    <p class="text-center">
+      
+      <a href="http://presidioworkshops.com/workshops/net_automation_101">Return to Workshop</a>
+    </p>
+  </div>
+</div>
+
+    <div id="page-footer" class="container">
+      <p class="text-center">
+        Copyright &copy; 2024 Presidio, Inc.
+      </p>
+    </div>
+    <script type="text/javascript">
+      if (("undefined" !== typeof _satellite) && ("function" === typeof _satellite.pageBottom)) {
+          _satellite.pageBottom();
+      }
+    </script>
+  </body>
+</html>
+
